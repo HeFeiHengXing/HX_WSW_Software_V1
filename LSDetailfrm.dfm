@@ -1,0 +1,621 @@
+object LSdetailForm: TLSdetailForm
+  Left = 209
+  Top = 14
+  Width = 509
+  Height = 645
+  Caption = 'LSdetailForm'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label42: TLabel
+    Left = 16
+    Top = 104
+    Width = 72
+    Height = 12
+    Caption = #32454#33740#37492#23450#32467#26524
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label41: TLabel
+    Left = 340
+    Top = 56
+    Width = 36
+    Height = 12
+    Caption = #23457#26680#32773
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label40: TLabel
+    Left = 200
+    Top = 88
+    Width = 36
+    Height = 12
+    Caption = #25253#21578#32773
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label39: TLabel
+    Left = 328
+    Top = 88
+    Width = 48
+    Height = 12
+    Caption = #25253#21578#26085#26399
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label38: TLabel
+    Left = 200
+    Top = 72
+    Width = 36
+    Height = 12
+    Caption = #36865#26816#32773
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label37: TLabel
+    Left = 328
+    Top = 72
+    Width = 48
+    Height = 12
+    Caption = #36865#26816#26085#26399
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label36: TLabel
+    Left = 40
+    Top = 72
+    Width = 48
+    Height = 12
+    Caption = #20020#24202#35786#26029
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label35: TLabel
+    Left = 200
+    Top = 40
+    Width = 36
+    Height = 12
+    Caption = #20303#38498#21495
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label34: TLabel
+    Left = 212
+    Top = 56
+    Width = 24
+    Height = 12
+    Caption = #24202#21495
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label33: TLabel
+    Left = 328
+    Top = 40
+    Width = 48
+    Height = 12
+    Caption = #26631#26412#31867#22411
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label32: TLabel
+    Left = 212
+    Top = 24
+    Width = 24
+    Height = 12
+    Caption = #31185#21035
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label31: TLabel
+    Left = 64
+    Top = 56
+    Width = 24
+    Height = 12
+    Caption = #24180#40836
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label30: TLabel
+    Left = 64
+    Top = 40
+    Width = 24
+    Height = 12
+    Caption = #24615#21035
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label29: TLabel
+    Left = 64
+    Top = 24
+    Width = 24
+    Height = 12
+    Caption = #22995#21517
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label28: TLabel
+    Left = 52
+    Top = 88
+    Width = 36
+    Height = 12
+    Caption = #26631#26412#21495
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label27: TLabel
+    Left = 352
+    Top = 24
+    Width = 24
+    Height = 12
+    Caption = #33740#23646
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 64
+    Top = 120
+    Width = 24
+    Height = 12
+    Caption = #22791#27880
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object DBText9: TDBText
+    Left = 388
+    Top = 40
+    Width = 42
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'bb'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText8: TDBText
+    Left = 248
+    Top = 56
+    Width = 42
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'bed'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText7: TDBText
+    Left = 248
+    Top = 40
+    Width = 42
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'zyh'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText6: TDBText
+    Left = 248
+    Top = 26
+    Width = 42
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'kb'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText5: TDBText
+    Left = 96
+    Top = 56
+    Width = 42
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'old'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText4: TDBText
+    Left = 96
+    Top = 40
+    Width = 42
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'sex'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText3: TDBText
+    Left = 96
+    Top = 24
+    Width = 42
+    Height = 12
+    Alignment = taCenter
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'name'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText2: TDBText
+    Left = 388
+    Top = 24
+    Width = 42
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'js'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText17: TDBText
+    Left = 96
+    Top = 120
+    Width = 48
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'bc'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText16: TDBText
+    Left = 96
+    Top = 104
+    Width = 48
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'jzname'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText15: TDBText
+    Left = 388
+    Top = 56
+    Width = 48
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'shys'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText14: TDBText
+    Left = 248
+    Top = 88
+    Width = 48
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'bgys'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText13: TDBText
+    Left = 248
+    Top = 72
+    Width = 48
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'sj'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText12: TDBText
+    Left = 388
+    Top = 88
+    Width = 48
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'repdate'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText11: TDBText
+    Left = 388
+    Top = 72
+    Width = 48
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'cydate'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText10: TDBText
+    Left = 96
+    Top = 72
+    Width = 48
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'lczd'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object DBText1: TDBText
+    Left = 96
+    Top = 88
+    Width = 42
+    Height = 12
+    AutoSize = True
+    Color = clBtnFace
+    DataField = 'bbh'
+    DataSource = dmym.LSDataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object sgrid: TStringGrid
+    Left = 0
+    Top = 136
+    Width = 489
+    Height = 473
+    Color = clInactiveCaption
+    FixedColor = clMedGray
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnDrawCell = sgridDrawCell
+    ColWidths = (
+      64
+      157
+      101
+      100
+      93)
+  end
+  object Button1: TButton
+    Left = 327
+    Top = 112
+    Width = 89
+    Height = 25
+    Caption = #25171' '#21360
+    TabOrder = 1
+    Visible = False
+    OnClick = Button1Click
+  end
+  object RvSystem1: TRvSystem
+    TitleSetup = 'Output Options'
+    TitleStatus = 'Report Status'
+    TitlePreview = 'Report Preview'
+    SystemFiler.StatusFormat = 'Generating page %p'
+    SystemPreview.ZoomFactor = 100.000000000000000000
+    SystemPrinter.ScaleX = 100.000000000000000000
+    SystemPrinter.ScaleY = 100.000000000000000000
+    SystemPrinter.StatusFormat = 'Printing page %p'
+    SystemPrinter.Title = 'Rave Report'
+    SystemPrinter.UnitsFactor = 1.000000000000000000
+    Left = 296
+    Top = 344
+  end
+  object rvsingle3: TRvDataSetConnection
+    RuntimeVisibility = rtDeveloper
+    Left = 248
+    Top = 344
+  end
+  object rvSingle2: TRvDataSetConnection
+    RuntimeVisibility = rtDeveloper
+    Left = 208
+    Top = 344
+  end
+  object rvSingle: TRvDataSetConnection
+    RuntimeVisibility = rtDeveloper
+    DataSet = dmym.rsBase
+    Left = 272
+    Top = 344
+  end
+  object RvProject1: TRvProject
+    Left = 320
+    Top = 344
+  end
+  object rsSingleAdd: TADODataSet
+    Connection = dmym.conn
+    CommandText = 'select * from ypAdd'
+    Parameters = <>
+    Left = 176
+    Top = 344
+  end
+  object dstemp: TDataSource
+    DataSet = rstemp
+    Left = 264
+    Top = 248
+  end
+  object rstemp: TADODataSet
+    Connection = dmym.conn
+    Parameters = <>
+    Left = 192
+    Top = 240
+  end
+  object ADOQuery1: TADOQuery
+    Connection = dmym.conn
+    Parameters = <>
+    Left = 104
+    Top = 240
+  end
+end

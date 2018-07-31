@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<StockHoldings>
+   <Stock exchange="NASDAQ">
+      <name>Borland</name>
+      <price>15.375</price>
+      <symbol>BORL</symbol>
+      <shares>100</shares>
+   </Stock>
+   <Stock exchange="NYSE">
+      <name>Pfizer</name>
+      <price>42.75</price>
+      <symbol>PFE</symbol>
+      <shares type="preferred">25</shares>
+   </Stock>
+   <nostock>
+	  <name>poli</name>
+   </nostock>
+</StockHoldings>
