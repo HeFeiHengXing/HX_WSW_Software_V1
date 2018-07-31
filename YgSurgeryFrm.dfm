@@ -1,6 +1,6 @@
 object YgSurgeryForm: TYgSurgeryForm
-  Left = 230
-  Top = 198
+  Left = 779
+  Top = 193
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#25163#26415#23460
   ClientHeight = 425
@@ -384,9 +384,9 @@ object YgSurgeryForm: TYgSurgeryForm
       object labunit1: TLabel
         Left = 197
         Top = 25
-        Width = 144
+        Width = 132
         Height = 12
-        Caption = 'cfu/(30min'#183#30452#24452'9cm'#24179#30399')'
+        Caption = 'cfu/(30min'#183#934'9cm'#24179#30399')'
       end
       object labunit2: TLabel
         Left = 197
