@@ -338,23 +338,23 @@ begin
             dbc_grade.Text:=fieldbyname('hjlb').asstring
           {if fieldbyname('hjlb').asstring='I' then
           begin
-              label20.Caption:='cfu/(30min°§¶µ9cm∆Ω√Û)';
-              dbc_gjbz.Text:='°‹4cfu/(30min°§¶µ9cm∆Ω√Û)';
+              label20.Caption:='cfu/(30min°§¶µ90√Û)';
+              dbc_gjbz.Text:='°‹4cfu/(30min°§¶µ90√Û)';
           end else
           if fieldbyname('hjlb').asstring='II' then
           begin
-              label20.Caption:='cfu/(15min°§¶µ9cm∆Ω√Û)';
-              dbc_gjbz.Text:='°‹4cfu/(15min°§¶µ9cm∆Ω√Û)';
+              label20.Caption:='cfu/(15min°§¶µ90√Û)';
+              dbc_gjbz.Text:='°‹4cfu/(15min°§¶µ90√Û)';
           end else
           if fieldbyname('hjlb').asstring='III' then
           begin
-              label20.Caption:='cfu/(5min°§¶µ9cm∆Ω√Û)';
-              dbc_gjbz.Text:='°‹4cfu/(5min°§¶µ9cm∆Ω√Û)';
+              label20.Caption:='cfu/(5min°§¶µ90√Û)';
+              dbc_gjbz.Text:='°‹4cfu/(5min°§¶µ90√Û)';
           end else
           if fieldbyname('hjlb').asstring='IV' then
           begin
-              label20.Caption:='cfu/(5min°§¶µ9cm∆Ω√Û)';
-              dbc_gjbz.Text:='°‹4cfu/(5min°§¶µ9cm∆Ω√Û)';
+              label20.Caption:='cfu/(5min°§¶µ90√Û)';
+              dbc_gjbz.Text:='°‹4cfu/(5min°§¶µ90√Û)';
           end else
           dbc_gjbz.Text:='Œﬁæ˙…˙≥§';}
       end;
@@ -753,19 +753,19 @@ begin
     Edit1.SetFocus;
     labunit3.Caption:=labunit1.Caption;
     if dmym.rsHospital['hjlb']='I-I' then
-      dbc_gjbz.text:='°‹0.2cfu/(30min°§¶µ9cm∆Ω√Û)'
+      dbc_gjbz.text:='°‹0.2cfu/(30min°§¶µ90√Û)'
     else if dmym.rsHospital['hjlb']='I-II' then
-      dbc_gjbz.text:='°‹0.4cfu/(30min°§¶µ9cm∆Ω√Û)'
+      dbc_gjbz.text:='°‹0.4cfu/(30min°§¶µ90√Û)'
     else if dmym.rsHospital['hjlb']='II-I' then
-      dbc_gjbz.text:='°‹0.75cfu/(30min°§¶µ9cm∆Ω√Û)'
+      dbc_gjbz.text:='°‹0.75cfu/(30min°§¶µ90√Û)'
     else if dmym.rsHospital['hjlb']='II-II' then
-      dbc_gjbz.text:='°‹1.5cfu/(30min°§¶µ9cm∆Ω√Û)'
+      dbc_gjbz.text:='°‹1.5cfu/(30min°§¶µ90√Û)'
     else if dmym.rsHospital['hjlb']='III-I' then
-      dbc_gjbz.text:='°‹2cfu/(30min°§¶µ9cm∆Ω√Û)'
+      dbc_gjbz.text:='°‹2cfu/(30min°§¶µ90√Û)'
     else if dmym.rsHospital['hjlb']='III-II' then
-      dbc_gjbz.text:='°‹4cfu/(30min°§¶µ9cm∆Ω√Û)'
+      dbc_gjbz.text:='°‹4cfu/(30min°§¶µ90√Û)'
     else if dmym.rsHospital['hjlb']='IV' then
-      dbc_gjbz.text:='°‹5cfu/(30min°§¶µ9cm∆Ω√Û)';
+      dbc_gjbz.text:='°‹5cfu/(30min°§¶µ90√Û)';
 end;
 
 procedure TYgSurgeryForm.RadioButton5Click(Sender: TObject);

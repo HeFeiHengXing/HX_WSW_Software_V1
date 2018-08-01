@@ -299,23 +299,23 @@ begin
 
              if fieldbyname('hjlb').asstring='I' then
              begin
-                label20.Caption:='cfu/(30min·Φ9cm平皿)';
-                dbc_gjbz.Text:='≤4cfu/(30min·Φ9cm平皿)';
+                label20.Caption:='cfu/(30min·Φ90皿)';
+                dbc_gjbz.Text:='≤4cfu/(30min·Φ90皿)';
              end else
              if fieldbyname('hjlb').asstring='II' then
              begin
-                label20.Caption:='cfu/(15min·Φ9cm平皿)';
-                dbc_gjbz.Text:='≤4cfu/(15min·Φ9cm平皿)';
+                label20.Caption:='cfu/(15min·Φ90皿)';
+                dbc_gjbz.Text:='≤4cfu/(15min·Φ90皿)';
              end else
              if fieldbyname('hjlb').asstring='III' then
              begin
-                label20.Caption:='cfu/(5min·Φ9cm平皿)';
-                dbc_gjbz.Text:='≤4cfu/(5min·Φ9cm平皿)';
+                label20.Caption:='cfu/(5min·Φ90皿)';
+                dbc_gjbz.Text:='≤4cfu/(5min·Φ90皿)';
              end else
              if fieldbyname('hjlb').asstring='IV' then
              begin
-                label20.Caption:='cfu/(5min·Φ9cm平皿)';
-                dbc_gjbz.Text:='≤4cfu/(5min·Φ9cm平皿)';
+                label20.Caption:='cfu/(5min·Φ90皿)';
+                dbc_gjbz.Text:='≤4cfu/(5min·Φ90皿)';
              end else
              dbc_gjbz.Text:='无菌生长';
       end;
@@ -440,23 +440,23 @@ procedure TYgAirForm.dbc_environChange(Sender: TObject);
 begin
    if dbc_environ.Text='I' then
    begin
-      label20.Caption:='cfu/(30min·Φ9cm平皿)';
-      dbc_gjbz.Text:='≤4cfu/(30min·Φ9cm平皿)';
+      label20.Caption:='cfu/(30min·Φ90皿)';
+      dbc_gjbz.Text:='≤4cfu/(30min·Φ90皿)';
    end else
    if dbc_environ.Text='II' then
    begin
-      label20.Caption:='cfu/(15min·Φ9cm平皿)';
-      dbc_gjbz.Text:='≤4cfu/(15min·Φ9cm平皿)';
+      label20.Caption:='cfu/(15min·Φ90皿)';
+      dbc_gjbz.Text:='≤4cfu/(15min·Φ90皿)';
    end else
    if dbc_environ.Text='III' then
    begin
-      label20.Caption:='cfu/(5min·Φ9cm平皿)';
-      dbc_gjbz.Text:='≤4cfu/(5min·Φ9cm平皿)';
+      label20.Caption:='cfu/(5min·Φ90皿)';
+      dbc_gjbz.Text:='≤4cfu/(5min·Φ90皿)';
    end else
    if dbc_environ.Text='IV' then
    begin
-      label20.Caption:='cfu/(5min·Φ9cm平皿)';
-      dbc_gjbz.Text:='≤4cfu/(5min·Φ9cm平皿)';
+      label20.Caption:='cfu/(5min·Φ90皿)';
+      dbc_gjbz.Text:='≤4cfu/(5min·Φ90皿)';
    end else
    if dbc_environ.Text='' then
       dbc_gjbz.Text:='无菌生长';
