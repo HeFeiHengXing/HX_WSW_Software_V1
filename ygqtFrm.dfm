@@ -1,6 +1,6 @@
 object YgqtForm: TYgqtForm
-  Left = 338
-  Top = 229
+  Left = 402
+  Top = 234
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#65293#65293#20854#20182
   ClientHeight = 304
@@ -278,9 +278,9 @@ object YgqtForm: TYgqtForm
     TabOrder = 13
   end
   object dbe_totalNum: TDBEdit
-    Left = 124
+    Left = 92
     Top = 148
-    Width = 73
+    Width = 105
     Height = 21
     DataField = 'anum'
     DataSource = dmym.dsHospital
@@ -302,7 +302,7 @@ object YgqtForm: TYgqtForm
     Top = 164
     Width = 104
     Height = 17
-    Caption = #32454#33740#24635#33740#33853#25968
+    Caption = #33740#33853#24635#25968
     TabOrder = 19
     Visible = False
     OnClick = RadioButton3Click
@@ -310,9 +310,9 @@ object YgqtForm: TYgqtForm
   object RadioButton2: TRadioButton
     Left = 16
     Top = 150
-    Width = 103
+    Width = 78
     Height = 17
-    Caption = #32454#33740#24635#33740#33853#25968
+    Caption = #33740#33853#24635#25968
     TabOrder = 10
   end
   object dbcBG: TDBComboBox
@@ -408,7 +408,7 @@ object YgqtForm: TYgqtForm
     Top = 173
     Width = 101
     Height = 17
-    Caption = #32454#33740#24635#33740#33853#25968
+    Caption = #33740#33853#24635#25968
     TabOrder = 21
     Visible = False
     OnClick = RadioButton4Click

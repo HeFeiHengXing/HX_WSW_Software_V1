@@ -346,7 +346,7 @@ begin
       resultstr:='经培养'+dbe_hours.Text+'小时后，分析无细菌生长';
    if   radiobutton2.Checked then
    begin
-      resultstr:='细菌总菌落数：'+dbe_totalNum.Text+label20.Caption;
+      resultstr:='菌落总数：'+dbe_totalNum.Text+label20.Caption;
       if checkbox1.Checked then
       begin
         resultstr:=resultstr+''#13#10;
@@ -778,7 +778,7 @@ begin
       resultstr:='经培养'+dbe_hours.Text+'小时后，分析无细菌生长';
     if   radiobutton2.Checked then
     begin
-      resultstr:='细菌总菌落数：'+dbe_totalNum.Text+label20.caption;
+      resultstr:='菌落总数：'+dbe_totalNum.Text+label20.caption;
       if checkbox1.Checked then
       begin
         resultstr:=resultstr+''#13#10;

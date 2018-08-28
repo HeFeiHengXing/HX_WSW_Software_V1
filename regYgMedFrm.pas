@@ -92,11 +92,11 @@ var
    Maxbbhair1:integer;
 begin
    dmym.rsRegYg.active:=false;
-   dmym.rsRegyg.CommandText:='select * from RegBBYngr where cylb="医疗用品" order by cydate';;
+   dmym.rsRegyg.CommandText:='select * from RegBBYngr where cylb="医疗器材" order by cydate';;
    dmym.rsRegyg.active:=true;
 
    dmym.rsRegyg.Edit;
-   dmym.rsRegYg['cylb']:='医疗用品';
+   dmym.rsRegYg['cylb']:='医疗器材';
    if dmym.rsRegYg.recordcount<>0 then
       label4.Caption:='标本总数:'+inttostr(dmym.rsRegYg.recordcount)
    else
@@ -176,7 +176,7 @@ begin
       exit;
    end;
    dmym.rsRegyg.append;
-   dmym.rsRegYg['cylb']:='医疗用品';
+   dmym.rsRegYg['cylb']:='医疗器材';
    if timetype='now' then
    dmym.rsRegyg['cyDate']:=now
    else
@@ -227,7 +227,7 @@ begin
   end;
   if (dmym.rsRegyg.state=dsedit) or (dmym.rsRegyg.state=dsInsert) then
   begin
-     dmym.rsRegYg['CYlb']:='医疗用品';
+     dmym.rsRegYg['CYlb']:='医疗器材';
      dmym.rsRegyg.Post;
      label4.Caption:='标本总数:'+inttostr(dmym.rsRegYg.recordcount);
      //btnSave.Enabled:=false;
@@ -337,11 +337,11 @@ begin
       if dbc_type.text<>'' then
       begin
          if (dbc_type.text='1') or (dbc_type.text='01') then
-            dbc_type.Text:='无接触的医疗用品';
+            dbc_type.Text:='高度危险性医疗器材';
          if (dbc_type.text='2') or (dbc_type.text='02') then
-            dbc_type.Text:='接触粘膜的医疗用品';
+            dbc_type.Text:='中度危险性医疗器材';
          if (dbc_type.text='3') or (dbc_type.text='03') then
-            dbc_type.Text:='接触皮肤的医疗用品';
+            dbc_type.Text:='低度危险性医疗器材';
       end;
   dbc_sampleDoctor.SetFocus;
   end;

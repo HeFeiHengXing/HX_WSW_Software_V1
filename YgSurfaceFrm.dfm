@@ -1,6 +1,6 @@
 object YgSurfaceForm: TYgSurfaceForm
-  Left = 282
-  Top = 261
+  Left = 723
+  Top = 232
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#29289#20307#34920#38754
   ClientHeight = 308
@@ -294,9 +294,9 @@ object YgSurfaceForm: TYgSurfaceForm
     OnKeyPress = dbcBGKeyPress
   end
   object dbe_hours: TDBEdit
-    Left = 80
+    Left = 87
     Top = 140
-    Width = 137
+    Width = 101
     Height = 20
     DataField = 'hhour'
     DataSource = dmym.dsHospital
@@ -312,9 +312,9 @@ object YgSurfaceForm: TYgSurfaceForm
     TabOrder = 15
   end
   object dbe_totalNum: TDBEdit
-    Left = 112
+    Left = 86
     Top = 170
-    Width = 73
+    Width = 100
     Height = 20
     DataField = 'anum'
     DataSource = dmym.dsHospital
@@ -333,9 +333,9 @@ object YgSurfaceForm: TYgSurfaceForm
   object RadioButton2: TRadioButton
     Left = 16
     Top = 172
-    Width = 97
+    Width = 71
     Height = 17
-    Caption = #32454#33740#24635#33740#33853#25968
+    Caption = #33740#33853#24635#25968
     TabOrder = 12
     OnClick = RadioButton2Click
   end

@@ -383,7 +383,7 @@ begin
       resultstr:='经培养'+dbe_hours.Text+'小时后，分析无细菌生长';
    if   radiobutton2.Checked then
    begin
-      resultstr:='细菌总菌落数：'+dbe_totalNum.Text+labunit3.Caption;
+      resultstr:='菌落总数：'+dbe_totalNum.Text+labunit3.Caption;
       if checkbox1.Checked then
       begin
         resultstr:=resultstr+''#13#10;
@@ -670,7 +670,7 @@ begin
     wordtab.cell(3,2).range.insertafter('环境类别：'+dmym.rsHospital['hjlb']);
     wordtab.cell(3,3).range.insertafter('采样者：'+dbc_samplingMan.text);
     wordtab.cell(4,1).range.insertafter('采样日期：'+dbe_cydate.text);
-    wordtab.cell(4,2).range.insertafter('细菌总菌落数：'+dbe_totalnum.Text);
+    wordtab.cell(4,2).range.insertafter('菌落总数：'+dbe_totalnum.Text);
     wordtab.rows.item(5).delete;
     resultstr:='';
     if  radiobutton1.Checked then
@@ -680,7 +680,7 @@ begin
       resultstr:='经培养'+dbe_hours.Text+'小时后，分析无细菌生长';
     if   radiobutton2.Checked then
     begin
-      resultstr:='细菌总菌落数：'+dbe_totalNum.Text+labunit3.Caption;
+      resultstr:='菌落总数：'+dbe_totalNum.Text+labunit3.Caption;
       if checkbox1.Checked then
       begin
         resultstr:=resultstr+''#13#10;

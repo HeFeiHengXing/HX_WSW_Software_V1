@@ -87,7 +87,7 @@ begin
       3:
          str:='select * from RegBBYngr where cylb="医护人员手"';
       4:
-         str:='select * from RegBBYngr where cylb="医疗用品"';
+         str:='select * from RegBBYngr where cylb="医疗器材"';
       5:
          str:='select * from RegBBYngr where cylb="消毒液与保存液"';
    end;}

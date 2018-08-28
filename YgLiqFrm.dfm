@@ -1,6 +1,6 @@
 object YgLiqForm: TYgLiqForm
-  Left = 66
-  Top = 232
+  Left = 590
+  Top = 198
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#28040#27602#28082#19982#20445#23384#28082
   ClientHeight = 312
@@ -201,9 +201,9 @@ object YgLiqForm: TYgLiqForm
     OnKeyPress = dbcBGKeyPress
   end
   object dbe_hours: TDBEdit
-    Left = 80
+    Left = 87
     Top = 132
-    Width = 137
+    Width = 100
     Height = 20
     DataField = 'hhour'
     DataSource = dmym.dsHospital
@@ -219,9 +219,9 @@ object YgLiqForm: TYgLiqForm
     TabOrder = 14
   end
   object dbe_totalNum: TDBEdit
-    Left = 112
+    Left = 86
     Top = 165
-    Width = 73
+    Width = 100
     Height = 20
     DataField = 'anum'
     DataSource = dmym.dsHospital
@@ -240,9 +240,9 @@ object YgLiqForm: TYgLiqForm
   object RadioButton2: TRadioButton
     Left = 16
     Top = 168
-    Width = 97
+    Width = 62
     Height = 17
-    Caption = #32454#33740#24635#33740#33853#25968
+    Caption = #26579#33740#37327
     TabOrder = 11
   end
   object CheckBox1: TCheckBox
@@ -314,7 +314,8 @@ object YgLiqForm: TYgLiqForm
     Items.Strings = (
       #20351#29992#20013#28040#27602#21058
       #26080#33740#22120#26800#20445#23384#28082
-      #28781#33740#29992#28040#27602#28082)
+      #28781#33740#29992#28040#27602#28082
+      #30382#32932#40655#33180#28040#27602#21058)
     TabOrder = 6
     OnChange = dbc_typeChange
     OnKeyPress = dbc_typeKeyPress

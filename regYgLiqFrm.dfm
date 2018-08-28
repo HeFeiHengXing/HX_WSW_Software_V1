@@ -1,6 +1,6 @@
 object regYgLiqForm: TregYgLiqForm
-  Left = 234
-  Top = 200
+  Left = 284
+  Top = 181
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#26631#26412#30331#35760'----'#28040#27602#28082#19982#20445#23384#28082
   ClientHeight = 401
@@ -291,7 +291,8 @@ object regYgLiqForm: TregYgLiqForm
       Items.Strings = (
         #20351#29992#20013#28040#27602#21058
         #26080#33740#22120#26800#20445#23384#28082
-        #28781#33740#28040#27602#28082)
+        #28781#33740#28040#27602#28082
+        #30382#32932#40655#33180#28040#27602#21058)
       TabOrder = 5
       OnKeyPress = dbc_typeKeyPress
     end

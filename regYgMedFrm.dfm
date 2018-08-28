@@ -1,6 +1,6 @@
 object regYgMedForm: TregYgMedForm
-  Left = 234
-  Top = 216
+  Left = 201
+  Top = 180
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#26631#26412#30331#35760'---'#21307#30103#29992#21697
   ClientHeight = 415

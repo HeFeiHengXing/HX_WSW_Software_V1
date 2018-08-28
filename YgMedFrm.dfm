@@ -1,6 +1,6 @@
 object YgMedForm: TYgMedForm
-  Left = 326
-  Top = 139
+  Left = 663
+  Top = 165
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#21307#30103#29992#21697
   ClientHeight = 346
@@ -230,9 +230,9 @@ object YgMedForm: TYgMedForm
     OnKeyPress = dbcBGKeyPress
   end
   object dbe_hours: TDBEdit
-    Left = 80
+    Left = 88
     Top = 140
-    Width = 137
+    Width = 98
     Height = 20
     DataField = 'hhour'
     DataSource = dmym.dsHospital
@@ -248,9 +248,9 @@ object YgMedForm: TYgMedForm
     TabOrder = 18
   end
   object dbe_totalNum: TDBEdit
-    Left = 112
+    Left = 88
     Top = 163
-    Width = 73
+    Width = 97
     Height = 20
     DataField = 'anum'
     DataSource = dmym.dsHospital
@@ -269,9 +269,9 @@ object YgMedForm: TYgMedForm
   object RadioButton2: TRadioButton
     Left = 16
     Top = 168
-    Width = 97
+    Width = 69
     Height = 17
-    Caption = #32454#33740#24635#33740#33853#25968
+    Caption = #33740#33853#24635#25968
     TabOrder = 11
     OnClick = RadioButton2Click
   end
@@ -350,9 +350,9 @@ object YgMedForm: TYgMedForm
     OnKeyPress = dbc_typeKeyPress
   end
   object dbe_totalNum2: TDBEdit
-    Left = 112
+    Left = 88
     Top = 192
-    Width = 73
+    Width = 96
     Height = 20
     DataField = 'anum'
     DataSource = dmym.dsHospital
@@ -361,9 +361,9 @@ object YgMedForm: TYgMedForm
   object RadioButton3: TRadioButton
     Left = 16
     Top = 192
-    Width = 97
+    Width = 68
     Height = 17
-    Caption = #32454#33740#24635#33740#33853#25968
+    Caption = #33740#33853#24635#25968
     TabOrder = 13
     OnClick = RadioButton3Click
   end
@@ -409,9 +409,9 @@ object YgMedForm: TYgMedForm
     OnClick = CheckBox2Click
   end
   object dbe_totalNum3: TDBEdit
-    Left = 111
+    Left = 87
     Top = 219
-    Width = 73
+    Width = 97
     Height = 20
     DataField = 'anum'
     DataSource = dmym.dsHospital
@@ -420,9 +420,9 @@ object YgMedForm: TYgMedForm
   object RadioButton4: TRadioButton
     Left = 16
     Top = 220
-    Width = 93
+    Width = 68
     Height = 17
-    Caption = #32454#33740#24635#33740#33853#25968
+    Caption = #33740#33853#24635#25968
     TabOrder = 15
     OnClick = RadioButton4Click
   end

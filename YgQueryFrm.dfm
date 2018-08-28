@@ -1,6 +1,6 @@
 object YgQueryForm: TYgQueryForm
-  Left = 339
-  Top = 224
+  Left = 290
+  Top = 188
   BorderStyle = bsDialog
   Caption = #25171#21360#25253#34920
   ClientHeight = 425

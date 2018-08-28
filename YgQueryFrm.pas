@@ -167,7 +167,7 @@ begin
        YhandFrm.bBrowse:=true;
        YhandFrm.ShowModal;
       end;
-      if dmym.rsHospital['cylb']='医疗用品' then
+      if dmym.rsHospital['cylb']='医疗器材' then
       begin
        adanum:= dmym.rsHospital['anum'];
        YMedFrm:=TYgMedForm.Create(self);

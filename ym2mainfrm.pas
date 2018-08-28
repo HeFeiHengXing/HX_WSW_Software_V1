@@ -22,8 +22,8 @@ type
     Label1: TLabel;
     Label2: TLabel;
     NSpeciman: TMenuItem;
-    SkinData1: TSkinData;
     NWhonet: TMenuItem;
+    SkinData1: TSkinData;
     procedure mnu_sub_patientRegClick(Sender: TObject);
     procedure mun_sub_infectRegClick(Sender: TObject);
     procedure mnuZKRegClick(Sender: TObject);

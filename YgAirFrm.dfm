@@ -1,6 +1,6 @@
 object YgAirForm: TYgAirForm
-  Left = 370
-  Top = 186
+  Left = 317
+  Top = 156
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#31354#27668
   ClientHeight = 341
@@ -286,9 +286,9 @@ object YgAirForm: TYgAirForm
       OnKeyPress = dbe_gnumKeyPress
     end
     object dbe_hours: TDBEdit
-      Left = 84
+      Left = 92
       Top = 156
-      Width = 137
+      Width = 114
       Height = 20
       DataField = 'hhour'
       DataSource = dmym.dsHospital
@@ -317,9 +317,9 @@ object YgAirForm: TYgAirForm
       OnKeyPress = dbe_SpecNumKeyPress
     end
     object dbe_totalNum: TDBEdit
-      Left = 116
+      Left = 91
       Top = 184
-      Width = 105
+      Width = 113
       Height = 20
       DataField = 'anum'
       DataSource = dmym.dsHospital
@@ -328,9 +328,9 @@ object YgAirForm: TYgAirForm
     object RadioButton2: TRadioButton
       Left = 20
       Top = 186
-      Width = 97
+      Width = 69
       Height = 17
-      Caption = #32454#33740#24635#33740#33853#25968
+      Caption = #33740#33853#24635#25968
       TabOrder = 11
     end
     object RadioButton1: TRadioButton

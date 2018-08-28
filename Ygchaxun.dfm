@@ -1,6 +1,6 @@
 object YgFrm: TYgFrm
-  Left = 288
-  Top = 185
+  Left = 827
+  Top = 236
   BorderStyle = bsDialog
   BorderWidth = 2
   Caption = #38498#20869#24863#26579

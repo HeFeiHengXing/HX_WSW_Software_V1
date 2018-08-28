@@ -90,9 +90,9 @@ object Ygtxy: TYgtxy
     ParentFont = False
   end
   object dbe_hours: TDBEdit
-    Left = 66
+    Left = 67
     Top = 138
-    Width = 73
+    Width = 72
     Height = 20
     DataField = 'hhour'
     DataSource = dmym.dsHospital
@@ -121,9 +121,9 @@ object Ygtxy: TYgtxy
   object RadioButton2: TRadioButton
     Left = 6
     Top = 164
-    Width = 99
+    Width = 69
     Height = 17
-    Caption = #32454#33740#24635#33740#33853#25968
+    Caption = #33740#33853#24635#25968
     Font.Charset = GB2312_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -140,9 +140,9 @@ object Ygtxy: TYgtxy
     TabOrder = 7
   end
   object dbe_totalnum: TDBEdit
-    Left = 106
+    Left = 76
     Top = 162
-    Width = 121
+    Width = 141
     Height = 20
     DataField = 'anum'
     DataSource = dmym.dsHospital

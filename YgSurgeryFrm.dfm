@@ -1,6 +1,6 @@
 object YgSurgeryForm: TYgSurgeryForm
-  Left = 539
-  Top = 188
+  Left = 461
+  Top = 157
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#25163#26415#23460
   ClientHeight = 425
@@ -255,9 +255,9 @@ object YgSurgeryForm: TYgSurgeryForm
     object RadioButton2: TRadioButton
       Left = 20
       Top = 266
-      Width = 97
+      Width = 68
       Height = 17
-      Caption = #32454#33740#24635#33740#33853#25968
+      Caption = #33740#33853#24635#25968
       TabOrder = 8
     end
     object RadioButton1: TRadioButton
@@ -321,9 +321,9 @@ object YgSurgeryForm: TYgSurgeryForm
       TabOrder = 12
     end
     object ComboBox1: TDBComboBox
-      Left = 36
+      Left = 37
       Top = 316
-      Width = 501
+      Width = 497
       Height = 20
       DataField = 'memo'
       DataSource = dmym.dsHospital

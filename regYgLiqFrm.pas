@@ -340,6 +340,10 @@ begin
             dbc_type.Text:='使用中消毒剂';
          if (dbc_type.text='2') or (dbc_type.text='02') then
             dbc_type.Text:='无菌器械保存液';
+         if (dbc_type.text='3') or (dbc_type.text='03') then
+            dbc_type.text:='灭菌用消毒液';
+         if (dbc_type.text='4') or (dbc_type.text='04') then
+            dbc_type.text:='皮肤黏膜消毒剂';
          dbc_sampleDoctor.SetFocus;
       end;
 end;

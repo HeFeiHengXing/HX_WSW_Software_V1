@@ -414,12 +414,12 @@ begin
          resultstr:='经培养'+dbe_hours.Text+'小时后，分析无细菌生长';
      if   radiobutton2.Checked then
       begin
-         resultstr:='细菌总菌落数：'+dbe_totalNum.Text+label20.caption;
+         resultstr:='菌落总数：'+dbe_totalNum.Text+label20.caption;
       end;
      {if  radiobutton3.Checked then
-         resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/100cm^2';
+         resultstr:='菌落总数：'+dbe_totalNum.Text+'CFU/100cm^2';
      if  radiobutton4.Checked then
-         resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/件';}
+         resultstr:='菌落总数：'+dbe_totalNum.Text+'CFU/件';}
      if checkbox1.Checked then
           begin
             resultstr:=resultstr+''#13#10;
@@ -722,7 +722,7 @@ begin
       resultstr:='经培养'+dbe_hours.Text+'小时后，分析无细菌生长';
     if   radiobutton2.Checked then
     begin
-      resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/cm^2';
+      resultstr:='菌落总数：'+dbe_totalNum.Text+'CFU/cm^2';
       if checkbox1.Checked then
       begin
         resultstr:=resultstr+''#13#10;

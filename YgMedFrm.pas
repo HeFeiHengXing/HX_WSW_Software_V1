@@ -129,7 +129,7 @@ begin
     begin
         close;
         sql.Clear;
-        sql.Add('select * from hospital where cylb=''医疗用品''');
+        sql.Add('select * from hospital where cylb=''医疗器材''');
         open;
         if recordcount>0 then
         begin
@@ -144,21 +144,21 @@ begin
             end
             else
             begin
-                if fieldvalues['sptype']='无接触的医疗用品' then
+                if fieldvalues['sptype']='高度危险性医疗器材' then
                 begin
                     if strtoint(fieldvalues['mem'])<=0 then
                         fieldvalues['YGBBJC']:='合格'
                     else
                         fieldvalues['YGBBJC']:='不合格';
                 end  else
-                if fieldvalues['sptype']='接触粘膜的医疗用品' then
+                if fieldvalues['sptype']='中度危险性医疗器材' then
                 begin
                     if strtoint(fieldvalues['mem'])<=20 then
                         fieldvalues['YGBBJC']:='合格'
                     else
                         fieldvalues['YGBBJC']:='不合格';
                 end else
-                if fieldvalues['hjlb']='接触皮肤的医疗用品' then
+                if fieldvalues['hjlb']='低度危险性医疗器材' then
                 begin
                     if strtoint(fieldvalues['mem'])<=200 then
                         fieldvalues['YGBBJC']:='合格'
@@ -365,7 +365,7 @@ begin
       dmym.rsHospital['chk']:='b';
    if RadioButton1.Checked then
       dmym.rsHospital['chk']:='a';
-   dmym.rsHospital['cylb']:='医疗用品';
+   dmym.rsHospital['cylb']:='医疗器材';
    dmym.rsHospital.Post;
    dmym.conn.commitTrans;
    MessageDlg('记录保存成功!',mtInformation,[mbOk],0);
@@ -426,7 +426,7 @@ procedure TYgMedForm.RadioButton2Click(Sender: TObject);
 begin
    if dbc_type.Text='' then
      begin
-     showmessage('****请输入医疗用品类别****');
+     showmessage('****请输入医疗器材类别****');
      dbc_type.SetFocus;
      end;
 end;
@@ -435,7 +435,7 @@ procedure TYgMedForm.RadioButton3Click(Sender: TObject);
 begin
      if dbc_type.Text='' then
      begin
-     showmessage('****请输入医疗用品类别****');
+     showmessage('****请输入医疗器材类别****');
      dbc_type.SetFocus;
      end;
 end;
@@ -459,18 +459,18 @@ begin
          resultstr:='经培养'+dbe_hours.Text+'小时后，分析无细菌生长';
    if radiobutton2.Checked then
       begin
-         resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/g';
+         resultstr:='菌落总数：'+dbe_totalNum.Text+'CFU/g';
       end;
    if  radiobutton3.Checked then
-         resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/100cm^2';
+         resultstr:='菌落总数：'+dbe_totalNum.Text+'CFU/100cm^2';
    if  radiobutton4.Checked then
-         resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/件';
+         resultstr:='菌落总数：'+dbe_totalNum.Text+'CFU/件';
    if checkbox1.Checked then
           begin
             resultstr:=resultstr+''#13#10;
             resultstr:=resultstr+'细菌名:'+dbe_gname.Text;
           end;
-   cylb:='医疗用品';
+   cylb:='医疗器材';
    rvproject1.SetParam('specnum',dbe_specnum.text);
    rvproject1.SetParam('cylb',cylb);
    rvproject1.SetParam('resultstr',resultstr);
@@ -664,7 +664,7 @@ procedure TYgMedForm.RadioButton4Click(Sender: TObject);
 begin
      if dbc_type.Text='' then
      begin
-     showmessage('****请输入医疗用品类别****');
+     showmessage('****请输入医疗器材类别****');
      dbc_type.SetFocus;
      end;
 end;
@@ -748,7 +748,7 @@ begin
     wordtab.cell(2,1).range.insertafter('标本号：'+dbe_specnum.text);
     wordtab.cell(2,2).range.insertafter('科室：'+dbcsection.text);
     wordtab.cell(2,3).range.insertafter('品名：'+dbc_pinming.Text);
-    wordtab.cell(3,1).range.insertafter('采样类别：'+'医疗用品');
+    wordtab.cell(3,1).range.insertafter('采样类别：'+'医疗器材');
     wordtab.cell(3,2).range.insertafter('商标：'+dbe_brand.Text);
     wordtab.cell(3,3).range.insertafter('批号：'+dbe_ph.text);
     wordtab.cell(4,1).range.insertafter('商品类型：'+dbc_type.text);
@@ -762,11 +762,11 @@ begin
     else
       resultstr:='经培养'+dbe_hours.Text+'小时后，分析无细菌生长';
     if   radiobutton2.Checked then
-      resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/g';
+      resultstr:='菌落总数：'+dbe_totalNum.Text+'CFU/g';
     if   radiobutton3.Checked then
-      resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/100cm^2';
+      resultstr:='菌落总数：'+dbe_totalNum.Text+'CFU/100cm^2';
     if   radiobutton4.Checked then
-      resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/件';
+      resultstr:='菌落总数：'+dbe_totalNum.Text+'CFU/件';
     if checkbox1.Checked then
     begin
       resultstr:=resultstr+''#13#10;

@@ -1,6 +1,6 @@
 object RegSurgeryform: TRegSurgeryform
-  Left = 511
-  Top = 352
+  Left = 437
+  Top = 214
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#26631#26412#30331#35760'--'#25163#26415#23460
   ClientHeight = 460

@@ -135,7 +135,21 @@ begin
                     else
                         fieldvalues['YGBBJC']:='不合格';
                 end  else
+                if fieldvalues['sptype']='皮肤黏膜消毒剂' then
+                begin
+                    if strtoint(fieldvalues['mem'])<=10 then
+                        fieldvalues['YGBBJC']:='合格'
+                    else
+                        fieldvalues['YGBBJC']:='不合格';
+                end  else
                 if fieldvalues['sptype']='无菌器械保存液' then
+                begin
+                    if strtoint(fieldvalues['mem'])<=0 then
+                        fieldvalues['YGBBJC']:='合格'
+                    else
+                        fieldvalues['YGBBJC']:='不合格';
+                end else
+                if fieldvalues['sptype']='灭菌用消毒液' then
                 begin
                     if strtoint(fieldvalues['mem'])<=0 then
                         fieldvalues['YGBBJC']:='合格'
@@ -268,6 +282,13 @@ begin
           else
               dbc_jcjg.Text:='不合格';
         end;
+        if dbc_type.Text='皮肤黏膜消毒剂' then
+        begin
+          if strtoint(dbe_totalNum.Text)<=10 then
+              dbc_jcjg.Text:='合格'
+          else
+              dbc_jcjg.Text:='不合格';
+        end;
         if dbc_type.Text='灭菌用消毒液' then
         begin
           if strtoint(dbe_totalNum.Text)<=0 then
@@ -293,6 +314,13 @@ begin
         if dbc_type.Text='使用中消毒剂' then
         begin
           if strtoint(stemp)<=100 then
+            dbc_jcjg.Text:='合格'
+          else
+            dbc_jcjg.Text:='不合格';
+        end ;
+        if dbc_type.Text='皮肤黏膜消毒剂' then
+        begin
+          if strtoint(stemp)<=10 then
             dbc_jcjg.Text:='合格'
           else
             dbc_jcjg.Text:='不合格';
@@ -381,6 +409,8 @@ begin
 
             if fieldbyname('sptype').asstring='使用中消毒剂' then
                 dbc_gjbz.Text:='≤100cfu/ml';
+            if fieldbyname('sptype').asstring='皮肤黏膜消毒剂' then
+                dbc_gjbz.Text:='≤10cfu/ml';
             if fieldbyname('sptype').asstring='无菌器械保存液' then
                 dbc_gjbz.Text:='无菌生长';
             if fieldbyname('sptype').asstring='灭菌用消毒液' then
@@ -405,7 +435,7 @@ begin
         resultstr:='经培养'+dbe_hours.Text+'小时后，分析无细菌生长';
      if radiobutton2.Checked then
         begin
-        resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/ml';
+        resultstr:='染菌量：'+dbe_totalNum.Text+'CFU/ml';
         if checkbox1.Checked then
         begin
           resultstr:=resultstr+''#13#10;
@@ -485,8 +515,11 @@ begin
               dbc_type.text:='使用中消毒剂';
            if (dbc_type.text='2') or (dbc_type.text='02') then
               dbc_type.text:='无菌器械保存液';
-           if (dbc_type.text='2') or (dbc_type.text='03') then
+           if (dbc_type.text='3') or (dbc_type.text='03') then
               dbc_type.text:='灭菌用消毒液';
+           if (dbc_type.text='4') or (dbc_type.text='04') then
+              dbc_type.text:='皮肤黏膜消毒剂';
+
         end;
    dbc_samplingMan.SetFocus;
    end;
@@ -512,6 +545,8 @@ procedure TYgLiqForm.dbc_typeChange(Sender: TObject);
 begin
    if dbc_type.Text='使用中消毒剂' then
       dbc_gjbz.Text:='≤100cfu/ml';
+   if dbc_type.Text='皮肤黏膜消毒剂' then
+      dbc_gjbz.Text:='≤10cfu/ml';
    if dbc_type.Text='无菌器械保存液' then
       dbc_gjbz.Text:='无菌生长';
    if dbc_type.text='灭菌用消毒液' then
@@ -737,7 +772,7 @@ begin
       resultstr:='经培养'+dbe_hours.Text+'小时后，分析无细菌生长';
     if   radiobutton2.Checked then
     begin
-      resultstr:='细菌总菌落数：'+dbe_totalNum.Text+'CFU/ml';
+      resultstr:='染菌量：'+dbe_totalNum.Text+'CFU/ml';
       if checkbox1.Checked then
       begin
         resultstr:=resultstr+''#13#10;
