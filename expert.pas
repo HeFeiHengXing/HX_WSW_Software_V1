@@ -1,7 +1,7 @@
 unit expert;
 
 interface
-uses common,strutils,dialogs,sysutils,classes,variants,controls,db;
+uses common,strutils,dialogs,sysutils,classes,variants,controls,db,inifiles,Forms;
 const
   cgjArray:array[1..5] of string=('大肠埃希菌','肺炎克雷伯菌肺炎亚种','产酸克雷伯菌',
     '奇异变形杆菌','');
@@ -21,6 +21,7 @@ type
       magicNumber:integer;
 
       function strInArray(str:string;arr:array of string):boolean;
+      function strInList(str:string;list:Tstringlist):boolean;
       function isTb(drugname:string):boolean;//是否头孢类？
       function isTbdFast(d:integer;mgstr:string):boolean;//头孢d代敏感
 
@@ -45,7 +46,7 @@ type
       function isYpFast(ypname:string):boolean;
       function isctqm:boolean;//判断耐碳青霉烯类抗菌药物
       function isydklm:boolean;//判断 诱导克林霉素实验
-      function TsnyType:integer; // 判断 0..普通 1..多重耐药 2..高耐药 3..泛耐药
+      function TsnyType(sec:string):integer; // 判断 0..普通 1..多重耐药 2..高耐药 3..泛耐药
       Procedure NaturalSensitive(var yps:Tstringlist);//提取天然敏感药敏
       Procedure NaturalResistance(var yps:Tstringlist);//提取天然耐药药敏
       procedure updateYpTable(yps:tstringlist); //修改天然敏感药敏结果
@@ -56,6 +57,7 @@ type
       Procedure CheckPani;//根据亚胺培南修改帕尼培南；
       Procedure TsnyForTljdbj; // 对于铜绿假单胞菌的特殊耐药性
       Procedure TsnyForBmbdgj; // 对于鲍曼不动杆菌的特殊耐药性
+      procedure TsnyForAll;
       function updateTb(yps:array of string):boolean;//修改了返回true，未做修改返回false
 
       function fastyxqj1:boolean;// 阴性球菌
@@ -128,6 +130,7 @@ begin
       expertyxqj;
      if js='09' then
       expertepi;
+     TsnyForAll;
 end;
 
 procedure zExpert.expertcgj;
@@ -230,6 +233,7 @@ begin
 
     TsnyForBmbdgj;
     TsnyForTljdbj;
+
 end;
 
 ///////////////////////////////////////////////////////////////////
@@ -519,12 +523,24 @@ begin
     result:=false;
 end;
 
-function Zexpert.TsnyType:integer;
-var a,b,c:integer;
+function Zexpert.TsnyType(sec:string):integer;
+var a,b,c,i:integer;
+    bPDR:boolean;
+    myini:Tinifile;
+    slist:tstringlist;
+    naiyao:array[1..20] of boolean;
+    ftr_naiyao:array[1..20] of boolean;
 begin
   result:=0;
   a:=0;
-  b:=0;
+  c:=0;
+  bPDR:=true;
+  slist:=tstringlist.Create;
+  NaturalResistance(slist);
+  fillchar(naiyao,sizeof(naiyao),0);
+  fillchar(ftr_naiyao,sizeof(ftr_naiyao),0);
+  myini:=Tinifile.Create(Extractfiledir(Application.ExeName)+'\mdr_xdr_pdr.ini');
+  a:= myini.readInteger(sec,'CNum',0);
   with dmym.query1 do
   begin
       close;
@@ -534,21 +550,32 @@ begin
       first;
       while not eof do
       begin
-          if trim(fieldvalues['mg'])='耐药' then
-            inc(a);
+          if (myini.ValueExists(sec, trim(fieldvalues['ypmc']))) and not strInList(trim(fieldvalues['ypmc']), slist) then
+              ftr_naiyao[myini.readInteger(sec, trim(fieldvalues['ypmc']), 0)]:=true;
 
-          if (trim(fieldvalues['mg'])='敏感') or (trim(fieldvalues['mg'])='中介')  then
-            inc(b);
+          if trim(fieldvalues['mg'])='敏感' then
+            bPDR := false
+          else if(myini.ValueExists(sec, trim(fieldvalues['ypmc']))) and not strInList(trim(fieldvalues['ypmc']), slist) then
+              naiyao[myini.readInteger(sec, trim(fieldvalues['ypmc']), 0)]:=true;
 
           next;
       end;
   end;
-  if (a+b)>8 then
-  if b=0 then
+  slist.Clear;
+
+  for i:=1 to a do
+    if (ftr_naiyao[i]) then
+      inc(b);
+
+  for i:=1 to a do
+    if (naiyao[i]) then
+      inc(c);
+
+  if bPDR then
     result:=3
-  else if (b=1) or (b=2) then
+  else if c >= b-2 then
     result:=2
-  else if a>5 then
+  else if c >= 3 then
     result:=1;
 end;
 
@@ -748,6 +775,7 @@ begin
 
     TsnyForBmbdgj;
     TsnyForTljdbj;
+
 end;
 {
  一、特殊耐药机制的判断（所有耐药机制均必须最终由用户确认）
@@ -869,6 +897,23 @@ begin
   end;
   result:=false;
 end;
+
+function zExpert.strInList(str:string;list:Tstringlist):boolean;
+var
+  i:integer;
+begin
+  //相等或者部分相等均返回true
+  for i := 0 to list.Count - 1 do
+  begin
+    if (str=list[i]) or (pos(list[i],str)>0) then
+    begin
+      result:=true;
+      exit;
+    end;
+  end;
+  result:=false;
+end;
+
 {ffxj:
 （二）根据经验规则对药敏结果的修正（仅仅报告"NA"，不改变MIC值和结果。）
   1、天然耐药：
@@ -1349,7 +1394,7 @@ var tsny:integer;
 begin
   if (jzname = '铜绿假单胞菌') then
   begin
-    tsny:= TsnyType;
+    tsny:= TsnyType('铜绿假单胞菌');
     if (tsny = 1) then
     if messagedlg('该菌株为多重耐药铜绿假单胞菌!',mtconfirmation,[mbyes,mbno],0)=mryes then
     begin
@@ -1390,8 +1435,13 @@ procedure zExpert.TsnyForBmbdgj;
 var tsny:integer;
 begin
   if (jzname = '鲍曼不动杆菌') then
-  begin
-    tsny:= TsnyType;
+    if (js = '01') then
+      tsny:= TsnyType('不动杆菌肠杆菌')
+    else if (js = '02') then
+      tsny:= TsnyType('不动杆菌非发酵菌')
+  else
+    exit;
+
     if (tsny = 1) then
     if messagedlg('该菌株为多重耐药鲍曼不动杆菌!',mtconfirmation,[mbyes,mbno],0)=mryes then
     begin
@@ -1425,7 +1475,61 @@ begin
         tsnyIDM:=trim(tsnyIDM+' PDR-AB') ;
         Expert:=Expert+' PDR-AB';
     end;
-  end;
+end;
+
+procedure zExpert.TsnyForAll;
+Const
+    Bdgjlist:Array[0..2]of string=('醋酸钙不动杆菌','溶血不动杆菌','洛菲不动杆菌');
+var tsny:integer;
+begin
+  if ((js = '01') and strInArray(jzname,Bdgjlist) ) then
+       tsny:= TsnyType('不动杆菌肠杆菌')
+  else if (js = '01') then
+       tsny:= TsnyType('肠杆菌')
+  else if ((js = '02') and strInArray(jzname,Bdgjlist)) then
+       tsny:= TsnyType('不动杆菌非发酵菌')
+  else if (js = '03') then
+       tsny:= TsnyType('葡萄球菌')
+  else if (js = '04') then
+       tsny:= TsnyType('肠球菌')
+  else if (js = '12') then
+       tsny:= TsnyType('肠球菌a')
+  else
+    exit;
+
+    if (tsny = 1) then
+    if messagedlg('该菌株为多重耐药菌株!',mtconfirmation,[mbyes,mbno],0)=mryes then
+    begin
+        if bc<>'' then
+          bc:=bc+';MDR'
+        else
+        bc:='MDR';
+        tsnyID:=trim(tsnyID+' MDR');
+        tsnyIDM:=trim(tsnyIDM+' MDR') ;
+        Expert:=Expert+' MDR';
+    end;
+    if (tsny = 2) then
+    if messagedlg('该菌株为高耐药菌株!',mtconfirmation,[mbyes,mbno],0)=mryes then
+    begin
+        if bc<>'' then
+          bc:=bc+';XDR'
+        else
+        bc:='XDR';
+        tsnyID:=trim(tsnyID+' XDR');
+        tsnyIDM:=trim(tsnyIDM+' XDR') ;
+        Expert:=Expert+' XDR';
+    end;
+    if (tsny = 3) then
+    if messagedlg('该菌株为泛耐药菌株!',mtconfirmation,[mbyes,mbno],0)=mryes then
+    begin
+        if bc<>'' then
+          bc:=bc+';PDR'
+        else
+        bc:='PDR';
+        tsnyID:=trim(tsnyID+' PDR');
+        tsnyIDM:=trim(tsnyIDM+' PDR') ;
+        Expert:=Expert+' PDR';
+    end;
 end;
 
 end.

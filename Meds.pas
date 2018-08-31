@@ -642,16 +642,23 @@ begin
     begin
         close;
         sql.Clear;
+        sql.Add('select * from specialmic where js='''+js+''' and jzname=''-''');
+        open;
+        if recordcount > 0 then
+        try
+        while not eof do
+        begin
+            dmym.conn.Execute('update yp set mg=iif(jl=0,'''+fieldvalues['000']+''',iif(jl=1,'''+fieldvalues['001']+''',iif(jl=3,'''+fieldvalues['011']+''','''+fieldvalues['111']+'''))) where mic<>"" and ypmc='''+fieldvalues['ypmc']+'''');
+            next;
+        end;
+        except
+        end;
+
+        close;
+        sql.Clear;
         sql.Add('select * from specialmic where js='''+js+''' and jzname='''+jzname+'''');
         open;
-        if recordcount<=0 then
-        begin
-          close;
-          sql.Clear;
-          sql.Add('select * from specialmic where js='''+js+''' and jzname=''-''');
-          open;
-        end;
-        if recordcount>0 then
+        if recordcount > 0 then
         try
         while not eof do
         begin

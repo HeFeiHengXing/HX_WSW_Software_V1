@@ -126,17 +126,12 @@ begin
   begin
       str1:=str1+',kb as 科室';
       str2:=str2+' and kb='''+dbc_section.Text+'''';
-      if  dbc_germtype.text='******不限******' then
-      str3:=str3+' kb' else
       str3:=str3+',kb';
   end;
   if dbc_bb.text<>'******不限******' then
   begin
       str1:=str1+',bb as 标本类型';
       str2:=str2+' and bb='''+dbc_bb.Text+'''';
-      if  (dbc_germtype.text='******不限******') and (dbc_section.text='******不限******') then
-      str3:=str3+' bb'
-      else
       str3:=str3+',bb';
   end;
   rstdata.Active:=false;

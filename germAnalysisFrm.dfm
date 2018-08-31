@@ -1,6 +1,6 @@
 object germAnalysisForm: TgermAnalysisForm
-  Left = 305
-  Top = 153
+  Left = 309
+  Top = 57
   Align = alCustom
   BorderStyle = bsDialog
   Caption = #37492#23450#20998#26512

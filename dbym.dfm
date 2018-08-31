@@ -1,8 +1,8 @@
 object dmym: Tdmym
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 4
-  Top = 4
+  Left = 6
+  Top = 6
   Height = 448
   Width = 638
   object conn: TADOConnection

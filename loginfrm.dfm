@@ -1,6 +1,6 @@
 object loginForm: TloginForm
-  Left = 418
-  Top = 157
+  Left = 419
+  Top = 158
   BorderStyle = bsDialog
   Caption = #31995#32479#30331#20837
   ClientHeight = 454
@@ -5826,8 +5826,8 @@ object loginForm: TloginForm
     object Label3: TLabel
       Left = 132
       Top = 146
-      Width = 342
-      Height = 37
+      Width = 333
+      Height = 39
       Caption = #32454#33740#37492#23450#33647#25935#20998#26512#20202
       Font.Charset = GB2312_CHARSET
       Font.Color = clWhite
