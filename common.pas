@@ -142,79 +142,106 @@ begin
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢ÄÍÇàÃ¹ËØ·ÎÑ×Á´Çò¾úÖê¡£';
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(PRSP)ÄÍÇàÃ¹ËØ·ÎÑ×Á´Çò¾úÖê¡£';
      inc(count);
   end;
   if pos('CRE',str1)>0 then
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢ÄÍÌ¼ÇàÃ¹Ï©Àà¿¹¾úÒ©Îï³¦¸Ë¾ú¿ÆÏ¸¾ú¡£';
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(CRE)ÄÍÌ¼ÇàÃ¹Ï©Àà¿¹¾úÒ©Îï³¦¸Ë¾ú¿ÆÏ¸¾ú¡£';
      inc(count);
   end;
    if pos('VRS',str1)>0 then
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢ÄÍÍò¹ÅÃ¹ËØµÄÆÏÌÑÇò¾ú¾ú¡£';
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(VRS)ÄÍÍò¹ÅÃ¹ËØµÄÆÏÌÑÇò¾ú¾ú¡£';
      inc(count);
   end;
   if pos('CR-PA',str1)>0 then
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢ÄÍÌ¼ÇàÃ¹Ï©µÄÍ­ÂÌ¼Ùµ¥°û¾ú¡£';
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(CR-PA)ÄÍÌ¼ÇàÃ¹Ï©µÄÍ­ÂÌ¼Ùµ¥°û¾ú¡£';
      inc(count);
   end;
   if pos('CR-AB',str1)>0 then
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢ÄÍÌ¼ÇàÃ¹Ï©µÄ±«Âü²»¶¯¸Ë¾ú¡£';
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(CR-AB)ÄÍÌ¼ÇàÃ¹Ï©µÄ±«Âü²»¶¯¸Ë¾ú¡£';
      inc(count);
   end;
   if pos('MDR-PA',str1)>0 then
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢¶àÖØÄÍÒ©Í­ÂÌ¼Ùµ¥°û¾ú¡£';
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(MDR-PA)¶àÖØÄÍÒ©Í­ÂÌ¼Ùµ¥°û¾ú¡£';
+     inc(count);
+  end
+  else if pos('MDR-AB',str1)>0 then
+  begin
+     if count>0 then
+        s:=s+#13#10;
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(MDR-AB)¶àÖØÄÍÒ©±«Âü²»¶¯¸Ë¾ú¡£';
+     inc(count);
+  end
+  else if pos('MDR',str1)>0 then
+  begin
+     if count>0 then
+        s:=s+#13#10;
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(MDR)¶àÖØÄÍÒ©¾úÖê¡£';
      inc(count);
   end;
+
+
   if pos('XDR-PA',str1)>0 then
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢¸ßÄÍÒ©Í­ÂÌ¼Ùµ¥°û¾ú¡£';
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(XDR-PA)¸ßÄÍÒ©Í­ÂÌ¼Ùµ¥°û¾ú¡£';
+     inc(count);
+  end
+  else if pos('XDR-AB',str1)>0 then
+  begin
+     if count>0 then
+        s:=s+#13#10;
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(XDR-AB)¸ßÄÍÒ©±«Âü²»¶¯¸Ë¾ú¡£';
+     inc(count);
+  end
+  else if pos('XDR',str1)>0 then
+  begin
+     if count>0 then
+        s:=s+#13#10;
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(XDR)¸ßÄÍÒ©¾úÖê¡£';
      inc(count);
   end;
+
   if pos('PDR-PA',str1)>0 then
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢·ºÄÍÒ©Í­ÂÌ¼Ùµ¥°û¾ú¡£';
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(PDR-PA)·ºÄÍÒ©Í­ÂÌ¼Ùµ¥°û¾ú¡£';
      inc(count);
-  end;
-  if pos('MDR-AB',str1)>0 then
+  end
+  else   if pos('PDR-AB',str1)>0 then
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢¶àÖØÄÍÒ©±«Âü²»¶¯¸Ë¾ú¡£';
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(PDR-AB)·ºÄÍÒ©±«Âü²»¶¯¸Ë¾ú¡£';
      inc(count);
-  end;
-  if pos('XDR-AB',str1)>0 then
+  end
+  else if pos('PDR',str1)>0 then
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢¸ßÄÍÒ©±«Âü²»¶¯¸Ë¾ú¡£';
+     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢(PDR)·ºÄÍÒ©¾úÖê¡£';
      inc(count);
   end;
-  if pos('PDR-AB',str1)>0 then
-  begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'¡¢·ºÄÍÒ©±«Âü²»¶¯¸Ë¾ú¡£';
-     inc(count);
-  end;
+
+
+
   if pos('VRE',str1)>0 then
   begin
      if count>0 then

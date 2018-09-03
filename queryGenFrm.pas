@@ -137,7 +137,7 @@ begin
       if length(str)>0 then
         str:=str+' and ';
       str:=str+' repdate between #'+datetostr(startdate.datetime)+'# and #'+
-            datetostr(enddate.datetime)+'#';
+            datetostr(enddate.datetime+1)+'#';
     end;
   if cb4.Checked then
     begin

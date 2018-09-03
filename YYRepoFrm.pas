@@ -102,7 +102,7 @@ begin
     ADODataSet1.Active :=false;
     ADODataSet1.CommandText :='select count(*) as 记录数,type from'+
     ' base where repdate between #'+datetostr(DateTimePicker1.datetime)+
-    '#  and  #'+ datetostr(DateTimePicker2.datetime)+'#'+str+' group by type';
+    '#  and  #'+ datetostr(DateTimePicker2.datetime+1)+'#'+str+' group by type';
     ADODataSet1.Active:=true;
 
     positivecount:=0;negativecount:=0;
@@ -136,7 +136,7 @@ begin
     ADODataSet1.Active :=false;
     ADODataSet1.CommandText :='select count(*) as 记录数,sjmd,sj from'+
     ' base where repdate between #'+datetostr(DateTimePicker1.datetime)+
-    '#  and  #'+ datetostr(DateTimePicker2.datetime)+'#'+str+' group by sj,sjmd';
+    '#  and  #'+ datetostr(DateTimePicker2.datetime+1)+'#'+str+' group by sj,sjmd';
     ADODataSet1.Active:=true;
 
     stringgrid2.RowCount:= ADODataSet1.RecordCount+1;

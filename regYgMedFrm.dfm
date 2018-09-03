@@ -1,8 +1,8 @@
 object regYgMedForm: TregYgMedForm
-  Left = 201
-  Top = 180
+  Left = 443
+  Top = 221
   BorderStyle = bsDialog
-  Caption = #38498#20869#24863#26579#26631#26412#30331#35760'---'#21307#30103#29992#21697
+  Caption = #38498#20869#24863#26579#26631#26412#30331#35760'---'#21307#30103#22120#26448
   ClientHeight = 415
   ClientWidth = 557
   Color = clBtnFace

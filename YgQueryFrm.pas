@@ -111,7 +111,7 @@ begin
           str:='select * from hospital where secname="'+cbSection.text+'" and CYlb="'+cbStyle.text+'" and ';
       if  (not (chk1.checked)) and (not(CheckBox1.checked)) then
           str:='select * from hospital where ' ;
-      str:=str+' reportdate between #'+datetostr(begdate.Date)+'# and #'+datetostr(enddate.date)+'# order by reportdate desc,specNum ASC';//asc';
+      str:=str+' reportdate between #'+datetostr(begdate.Date)+'# and #'+datetostr(enddate.date+1)+'# order by reportdate desc,specNum ASC';//asc';
     end;
     dmym.rshospital.CommandText:=str;
     dmym.rshospital.active:=true;

@@ -13,6 +13,8 @@ type
     Button3: TButton;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -37,6 +39,8 @@ begin
     Memo1.Text:=Myini.ReadString('DepartMent','Information','');
     CheckBox1.Checked := StrToBool(Myini.ReadString('ReportConfig','Group',''));
     CheckBox2.Checked := StrToBool(Myini.ReadString('ReportConfig','DoseUsage',''));
+    CheckBox3.Checked := StrToBool(Myini.ReadString('ReportConfig','NatrualResistance',''));
+    CheckBox4.Checked := StrToBool(Myini.ReadString('ReportConfig','NoStandard',''));
 end;
 
 procedure TDISetform.Button2Click(Sender: TObject);
@@ -44,6 +48,8 @@ begin
     Myini.WriteString('DepartMent','Information',Memo1.text);
     Myini.WriteString('ReportConfig','Group',BoolToStr(CheckBox1.Checked));
     Myini.WriteString('ReportConfig','DoseUsage',BoolToStr(CheckBox2.Checked));
+    Myini.WriteString('ReportConfig','NatrualResistance',BoolToStr(CheckBox3.Checked));
+    Myini.WriteString('ReportConfig','NoStandard',BoolToStr(CheckBox4.Checked));
     showmessage('设置信息已保存!');
 end;
 

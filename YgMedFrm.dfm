@@ -1,8 +1,8 @@
 object YgMedForm: TYgMedForm
-  Left = 663
-  Top = 165
+  Left = 427
+  Top = 262
   BorderStyle = bsDialog
-  Caption = #38498#20869#24863#26579#20998#26512#65293#65293#21307#30103#29992#21697
+  Caption = #38498#20869#24863#26579#20998#26512#65293#65293#21307#30103#22120#26448
   ClientHeight = 346
   ClientWidth = 595
   Color = clBtnFace

@@ -139,7 +139,7 @@ begin
     1:    //选择总属
     begin
         strq:='select count(useid) as 标本数,jzname as 细菌名称,kb as 科室,bb as 标本类型 from base where repdate between #';
-        strq:=strq+datetostr(dtpbegdate.DateTime)+'# and #'+datetostr(dtpenddate.DateTime)+'# '+str2;
+        strq:=strq+datetostr(dtpbegdate.DateTime)+'# and #'+datetostr(dtpenddate.DateTime+1)+'# '+str2;
         strq:=strq+'group by jzname,kb,bb';
     end;
     0:

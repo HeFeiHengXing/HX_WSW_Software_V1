@@ -1,6 +1,6 @@
 object YgFrm: TYgFrm
-  Left = 827
-  Top = 236
+  Left = 435
+  Top = 213
   BorderStyle = bsDialog
   BorderWidth = 2
   Caption = #38498#20869#24863#26579
@@ -40,7 +40,7 @@ object YgFrm: TYgFrm
     Top = 136
     Width = 117
     Height = 78
-    Caption = #21307#30103#29992#21697
+    Caption = #21307#30103#22120#26448
     TabOrder = 2
     OnClick = Button5Click
   end

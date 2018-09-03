@@ -102,7 +102,7 @@ begin
         stgchk.Cells[6,0]:='菌属比率';
 
         //同属耐药数
-        strSpecial:='select chkdate,count(chkdate) as base from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime)+'#';
+        strSpecial:='select chkdate,count(chkdate) as base from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime+1)+'#';
         strSpecial:=strSpecial+' and js="'+dmym.rsGermType['germindex']+ '"';
         IF SpecialRmDB.Text='MRS' THEN
         strSpecial:=strSpecial+' and tsnyIDM="'+SpecialRmDB.Text+ '"'
@@ -110,7 +110,7 @@ begin
         strSpecial:=strSpecial+' and tsnyID="'+SpecialRmDB.Text+ '"';
         strSpecial:=strSpecial+' group by chkdate';  //base
         //同种耐药数
-        strSpecial1:='select chkdate,count(chkdate) as same from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime)+'#';
+        strSpecial1:='select chkdate,count(chkdate) as same from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime+1)+'#';
         strSpecial1:=strSpecial1+' and js="'+dmym.rsGermType['germindex']+ '"';
         IF SpecialRmDB.Text='MRS' THEN
         strSpecial1:=strSpecial1+' and tsnyIDM="'+SpecialRmDB.Text+ '"'
@@ -119,11 +119,11 @@ begin
         strSpecial1:=strSpecial1+' and jzname="'+dlcjzname.Text+ '"';
         strSpecial1:=strSpecial1+' group by chkdate';  //same
         //菌属检出数
-        strSpecial2:='select chkdate,count(chkdate) as allb from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime)+'#';
+        strSpecial2:='select chkdate,count(chkdate) as allb from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime+1)+'#';
         strSpecial2:=strSpecial2+' and js="'+dmym.rsGermType['germindex']+ '"';
         strSpecial2:=strSpecial2+' group by chkdate';  //allb
         //菌种检出数
-        strSpecial3:='select chkdate,count(chkdate) as e from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime)+'#';
+        strSpecial3:='select chkdate,count(chkdate) as e from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime+1)+'#';
         strSpecial3:=strSpecial3+' and js="'+dmym.rsGermType['germindex']+ '"';
         strSpecial3:=strSpecial3+' and jzname="'+dlcjzname.Text+ '"';//e
         strSpecial3:=strSpecial3+' group by chkdate';
@@ -187,7 +187,7 @@ begin
      else
      begin
        strqstatic:='TRANSFORM Count(useid) SELECT chkdate, Count(useid) AS 总计 FROM Base  ';
-       strqstatic:=strqstatic+ 'where jzname="'+dlcjzname.text +'" and repdate between #'+ datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime)+'# GROUP BY [chkdate] PIVOT [bb]';
+       strqstatic:=strqstatic+ 'where jzname="'+dlcjzname.text +'" and repdate between #'+ datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime+1)+'# GROUP BY [chkdate] PIVOT [bb]';
        rstdata.CommandText:=strqstatic;
        rstdata.Active:=true;
 
@@ -246,7 +246,7 @@ begin
         stgchk.Cells[6,0]:='总标本数';
         stgchk.Cells[7,0]:='总标本分布率';
         //检出数
-        strSpecial:='select jzname,count(useid) as same from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime)+'#';
+        strSpecial:='select jzname,count(useid) as same from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime+1)+'#';
         strSpecial:=strSpecial+str;
         strspecial:=strSpecial+' and js='''+dbhelper.Create.getgermindex(trim(dbc_germtype.text))+'''';
         if SpecialRmDBCh.Checked then
@@ -276,7 +276,7 @@ begin
         end;
 
         //同种检出数
-        strSpecial:='select jzname,count(useid) as itself from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime)+'#';
+        strSpecial:='select jzname,count(useid) as itself from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime+1)+'#';
         strSpecial:=strSpecial+str;
         strspecial:=strSpecial+' and js='''+dbhelper.Create.getgermindex(trim(dbc_germtype.text))+'''';
         strSpecial:=strSpecial+' and jzname in (select jzname from tmpcheck)';
@@ -295,7 +295,7 @@ begin
         end;
 
         //同属全部细菌检出数
-        strSpecial:='select count(useid) as total from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime)+'#';
+        strSpecial:='select count(useid) as total from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime+1)+'#';
         strSpecial:=strSpecial+str;
         strspecial:=strSpecial+' and js='''+dbhelper.Create.getgermindex(trim(dbc_germtype.text))+'''';
 
@@ -307,7 +307,7 @@ begin
             stgchk.Cells[4,i]:=rscalc.FieldValues['total'];
 
         //总标本检出数
-        strSpecial2:='select count(useid) as allb from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime)+'# and type=''鉴定分析''';
+        strSpecial2:='select count(useid) as allb from base where repdate between #' + datetostr(dtpBegDate.datetime) +'# and #'+ datetostr(dtpendDate.datetime+1)+'# and type=''鉴定分析''';
         strSpecial2:=strSpecial2+str;
         rscalc.Active:=false;
         rscalc.CommandText:=strSpecial2;

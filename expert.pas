@@ -562,7 +562,7 @@ begin
       end;
   end;
   slist.Clear;
-
+  myini.Free;
   for i:=1 to a do
     if (ftr_naiyao[i]) then
       inc(b);
@@ -1482,6 +1482,9 @@ Const
     Bdgjlist:Array[0..2]of string=('´×Ëá¸Æ²»¶¯¸Ë¾ú','ÈÜÑª²»¶¯¸Ë¾ú','Âå·Æ²»¶¯¸Ë¾ú');
 var tsny:integer;
 begin
+  if (jzname = 'ÊÈÂóÑ¿Õ­Ê³µ¥°û¾ú') then
+    exit;
+
   if ((js = '01') and strInArray(jzname,Bdgjlist) ) then
        tsny:= TsnyType('²»¶¯¸Ë¾ú³¦¸Ë¾ú')
   else if (js = '01') then

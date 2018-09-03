@@ -1304,6 +1304,7 @@ var
   mydataband:travedataband;
   jjband,titleband,pyband,bzband:traveband;
   mydatatext1,mydatatext2:travedatatext;
+  mytext1,mytext2:travetext;
   mydataview:tRavedataview;
   myhline1,myhline2:travehline;
  // mysection,mysection2:travesection;
@@ -1314,19 +1315,21 @@ var
   b1:boolean;
   text22,bbjljs:TRaveText;
   RetNum,i,index:integer ;
+  slist:tstringlist;
   a:array[1..30] of string;
   b:array[1..30] of string;
 begin
 //比较结果
-   if (dbc_bb.Text<>'') and (dbe_jzname.Text<>'')then
+   myini:=Tinifile.Create(Extractfiledir(Application.ExeName)+'\dw.ini');
+   if not StrToBool(Myini.ReadString('ReportConfig','NoStandard','')) then  //读取文件信息来控制
    begin
-   SqlText:='select * from ZFX_YP Where jsname='''+cb_germtype.Text+''' and xjname='''+dbe_jzname.Text+''' and bblx='''+dbc_bb.Text+''' ORDER BY ypid';
-   ZFX_PrintQuery.Close;
-   ZFX_PrintQuery.SQL.Clear;
-   ZFX_PrintQuery.SQL.Add(SqlText);
-   ZFX_PrintQuery.Open;
-   RetNum :=ZFX_PrintQuery.RecordCount;
-   if RetNum>0 then
+    SqlText:='select * from ZFX_YP Where jsname='''+cb_germtype.Text+''' and xjname='''+dbe_jzname.Text+''' and bblx='''+dbc_bb.Text+''' ORDER BY ypid';
+    ZFX_PrintQuery.Close;
+    ZFX_PrintQuery.SQL.Clear;
+    ZFX_PrintQuery.SQL.Add(SqlText);
+    ZFX_PrintQuery.Open;
+    RetNum :=ZFX_PrintQuery.RecordCount;
+    if RetNum>0 then
       begin
        for i:=1 to RetNum  do
          begin
@@ -1337,12 +1340,13 @@ begin
        for i:=1 to RetNum do
          if a[i]='no' then
          begin
+         try
          with dmym.conn do
-         execute('update yp set mg='' '' where ypmc='''+b[i]+'''' );
+         execute('delete from yp where ypmc='''+b[i]+'''' );
+         except
+            end;
          end;
-      end
-   else
-     begin
+      end;
      SqlText:='select * from ZFX_YP Where jsname='''+cb_germtype.Text+''' and bblx='''+dbc_bb.Text+''' and xjname=''所有'' ORDER BY ypid';
      ZFX_PrintQuery.Close;
      ZFX_PrintQuery.SQL.Clear;
@@ -1360,84 +1364,37 @@ begin
         for i:=1 to RetNum do
           if a[i]='no' then
           begin
+          try
           with dmym.conn do
-          execute('update yp set mg='' '' where ypmc='''+b[i]+'''' );
-          end;
-        end
-     else
-     begin
-       SqlText:='select * from ZFX_YP Where jsname='''+cb_germtype.Text+''' and xjname='''+dbe_jzname.Text+''' and bblx=''所有'' ORDER BY ypid';
-       ZFX_PrintQuery.Close;
-       ZFX_PrintQuery.SQL.Clear;
-       ZFX_PrintQuery.SQL.Add(SqlText);
-       ZFX_PrintQuery.Open;
-       RetNum :=ZFX_PrintQuery.RecordCount;
-       if RetNum>0 then
-          begin
-          for i:=1 to RetNum  do
-            begin
-            a[i]:=ZFX_PrintQuery.FieldByName('isprint').AsString;
-            b[i]:=ZFX_PrintQuery.FieldByName('ypmc').AsString;
-            ZFX_PrintQuery.Next;
-            end ;
-          for i:=1 to RetNum do
-            if a[i]='no' then
-            begin
-            with dmym.conn do
-            execute('update yp set mg='' '' where ypmc='''+b[i]+'''' );
+          execute('delete from yp where ypmc='''+b[i]+'''' );
+          except
             end;
-          end ;
-      end ;
-   end;
-      i:=1;
-      with sGrid do
-      begin
-        with dmym.query1 do
-        begin
-         close;
-         sql.clear;
-         sql.add('select * from yp order by ypid');
-         open;
-         sgrid.RowCount:=recordcount+1;
-         while not eof do
-          begin
-            if Varisnull(fieldValues['mg']) then
-               cells[3,i]:=' '
-            else
-               cells[3,i]:=fieldvalues['mg'];
-            next;
-            inc(i);
           end;
         end;
-        row:=1;
-        col:=0;
+     SqlText:='select * from ZFX_YP Where jsname='''+cb_germtype.Text+''' and xjname='''+dbe_jzname.Text+''' and bblx=''所有'' ORDER BY ypid';
+     ZFX_PrintQuery.Close;
+     ZFX_PrintQuery.SQL.Clear;
+     ZFX_PrintQuery.SQL.Add(SqlText);
+     ZFX_PrintQuery.Open;
+     RetNum :=ZFX_PrintQuery.RecordCount;
+     if RetNum>0 then
+        begin
+        for i:=1 to RetNum  do
+          begin
+          a[i]:=ZFX_PrintQuery.FieldByName('isprint').AsString;
+          b[i]:=ZFX_PrintQuery.FieldByName('ypmc').AsString;
+          ZFX_PrintQuery.Next;
+          end ;
+        for i:=1 to RetNum do
+          if a[i]='no' then
+          begin
+          try
+          with dmym.conn do
+          execute('delete from yp where ypmc='''+b[i]+'''' );
+          except
+          end;
+          end;
       end;
-end ;
-if  (dbc_bb.Text='') and (dbe_jzname.Text<>'')then
-   begin
-   SqlText:='select * from ZFX_YP Where jsname='''+cb_germtype.Text+''' and xjname='''+dbe_jzname.Text+''' and bblx=''所有'' ORDER BY ypid';
-   ZFX_PrintQuery.Close;
-   ZFX_PrintQuery.SQL.Clear;
-   ZFX_PrintQuery.SQL.Add(SqlText);
-   ZFX_PrintQuery.Open;
-   RetNum :=ZFX_PrintQuery.RecordCount;
-   if RetNum>0 then
-      begin
-       for i:=1 to RetNum  do
-         begin
-         a[i]:=ZFX_PrintQuery.FieldByName('isprint').AsString;
-         b[i]:=ZFX_PrintQuery.FieldByName('ypmc').AsString;
-         ZFX_PrintQuery.Next;
-         end ;
-       for i:=1 to RetNum do
-         if a[i]='no' then
-         begin
-         with dmym.conn do
-         execute('update yp set mg='' '' where ypmc='''+b[i]+'''' );
-         end;
-      end
-    else
-      begin
       SqlText:='select * from ZFX_YP Where jsname='''+cb_germtype.Text+''' and xjname=''所有'' and bblx=''所有'' ORDER BY ypid';
       ZFX_PrintQuery.Close;
       ZFX_PrintQuery.SQL.Clear;
@@ -1455,36 +1412,36 @@ if  (dbc_bb.Text='') and (dbe_jzname.Text<>'')then
        for i:=1 to RetNum do
          if a[i]='no' then
          begin
+         try
          with dmym.conn do
-         execute('update yp set mg='' '' where ypmc='''+b[i]+'''' );
+         execute('delete from yp where ypmc='''+b[i]+'''' );
+         except
+            end;
          end;
-         end ;
-      end;
-      i:=1;
-      with sGrid do
-      begin
-        with dmym.query1 do
-        begin
-         close;
-         sql.clear;
-         sql.add('select * from yp order by ypid');
-         open;
-         sgrid.RowCount:=recordcount+1;
-         while not eof do
-          begin
-            if Varisnull(fieldValues['mg']) then
-               cells[3,i]:=' '
-            else
-               cells[3,i]:=fieldvalues['mg'];
-            next;
-            inc(i);
-          end;
-        end;
-        row:=1;
-        col:=0;
-      end;
-end;
+       end;
+  end;
 //比较结束
+
+if not StrToBool(Myini.ReadString('ReportConfig','NatrualResistance','')) then
+begin
+  with dmym.query1 do
+    begin
+      close;
+      sql.Clear;
+      sql.Add('select * from ymspecial where ymType=''+'' and js='''+
+              js+''' and xjName='''+dbe_jzname.Text+'''');
+      open;
+      first;
+      While not Eof do
+      begin
+      try
+        dmym.conn.Execute('delete from yp where ypmc='''+FieldByName('ypmc').AsString+'''');
+      except
+        end;
+        next;
+      end;
+    end;
+end;
 
 if (saved) or (not bNewpatient)  then
    begin
@@ -1495,7 +1452,9 @@ if (saved) or (not bNewpatient)  then
          myRegion:=findRaveComponent('dv_ypregion',mypage) as tRaveRegion;
          mydataband:=findRaveComponent('dv_ypdataband',myregion) as tRaveDataband;
          mymemo:=findRaveComponent('datamemo1',mypage) as tRaveDatamemo;
+         mytext1:=findRaveComponent('Text9',mypage) as tRaveText;  //分组表头
          mydatatext1:=findRaveComponent('DataText3',mypage) as tRavedataText;
+         mytext2:=findRaveComponent('Text11',mypage) as tRaveText; //剂量和用法的表头
          mydatatext2:=findRaveComponent('DataText32',mypage) as tRavedataText;
          titleband:=findRaveComponent('dv_ypBand',mypage) as tRaveband;
          pyband:=findRaveComponent('pyBand',mypage) as tRaveband;
@@ -1578,14 +1537,15 @@ if (saved) or (not bNewpatient)  then
             rvproject1.SetParam('titlestr',hospitalName+'微生物检测报告单');
 
             (*设置科室打印信息*)
-            myini:=Tinifile.Create(Extractfiledir(Application.ExeName)+'\dw.ini');
             rvproject1.SetParam('Remark',myini.ReadString('DepartMent','Information',''));
             if not StrToBool(Myini.ReadString('ReportConfig','Group','')) then
             begin
+              mytext1.Visible:=false;
               mydatatext1.Visible:=false;
             end;
             if not StrToBool(Myini.ReadString('ReportConfig','DoseUsage','')) then
             begin
+              mytext2.Visible:=false;
               mydatatext2.Visible:=false;
             end;
             myini.Free;

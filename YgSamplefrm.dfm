@@ -1,6 +1,6 @@
 object Ygsample: TYgsample
-  Left = 405
-  Top = 201
+  Left = 506
+  Top = 302
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#26631#26412#30331#35760
   ClientHeight = 283
@@ -47,7 +47,7 @@ object Ygsample: TYgsample
     Top = 88
     Width = 127
     Height = 40
-    Caption = #21307#30103#29992#21697#26631#26412#30331#35760
+    Caption = #21307#30103#22120#26448#26631#26412#30331#35760
     TabOrder = 4
     OnClick = Button4Click
   end

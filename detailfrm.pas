@@ -276,6 +276,8 @@ var
   mydataband,fjdataband:travedataband;
   jjband,titleband,pyband,bzband,fjband:traveband;
   mydatatext1,mydatatext2:travedatatext;
+  rvdatatext1,rvdatatext2:travedatatext;
+  mytext1,mytext2:travetext;
   myhline1,myhline2:travehline;
   str,str1:string;
   memo1:tRaveMemo;
@@ -334,6 +336,10 @@ begin
           bzband:=findRaveComponent('bzBand',mypage) as tRaveband;
           fjband:=findRaveComponent('fjband',mypage) as tRaveband;
           fjdataband:=findRaveComponent('databand1',mypage) as tRaveDataband;
+          mytext1:=findRaveComponent('Text9',mypage) as tRaveText;  //分组表头
+          rvdatatext1:=findRaveComponent('DataText3',mypage) as tRavedataText;
+          mytext2:=findRaveComponent('Text11',mypage) as tRaveText; //剂量和用法的表头
+          rvdatatext2:=findRaveComponent('DataText32',mypage) as tRavedataText;
       end;
         //打印镜检结果
       {if not(aform.bjj=true) then
@@ -460,6 +466,16 @@ begin
      (*科室打印信息设置*)
      myini:=Tinifile.Create(Extractfiledir(Application.ExeName)+'\dw.ini');
      rvproject1.SetParam('Remark',myini.ReadString('DepartMent','Information',''));
+     if not StrToBool(Myini.ReadString('ReportConfig','Group','')) then
+      begin
+        mytext1.Visible:=false;
+        rvdatatext1.Visible:=false;
+      end;
+     if not StrToBool(Myini.ReadString('ReportConfig','DoseUsage','')) then
+      begin
+        mytext2.Visible:=false;
+        rvdatatext2.Visible:=false;
+      end;
      myini.Free;
    //
      if bezk then
@@ -480,18 +496,18 @@ begin
         rvProject1.ExecuteReport('report_germanalysis');
      rvProject1.Close;
   end;
-  if not bezk then
+{  if not bezk then
   begin
       dmym.rsBase.Edit;
       dmym.rsBase['jjjg']:=str;
       dmym.rsbase['yspy']:=str1;
       dmym.rsBase.Post;
-  end;
+  end;}
 end;
 
 procedure Tdetailform.BitBtn1Click(Sender: TObject);
 var
-  i,j,id,idex,reporttype:integer;
+  i,id,idex,reporttype:integer;
   bPositive:boolean;
   resultstr:string;
   timestr:string;
@@ -499,41 +515,135 @@ var
   mytext:travetext;
   mydatatext:travedatatext;
   mypage:travepage;
+  myini:Tinifile;
   s,str,str1,str2:string;
-  globalstrarray:array[0..30] of string;
 begin
+  myini:=Tinifile.Create(Extractfiledir(Application.ExeName)+'\dw.ini');
   try  //为了给药敏前加勾，数据处理过再恢复
   dmym.conn.BeginTrans;
-      j:=0;
+      id:=0;
       rstemp.Active:=true;
       rstemp.first;
       rstemp.DisableControls;
       while not rstemp.Eof do
       begin
-          //剂量及用法按A,B分行显示的问题
-          globalstrarray[j]:=rstemp.FieldValues['ypmc'];
-          inc(j);
-          str:=rstemp.FieldValues['jfyl'];
-          idex:=pos(';',str);
-          if idex>0 then
+        rstemp.Edit;
+         with dmym.query1 do
+         begin
+          if not StrToBool(Myini.ReadString('ReportConfig','NoStandard','')) then  //读取文件信息来控制
           begin
-              str1:=leftstr(str,idex-1);
-              str2:=rightstr(str,length(str)-idex);
-              rstemp.Edit;
-              rstemp.FieldValues['jfyl']:=trim(str1+''#13#10+str2);
+            close;
+            sql.Clear;
+            sql.Add('select * from ZFX_YP Where js='''+dmym.rsBase.FieldValues['js']+
+            ''' and xjname='''+dmym.rsBase.FieldValues['jzname']+
+            ''' and bblx='''+dmym.rsBase.FieldValues['bb']+
+            ''' and ypmc='''+rstemp.FieldValues['ypmc']+''' ORDER BY ypid');
+            open;
+            if RecordCount>0 then
+            begin
+              first;
+              if FieldValues['isprint'] = 'no' then
+              begin
+                 rstemp.Delete;
+                 continue;
+              end;
+            end;
+
+            close;
+            sql.Clear;
+            sql.Add('select * from ZFX_YP Where js='''+dmym.rsBase.FieldValues['js']+
+            ''' and xjname=''所有'''+
+            ' and bblx='''+dmym.rsBase.FieldValues['bb']+
+            ''' and ypmc='''+rstemp.FieldValues['ypmc']+''' ORDER BY ypid');
+            open;
+            if RecordCount>0 then
+            begin
+              first;
+              if FieldValues['isprint'] = 'no' then
+              begin
+                 rstemp.Delete;
+                 continue;
+              end;
+            end;
+
+            close;
+            sql.Clear;
+            sql.Add('select * from ZFX_YP Where js='''+dmym.rsBase.FieldValues['js']+
+            ''' and xjname='''+dmym.rsBase.FieldValues['jzname']+
+            ''' and bblx=''所有'''+
+            ' and ypmc='''+rstemp.FieldValues['ypmc']+''' ORDER BY ypid');
+            open;
+            if RecordCount>0 then
+            begin
+              first;
+              if FieldValues['isprint'] = 'no' then
+              begin
+                 rstemp.Delete;
+                 continue;
+              end;
+            end;
+
+            close;
+            sql.Clear;
+            sql.Add('select * from ZFX_YP Where js='''+dmym.rsBase.FieldValues['js']+
+            ''' and xjname=''所有'' and bblx=''所有'' and ypmc='''+
+            rstemp.FieldValues['ypmc']+''' ORDER BY ypid');
+            open;
+            if RecordCount>0 then
+            begin
+              first;
+              if FieldValues['isprint'] = 'no' then
+              begin
+                 rstemp.Delete;
+                 continue;
+              end;
+            end;
           end;
-          //药物英文名称附加到中文名称后面
-          s:=rstemp.FieldValues['ypmc'];
-          s:=s+rstemp.FieldValues['ename'];
-          rstemp.Edit;
-          rstemp.FieldValues['ypmc']:=s;
-          //结果敏感 可用的药物前面打*
-          if rstemp.FieldValues['mg']='敏感' then
-            rstemp.FieldValues['ypmc']:='*'+rstemp.FieldValues['ypmc']
-          else
-            rstemp.FieldValues['ypmc']:='  '+rstemp.FieldValues['ypmc'];
+
+          if not StrToBool(Myini.ReadString('ReportConfig','NatrualResistance','')) then
+          begin
+            close;
+            sql.Clear;
+            sql.Add('select * from ymspecial where ymType=''+'' and js='''+
+                    dmym.rsBase.FieldValues['js']+''' and xjName='''+dmym.rsBase.FieldValues['jzname']+
+                    ''' and ypmc='''+ rstemp.FieldValues['ypmc'] + '''');
+            open;
+            if RecordCount>0 then
+            begin
+              rstemp.Delete;
+              continue;
+            end;
+          end;
+         end;
+
+        if id=rstemp.FieldValues['id'] then
+        begin
           rstemp.Next;
+          continue;
+        end;
+        //剂量及用法按A,B分行显示的问题
+        str:=rstemp.FieldValues['jfyl'];
+        idex:=pos(';',str);
+        if idex>0 then
+        begin
+            str1:=leftstr(str,idex-1);
+            str2:=rightstr(str,length(str)-idex);
+            rstemp.Edit;
+            rstemp.FieldValues['jfyl']:=trim(str1+''#13#10+str2);
+        end;
+        //药物英文名称附加到中文名称后面
+        s:=rstemp.FieldValues['ypmc'];
+        s:=s+rstemp.FieldValues['ename'];
+        rstemp.FieldValues['ypmc']:=s;
+        //结果敏感 可用的药物前面打*
+        if rstemp.FieldValues['mg']='敏感' then
+          rstemp.FieldValues['ypmc']:='*'+rstemp.FieldValues['ypmc']
+        else
+          rstemp.FieldValues['ypmc']:='  '+rstemp.FieldValues['ypmc'];
+        id:=rstemp.FieldValues['id'];
+        rstemp.Next;
       end;
+      myini.Free;
       rstemp.EnableControls;
 
       application.createform(Tsreportform,sreportform);
@@ -555,22 +665,14 @@ begin
           end;
       end;
       sreportform.Free;
-      //处理过的数据恢复
-      j:=0;
-      rstemp.Active:=true;
-      rstemp.First;
-      rstemp.DisableControls;
-      while not rstemp.Eof do
-      begin
-          rstemp.Edit;
-          rstemp.FieldValues['ypmc']:=globalstrarray[j];
-          rstemp.Next;
-          inc(j);
-      end;
-      rstemp.EnableControls;
-  dmym.conn.CommitTrans;
+
+  dmym.conn.RollbackTrans;
+  rstemp.Refresh;
+  dmym.rsBase.Refresh;
+  rstemp.EnableControls;
   except
   dmym.conn.RollbackTrans;
+  myini.Free;
   end;
 end;
 
@@ -578,6 +680,7 @@ procedure Tdetailform.BitBtn2Click(Sender: TObject);
 var i:integer;
 begin
     dsTemp.AutoEdit:=true;
+    rstemp.Edit;
     dsMedAdd.AutoEdit:=true;
     for i:=0 to componentcount-1 do
     begin
@@ -611,7 +714,8 @@ begin
     dmym.conn.BeginTrans;
     try
     begin
-        rsTemp.Next;//指针移动到下一条，会自动保存上一条的记录的当前信息;
+        rsTemp.UpdateBatch;
+        //rsTemp.Next;//指针移动到下一条，会自动保存上一条的记录的当前信息;
         rsMedAdd.Next;
         if bezk then
             dmym.rsBasezk.Post
@@ -696,6 +800,7 @@ begin
     flashform.Show;
     flashform.Panel1.Caption:='正在导出到Word,请稍后...';
     flashform.Refresh;
+    myini:=Tinifile.Create(Extractfiledir(Application.ExeName)+'\dw.ini');
 
     //设定文档模式,(*关闭拼音查找，语法查找，提高运行效率*)
     Wordapp.Options.CheckSpellingAsYouType := False;
@@ -777,10 +882,16 @@ begin
     while not rstemp.Eof do
     begin
         wordtab.cell(k,1).range.insertafter(rstemp['ypmc']);
-        wordtab.cell(k,2).range.insertafter(rstemp['bz']);
+        if StrToBool(Myini.ReadString('ReportConfig','Group','')) then
+        begin
+           wordtab.cell(k,2).range.insertafter(rstemp['bz']);
+        end;
         wordtab.cell(k,3).range.insertafter(rstemp['mic']);
         wordtab.cell(k,4).range.insertafter(rstemp['mg']);
-        wordtab.cell(k,5).range.insertafter(rstemp['jfyl']);
+        if StrToBool(Myini.ReadString('ReportConfig','DoseUsage','')) then
+        begin
+           wordtab.cell(k,5).range.insertafter(rstemp['jfyl']);
+        end;
         wordtab.Rows.item(k+1).Select;
         wordapp.Selection.InsertRowsBelow;
         inc(k);
@@ -867,7 +978,6 @@ begin
     if not varisnull(RsbaseTable['shys']) then
     wordtab.cell(k,2).range.insertafter(RsbaseTable['shys']);
     //导出页脚
-    myini:=Tinifile.Create(Extractfiledir(Application.ExeName)+'\dw.ini');
     inc(k);
     wordtab.cell(k,1).range.insertafter(myini.ReadString('DepartMent','Information',''));
     myini.Free;

@@ -43,7 +43,6 @@ type
     Label5: TLabel;
     Label6: TLabel;
     dbc_bbtype: TComboBox;
-    Label7: TLabel;
     Dbc_sjmd: TComboBox;
     Label8: TLabel;
     chkypmc: TCheckBox;
@@ -384,7 +383,7 @@ end;
 procedure TtotalForm.Button2Click(Sender: TObject);
 begin
     comstr:='select * from base where repdate between #';
-    comstr:=comstr+datetostr(dtpbegdate.DateTime)+'# and #'+datetostr(dtpenddate.DateTime)+'# ';
+    comstr:=comstr+datetostr(dtpbegdate.DateTime)+'# and #'+datetostr(dtpenddate.DateTime+1)+'# ';
     if dbc_germtype.text<>'******不限******' then
         comstr:=comstr+' and js='''+dbhelper.Create.getgermindex(trim(dbc_germtype.text))+'''';
     if dbc_section.text<>'******不限******' then

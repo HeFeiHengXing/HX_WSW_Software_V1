@@ -1,9 +1,9 @@
 object DISetform: TDISetform
-  Left = 753
-  Top = 244
+  Left = 483
+  Top = 255
   Width = 406
   Height = 205
-  Caption = #31185#23460#20449#24687#35774#32622
+  Caption = #25253#34920#35774#32622
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,19 +26,19 @@ object DISetform: TDISetform
     TabOrder = 0
   end
   object Button2: TButton
-    Left = 216
-    Top = 129
-    Width = 75
-    Height = 25
+    Left = 311
+    Top = 109
+    Width = 70
+    Height = 22
     Caption = #20445#23384
     TabOrder = 1
     OnClick = Button2Click
   end
   object Button3: TButton
-    Left = 309
-    Top = 129
-    Width = 75
-    Height = 25
+    Left = 311
+    Top = 139
+    Width = 70
+    Height = 22
     Caption = #36864#20986
     TabOrder = 2
     OnClick = Button3Click
@@ -48,7 +48,7 @@ object DISetform: TDISetform
     Top = 112
     Width = 97
     Height = 17
-    Caption = #26174#31034#20998#32452
+    Caption = #20998#32452
     TabOrder = 3
   end
   object CheckBox2: TCheckBox
@@ -56,7 +56,23 @@ object DISetform: TDISetform
     Top = 136
     Width = 127
     Height = 17
-    Caption = #26174#31034#35745#37327#19982#29992#27861
+    Caption = #35745#37327#19982#29992#27861
     TabOrder = 4
+  end
+  object CheckBox3: TCheckBox
+    Left = 166
+    Top = 112
+    Width = 115
+    Height = 17
+    Caption = #22266#26377#32784#33647
+    TabOrder = 5
+  end
+  object CheckBox4: TCheckBox
+    Left = 166
+    Top = 136
+    Width = 123
+    Height = 17
+    Caption = #38750#24120#35268#33647#29289
+    TabOrder = 6
   end
 end

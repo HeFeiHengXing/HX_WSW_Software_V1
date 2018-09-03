@@ -133,7 +133,7 @@ begin
     begin
         rstDAta.Active:=false;
         str1:='select distinct ypmc from vw_anti where ';
-        str1:=str1+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date)+'# ';
+        str1:=str1+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date+1)+'# ';
         str1:=str1+str;
         rstDAta.CommandText:=str1;
         rstDAta.Active:=true;
@@ -155,7 +155,7 @@ begin
     //填写第一列 细菌名称
     rstDAta.Active:=false;
     rstDAta.CommandText:='select distinct jzname from vw_anti where '+
-    'repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date)+'#'+str;
+    'repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date+1)+'#'+str;
     rstDAta.Active:=true;
     stgchk.RowCount:=rstdata.RecordCount+2;
     RowNum:=stgchk.RowCount;
@@ -174,7 +174,7 @@ begin
         if radiobutton4.Checked then
         begin
             strqstatic:='select count(jl) as jlAll from vw_anti where';
-            strqstatic:=strqstatic+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date)+'#';
+            strqstatic:=strqstatic+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date+1)+'#';
             strqstatic:=strqstatic+'and jzname="'+stgchk.Cells[0,i+1]+'"';
             strqstatic:=strqstatic+str;
             rstdata.Active:=false;
@@ -183,7 +183,7 @@ begin
             stgchk.Cells[2,i+1]:=rstdata.FieldValues['jlAll'];
 
             strqstatic:='select count(jl) as jlNy from vw_anti where';
-            strqstatic:=strqstatic+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date)+'#';
+            strqstatic:=strqstatic+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date+1)+'#';
             strqstatic:=strqstatic+' and jzname="'+stgchk.Cells[0,i+1]+'"';
             strqstatic:=strqstatic+str;
             strqstatic:=strqstatic+' and mg=''耐药''';
@@ -193,7 +193,7 @@ begin
             stgchk.Cells[3,i+1]:=rstdata.FieldValues['jlNy'];
 
             strqstatic:='select count(jl) as jlZj from vw_anti where';
-            strqstatic:=strqstatic+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date)+'#';
+            strqstatic:=strqstatic+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date+1)+'#';
             strqstatic:=strqstatic+'and jzname="'+stgchk.Cells[0,i+1]+'"';
             strqstatic:=strqstatic+str;
             strqstatic:=strqstatic+' and mg=''中介''';
@@ -203,7 +203,7 @@ begin
             stgchk.Cells[4,i+1]:=rstdata.FieldValues['jlZj'];
 
             strqstatic:='select count(jl) as jlMg from vw_anti where';
-            strqstatic:=strqstatic+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date)+'#';
+            strqstatic:=strqstatic+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date+1)+'#';
             strqstatic:=strqstatic+'and jzname="'+stgchk.Cells[0,i+1]+'"';
             strqstatic:=strqstatic+str;
             strqstatic:=strqstatic+' and mg=''敏感'' ';
@@ -215,7 +215,7 @@ begin
         for j:=1 to colNum-2 do
         begin
             strqstatic:='select count(jl) as jlAll from vw_anti where';
-            strqstatic:=strqstatic+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date)+'#';
+            strqstatic:=strqstatic+' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date+1)+'#';
             strqstatic:=strqstatic+' and jzname='''+stgchk.Cells[0,i+1]+'''';
             strqstatic:=strqstatic+' and ypmc='''+stgchk.Cells[j+1,0]+'''';
             strqstatic:=strqstatic+str;
@@ -237,7 +237,7 @@ begin
         begin
             rstDAta.Active:=false;
             rstdata.CommandText:='select count(jzname) as jznum from base  where'+
-            ' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date)+'#'+' and jzname="'+stgchk.cells[0,i+1]+'"'+str;
+            ' repdate between #'+datetostr(dateStart.date)+'# and #'+datetostr(dateEnd.date+1)+'#'+' and jzname="'+stgchk.cells[0,i+1]+'"'+str;
             rstdata.Active:=true;
             stgchk.cells[1,i+1]:=rstdata.FieldValues['jznum'];
         end

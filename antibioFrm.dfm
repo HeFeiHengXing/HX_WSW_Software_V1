@@ -1,6 +1,6 @@
 object antibioForm: TantibioForm
-  Left = 231
-  Top = 113
+  Left = 233
+  Top = 115
   BorderStyle = bsDialog
   Caption = #25239#29983#32032#25928#33021
   ClientHeight = 559
@@ -239,8 +239,8 @@ object antibioForm: TantibioForm
           Top = 16
           Width = 141
           Height = 21
-          Date = 0.997245509301137600
-          Time = 0.997245509301137600
+          Date = 0.997245509301137700
+          Time = 0.997245509301137700
           TabOrder = 0
         end
         object dateEnd: TDateTimePicker

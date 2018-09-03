@@ -47,6 +47,7 @@ uses
       procedure loadBmpfromDisk();
       procedure getColorsFromImage;
       procedure analyzeYm;
+      procedure NaturalResistance(var yps: Tstringlist);
       procedure updateDatabase();
       procedure setNewPatient(newpatient:boolean);
       procedure InitOldPatient;
@@ -374,6 +375,11 @@ begin
       end;
       //***************************************************
       //parent.updateGUI;
+end;
+
+procedure zHelper.NaturalResistance(var yps: Tstringlist);
+begin
+     ex.NaturalResistance(yps);
 end;
 
 procedure zHelper.updateDatabase();

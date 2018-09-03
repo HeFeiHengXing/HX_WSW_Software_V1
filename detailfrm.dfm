@@ -1,6 +1,6 @@
 object detailform: Tdetailform
-  Left = 206
-  Top = 154
+  Left = 606
+  Top = 163
   BorderStyle = bsDialog
   Caption = #35814#32454#26597#35810
   ClientHeight = 436
@@ -647,6 +647,7 @@ object detailform: Tdetailform
   end
   object rstemp: TADODataSet
     Connection = dmym.conn
+    LockType = ltBatchOptimistic
     Parameters = <>
     Left = 484
     Top = 224

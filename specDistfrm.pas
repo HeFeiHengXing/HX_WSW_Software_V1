@@ -160,12 +160,12 @@ begin
                 inc(i);
             end;
         end;
-        SQLText:='select * from vw_anti where repdate between #'+datetostr(datestart.Date)+'# and #'+datetostr(dateend.Date)+'#';
+        SQLText:='select * from vw_anti where repdate between #'+datetostr(datestart.Date)+'# and #'+datetostr(dateend.Date+1)+'#';
         SQLText:=SQLText+' and js='''+db.getgermindex(trim(dbc_germtype.text))+'''';
         SQLText:=SQLText+str;
         // 填写第二列总检出数
         rsdata.Active:=false;
-        rsdata.CommandText:='select * from base where repdate between #'+datetostr(datestart.Date)+'# and #'+datetostr(dateend.Date)+'#';
+        rsdata.CommandText:='select * from base where repdate between #'+datetostr(datestart.Date)+'# and #'+datetostr(dateend.Date+1)+'#';
         rsdata.CommandText:=rsdata.CommandText+str+' and js='''+db.getgermindex(trim(dbc_germtype.text))+'''';
         rsdata.Active:=true;
         for i:=2 to stringgrid1.RowCount-1 do

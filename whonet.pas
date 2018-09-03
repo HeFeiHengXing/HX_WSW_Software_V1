@@ -253,7 +253,7 @@ begin
 
     SQLtext:='select * from base where repdate between #'+
                 datetostr(datetimepicker1.time)+'# and #'+
-                datetostr(datetimepicker2.time)+'# ';
+                datetostr(datetimepicker2.time+1)+'# ';
     if  germlist.count>0 then
     begin
       SQLtext:=SQLtext+' and jzname in (';
