@@ -1,6 +1,6 @@
 object queryGenForm: TqueryGenForm
-  Left = 337
-  Top = 195
+  Left = 340
+  Top = 198
   Width = 541
   Height = 377
   Caption = #26597#35810#26465#20214#29983#25104

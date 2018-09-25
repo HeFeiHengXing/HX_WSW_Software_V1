@@ -1,6 +1,6 @@
 object YgLiqForm: TYgLiqForm
-  Left = 590
-  Top = 198
+  Left = 428
+  Top = 203
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#28040#27602#28082#19982#20445#23384#28082
   ClientHeight = 312

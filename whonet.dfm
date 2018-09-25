@@ -1,6 +1,6 @@
 object whonetform: Twhonetform
-  Left = 485
-  Top = 254
+  Left = 490
+  Top = 89
   Width = 754
   Height = 679
   Caption = #23548#20986#21040'WHONET'
@@ -150,7 +150,7 @@ object whonetform: Twhonetform
           Top = 20
           Width = 210
           Height = 312
-          ItemHeight = 16
+          ItemHeight = 13
           TabOrder = 0
         end
         object ListBox_Sec_Y: TListBox
@@ -158,7 +158,7 @@ object whonetform: Twhonetform
           Top = 20
           Width = 241
           Height = 163
-          ItemHeight = 16
+          ItemHeight = 13
           TabOrder = 1
         end
         object BtnSec: TButton
@@ -181,7 +181,7 @@ object whonetform: Twhonetform
           Top = 209
           Width = 241
           Height = 123
-          ItemHeight = 16
+          ItemHeight = 13
           TabOrder = 3
         end
         object BtnMarch_Sec: TButton
@@ -247,7 +247,7 @@ object whonetform: Twhonetform
           Top = 20
           Width = 210
           Height = 312
-          ItemHeight = 16
+          ItemHeight = 13
           TabOrder = 0
         end
         object BtnType: TButton
@@ -270,7 +270,7 @@ object whonetform: Twhonetform
           Top = 20
           Width = 241
           Height = 163
-          ItemHeight = 16
+          ItemHeight = 13
           TabOrder = 2
         end
         object Listbox_Type_C: TListBox
@@ -278,7 +278,7 @@ object whonetform: Twhonetform
           Top = 209
           Width = 241
           Height = 123
-          ItemHeight = 16
+          ItemHeight = 13
           TabOrder = 3
         end
         object BtnMarch_Type: TButton

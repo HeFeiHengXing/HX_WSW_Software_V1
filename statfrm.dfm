@@ -1,6 +1,6 @@
 object statform: Tstatform
-  Left = 312
-  Top = 125
+  Left = 227
+  Top = 156
   BorderStyle = bsDialog
   Caption = #32454#33740#20998#31867#32479#35745
   ClientHeight = 562

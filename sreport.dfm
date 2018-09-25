@@ -1,6 +1,6 @@
 object sreportform: Tsreportform
-  Left = 480
-  Top = 254
+  Left = 481
+  Top = 256
   BorderStyle = bsSingle
   Caption = #24555#36895#25171#21360
   ClientHeight = 199

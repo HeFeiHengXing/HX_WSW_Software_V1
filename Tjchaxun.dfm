@@ -1,6 +1,6 @@
 object aboutbox: Taboutbox
-  Left = 472
-  Top = 285
+  Left = 469
+  Top = 253
   BorderStyle = bsDialog
   Caption = #32479#35745#26597#35810
   ClientHeight = 342

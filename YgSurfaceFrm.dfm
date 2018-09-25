@@ -1,6 +1,6 @@
 object YgSurfaceForm: TYgSurfaceForm
-  Left = 723
-  Top = 232
+  Left = 341
+  Top = 251
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#29289#20307#34920#38754
   ClientHeight = 308

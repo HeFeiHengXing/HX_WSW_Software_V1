@@ -1,6 +1,6 @@
 object YgqtForm: TYgqtForm
-  Left = 402
-  Top = 234
+  Left = 424
+  Top = 281
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#65293#65293#20854#20182
   ClientHeight = 304

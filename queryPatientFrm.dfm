@@ -1,6 +1,6 @@
 object queryPatientForm: TqueryPatientForm
-  Left = 258
-  Top = 192
+  Left = 368
+  Top = 232
   BorderStyle = bsDialog
   Caption = #30149#21592#20449#24687#26597#35810
   ClientHeight = 221

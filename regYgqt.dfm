@@ -1,6 +1,6 @@
 object regYgqtForm: TregYgqtForm
-  Left = 604
-  Top = 134
+  Left = 410
+  Top = 184
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#26631#26412#30331#35760'('#20854#20182')'
   ClientHeight = 356

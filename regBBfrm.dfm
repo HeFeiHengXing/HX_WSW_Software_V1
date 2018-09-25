@@ -1,6 +1,6 @@
 object regBBForm: TregBBForm
-  Left = 880
-  Top = 184
+  Left = 354
+  Top = 174
   BorderStyle = bsDialog
   Caption = #20020#24202#26631#26412#30331#35760
   ClientHeight = 459

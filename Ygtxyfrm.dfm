@@ -1,6 +1,6 @@
 object Ygtxy: TYgtxy
-  Left = 550
-  Top = 302
+  Left = 329
+  Top = 282
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#36879#26512#28082
   ClientHeight = 292

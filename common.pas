@@ -93,7 +93,7 @@ begin
   begin
      if count>0 then
         s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、产ESBL(超广谱β-内酰胺酶)的肺炎克雷伯氏菌:对青霉素和一、二、三代头孢菌素以及单环菌素类'+#13#10+'抗生素耐药，但对头霉素、碳青霉烯酶及酶抑制剂类抗生素敏感。';
+     s:=s+inttostr(count+ReportRemarkNumber)+'、产ESBL(超广谱β-内酰胺酶)的菌株:对青霉素和一、二、三代头孢菌素以及单环菌素类'+#13#10+'抗生素耐药，但对头霉素、碳青霉烯酶及酶抑制剂类抗生素敏感。';
      inc(count);
   end;
   if pos('产诱导酶',str1)>0 then

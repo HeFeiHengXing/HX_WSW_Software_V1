@@ -1,6 +1,6 @@
 object YgSurgeryForm: TYgSurgeryForm
-  Left = 461
-  Top = 157
+  Left = 326
+  Top = 162
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#25163#26415#23460
   ClientHeight = 425

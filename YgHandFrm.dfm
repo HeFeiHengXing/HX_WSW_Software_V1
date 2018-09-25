@@ -1,6 +1,6 @@
 object YgHandForm: TYgHandForm
-  Left = 446
-  Top = 152
+  Left = 432
+  Top = 206
   BorderStyle = bsDialog
   Caption = #38498#20869#24863#26579#20998#26512#65293#65293#21307#25252#20154#21592#25163
   ClientHeight = 319

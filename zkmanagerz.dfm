@@ -1,6 +1,6 @@
 object zkmanagez: Tzkmanagez
-  Left = 729
-  Top = 356
+  Left = 528
+  Top = 343
   BorderStyle = bsDialog
   Caption = #36136#25511#31649#29702
   ClientHeight = 175

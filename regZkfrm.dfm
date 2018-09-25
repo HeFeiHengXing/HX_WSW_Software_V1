@@ -1,6 +1,6 @@
 object regZkform: TregZkform
-  Left = 316
-  Top = 162
+  Left = 264
+  Top = 168
   BorderStyle = bsDialog
   Caption = #36136#25511#26631#26412#30331#35760
   ClientHeight = 457

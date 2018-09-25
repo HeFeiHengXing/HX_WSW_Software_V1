@@ -1,6 +1,6 @@
 object YYRepoForm: TYYRepoForm
-  Left = 338
-  Top = 197
+  Left = 341
+  Top = 199
   BorderStyle = bsDialog
   Caption = #38452#38451#24615#25253#21578#27604#29575
   ClientHeight = 464

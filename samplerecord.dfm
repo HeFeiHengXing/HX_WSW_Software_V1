@@ -1,6 +1,6 @@
 object samplerecordform: Tsamplerecordform
-  Left = 501
-  Top = 241
+  Left = 287
+  Top = 270
   BorderStyle = bsDialog
   Caption = #26631#26412#30331#35760
   ClientHeight = 249
