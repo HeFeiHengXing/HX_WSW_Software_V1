@@ -1014,7 +1014,7 @@ begin
      open;
 
      if recordcount>0 then
-        if fieldvalues['mg']='ÄÍÒ©' then
+        if (fieldvalues['mg']='ÄÍÒ©') or (fieldvalues['mg']='ÑôĞÔ') then
         begin
           result:=true;
           exit;

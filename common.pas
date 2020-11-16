@@ -8,7 +8,7 @@ uses
 //fileexists--sysutils
 //timage----extctrls
 
-  graphics,inifiles,sysutils,extctrls,dialogs,variants,windows,controls,dateutils;
+  graphics,inifiles,sysutils,classes,extctrls,dialogs,variants,windows,controls,dateutils;
   type
       TcomcColor=function(strjz:string;i,r,g,b:integer):integer;  stdcall;
       EDllLoadError=class(Exception);
@@ -30,6 +30,7 @@ uses
  procedure getRGB(icolor:integer;var ir,ig,ib:integer);
  function calcColor(x,y:integer;img:tImage;Aparam:string):tcolor;
  function bool2Str(b:boolean):string;
+ function nrstr(js,jzname:string):string;
  function bcstr(str1:string):string;
  function nastr(b1:boolean):string;
  function calaverage(intarr:array of integer;Aparam:string):integer;//计算数组最大的COUNT个数的平均值
@@ -82,6 +83,46 @@ uses
 implementation
 
 uses dbym;
+
+function nrstr(js,jzname:string):string;
+var
+  i:integer;
+  s:string;
+  yps: Tstringlist;
+begin
+    s:='';
+    yps := TStringList.Create;
+    with dmym.query1 do
+    begin
+      close;
+      sql.Clear;
+      sql.Add('select * from ymspecial where ymType=''+'' and js='''+
+              js+''' and xjName='''+jzname+'''');
+      open;
+    end;
+    dmym.query1.First;
+    While not dmym.query1.Eof do
+    begin
+      yps.Add(dmym.query1.FieldByName('ypmc').AsString);
+      dmym.query1.Next;
+    end;
+    if yps.Count <> 0 then
+    begin
+      s:=inttostr(ReportRemarkNumber)+'、'+jzname+'对以下抗生素固有耐药：'; 
+      inc(ReportRemarkNumber);
+      for i:=0 to yps.Count-1 do
+            begin
+                s:=s+yps[i];
+                if i<>yps.Count-1 then
+                   s:=s+'、';
+                if i = 3 then
+                   s:=s+#13#10;
+            end;
+      s:=s+'。'+#13#10;
+    end;
+    result:=s;
+end;
+
 function bcstr(str1:string):string;
 var
   s:string;

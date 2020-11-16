@@ -1,6 +1,6 @@
 object DISetform: TDISetform
-  Left = 483
-  Top = 255
+  Left = 592
+  Top = 308
   Width = 406
   Height = 205
   Caption = #25253#34920#35774#32622
@@ -54,13 +54,13 @@ object DISetform: TDISetform
   object CheckBox2: TCheckBox
     Left = 24
     Top = 136
-    Width = 127
+    Width = 146
     Height = 17
-    Caption = #35745#37327#19982#29992#27861
+    Caption = #35299#37322#31867#21035#21644'MIC'#25240#28857
     TabOrder = 4
   end
   object CheckBox3: TCheckBox
-    Left = 166
+    Left = 186
     Top = 112
     Width = 115
     Height = 17
@@ -68,9 +68,9 @@ object DISetform: TDISetform
     TabOrder = 5
   end
   object CheckBox4: TCheckBox
-    Left = 166
+    Left = 185
     Top = 136
-    Width = 123
+    Width = 117
     Height = 17
     Caption = #38750#24120#35268#33647#29289
     TabOrder = 6

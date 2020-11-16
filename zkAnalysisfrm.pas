@@ -178,10 +178,14 @@ uses dbym, Bio, common,  Meds, regZkfrm, germAnalysisFrm,loginfrm,
 
 procedure TzkAnalysisForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
+   var
+  aform:tform;
 begin
     if (dmym.rsBaseZk.state=dsinsert) or (dmym.rsBaseZk.state=dsedit) then
         dmym.rsBaseZk.Cancel;
     Action:=cafree;
+    aform:=self.Owner as TForm;
+    aform.Show;
 end;
 
 procedure TzkAnalysisForm.FormCreate(Sender: TObject);

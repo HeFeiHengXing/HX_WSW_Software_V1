@@ -1,6 +1,6 @@
 object backupForm: TbackupForm
-  Left = 391
-  Top = 303
+  Left = 394
+  Top = 306
   BorderStyle = bsSingle
   Caption = #22791#20221#19982#36824#21407
   ClientHeight = 204

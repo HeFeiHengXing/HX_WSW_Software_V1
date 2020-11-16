@@ -227,7 +227,7 @@ begin
    end;
    rvproject1.SetParam('begDate',datetostr(begdate.Date));
    rvproject1.SetParam('endDate',datetostr(enddate.Date));
-   rvproject1.SetParam('titlestr',hospitalname+'院内感染监测报告单');
+   rvproject1.SetParam('titlestr',hospitalname+'环境卫生学监测报告单');
    rvproject1.ExecuteReport('report8');
    rvproject1.Close;
 end;

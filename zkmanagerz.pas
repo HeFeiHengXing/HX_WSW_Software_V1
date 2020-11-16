@@ -31,6 +31,7 @@ var
    zfrm:tzkAnalysisForm;
 begin
    zfrm:=tzkAnalysisForm.Create(self);
+   self.Hide;
    zfrm.ShowModal;
 end;
 

@@ -36,7 +36,8 @@ var
    gfrm:tgermAnalysisForm;
 begin
    gfrm:=tgermAnalysisForm.Create(self);
-   gfrm.Showmodal;
+   self.Hide;
+   gfrm.ShowModal;
 end;
 
 procedure TfenxiForm.Button2Click(Sender: TObject);

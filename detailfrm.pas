@@ -118,9 +118,9 @@ end;
 procedure Tdetailform.FormShow(Sender: TObject);
 var i:integer;
 begin
-    label7.Visible:=false;
+    {label7.Visible:=false;
     label8.Visible:=false;
-    DBCount.Visible:=false;
+    DBCount.Visible:=false;}
     dsTemp.AutoEdit:=false;
     dsMedAdd.AutoEdit:=false;
     for i:=0 to componentcount-1 do
@@ -148,12 +148,12 @@ begin
             DBconclusion.DataField:='';
             DBjzclass.DataField:='';
         end;
-        if dmym.rsBasezk['bb']='中段尿' then
+        {if trim(dmym.rsBasezk['cfu'])<>'' then
         begin
             label7.Visible:=true;
             label8.Visible:=true;
             DBcount.Visible:=true;
-        end;
+        end;}
         with rsTemp do
         begin
             Active:=false;
@@ -178,17 +178,17 @@ begin
     end else
     begin
         if not varisnull(dmym.rsBase['jjjg']) then
-        if AnsiContainsStr(dmym.rsBase['jjjg'],'镜检结果') then
+        if AnsiContainsStr(dmym.rsBase['jjjg'],'涂片镜检结果') then
             radiobutton1.Checked:=true;
         if not varisnull(dmym.rsBase['jjjg']) then
         if AnsiContainsStr(dmym.rsBase['jjjg'],'细菌生长') then
             radiobutton2.Checked:=true;
-        if dmym.rsBase['bb']='中段尿' then
+        {if trim(dmym.rsBase['cfu']) <> '' then
         begin
             label7.Visible:=true;
             label8.Visible:=true;
             DBcount.Visible:=true;
-        end;
+        end;}
         with rsTemp do
         begin
             Active:=false;
@@ -450,10 +450,11 @@ begin
               inc(ReportRemarkNumber);
           end;
       end else
-     s:=bcstr(RsbaseTable['bc']);
+     s:=nrstr(RsbaseTable['js'],RsbaseTable['jzname']);
+     s:=s+bcstr(RsbaseTable['bc']);
      memo1.text:=s;
      end;
-     if DBSamType.Text='中段尿' then
+     if trim(dmym.rsBase.FieldByName('cfu').asstring)<>'' then
      begin
         rvProject1.SetParam('jljs','菌落计数:');
         rvproject1.SetParam('cfudw', 'CFU/ml');
@@ -530,6 +531,32 @@ begin
         rstemp.Edit;
          with dmym.query1 do
          begin
+            // MIC折点表示
+            rstemp.Fieldvalues['jfyl']:='';
+            close;
+            sql.Clear;
+            sql.Add('select * from specialmic where js='''+dmym.rsBase.FieldValues['js']+''' and jzname='''+dmym.rsBase.FieldValues['jzname']+''' and ypmc='''+rstemp.FieldValues['ypmc']+'''');
+            open;
+            if recordcount > 0 then
+            while not eof do
+            begin
+                rstemp.Fieldvalues['jfyl']:=FieldValues['miczd'];
+                next;
+            end
+            else
+            begin
+                close;
+                sql.Clear;
+                sql.Add('select * from specialmic where js='''+dmym.rsBase.FieldValues['js']+''' and jzname=''-'' and ypmc='''+rstemp.FieldValues['ypmc']+'''');
+                open;
+                if recordcount > 0 then
+                while not eof do
+                begin
+                    rstemp.Fieldvalues['jfyl']:=FieldValues['miczd'];
+                    next;
+                end;
+            end;
+            
           if not StrToBool(Myini.ReadString('ReportConfig','NoStandard','')) then  //读取文件信息来控制
           begin
             close;
@@ -621,8 +648,10 @@ begin
           rstemp.Next;
           continue;
         end;
+
+
         //剂量及用法按A,B分行显示的问题
-        str:=rstemp.FieldValues['jfyl'];
+        {str:=rstemp.FieldValues['jfyl'];
         idex:=pos(';',str);
         if idex>0 then
         begin
@@ -630,7 +659,7 @@ begin
             str2:=rightstr(str,length(str)-idex);
             rstemp.Edit;
             rstemp.FieldValues['jfyl']:=trim(str1+''#13#10+str2);
-        end;
+        end;}
         //药物英文名称附加到中文名称后面
         s:=rstemp.FieldValues['ypmc'];
         s:=s+rstemp.FieldValues['ename'];
@@ -748,8 +777,8 @@ begin
     if DBRemark.text<>'' then
     begin
         if radiobutton1.Checked then
-        if not AnsiContainsText(dmym.rsBase['jjjg'],'镜检结果') then
-            dmym.rsBase['jjjg']:='镜检结果：'+dmym.rsBase['jjjg'];
+        if not AnsiContainsText(dmym.rsBase['jjjg'],'涂片镜检结果') then
+            dmym.rsBase['jjjg']:='涂片镜检结果：'+dmym.rsBase['jjjg'];
         if radiobutton2.Checked then
         if not AnsiContainsText(dmym.rsBase['jjjg'],'细菌生长') then
             dmym.rsBase['jjjg']:='细菌生长：'+dmym.rsBase['jjjg'];
@@ -758,7 +787,7 @@ end;
 
 procedure Tdetailform.DBSamTypeChange(Sender: TObject);
 begin
-    if DBSamType.Text='中段尿' then
+    {if trim(DBCount.Text)<>'' then
     begin
         Label7.Visible:=true;
         Label8.Visible:=true;
@@ -769,7 +798,7 @@ begin
         Label8.Visible:=false;
         DBcount.Visible:=false;
         dbcount.Text:='';  
-    end;
+    end;  }
 end;
 
 procedure Tdetailform.ExportWord;
@@ -861,7 +890,7 @@ begin
       wordtab.cell(k,1).range.insertafter(RsbaseTable.FieldByName('ename').AsString);
     inc(k);
     str1:='';str2:='';
-    if dbsamtype.Text='中段尿' then
+    if trim(dmym.rsBase.FieldByName('cfu').asstring)<>'' then
     begin
         str1:='  菌落计数：';
         str2:='CFU/ml'
@@ -935,6 +964,15 @@ begin
         wordtab.cell(k,1).range.insertafter('5、SDD:剂量依赖性敏感.');
     end else
         ReportRemarkNumber:=5;
+    remarkstr:=nrstr(RsbaseTable['js'],RsbaseTable['jzname']);
+    if remarkstr<>'' then
+    begin
+        wordtab.rows.item(k).select;
+        wordapp.selection.InsertRowsBelow;
+        inc(k);
+        wordtab.cell(k,1).range.insertafter(remarkstr);
+        wordtab.cell(k,1).borders.item(-1).linestyle:=0;
+    end;
     if RsbaseTable['js']='19' then
     begin
         remarkstr:=inttostr(ReportRemarkNumber)+'、该菌株为'+RsbaseTable['bc'];

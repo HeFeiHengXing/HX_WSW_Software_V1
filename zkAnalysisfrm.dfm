@@ -1,6 +1,6 @@
 object zkAnalysisForm: TzkAnalysisForm
-  Left = 255
-  Top = 184
+  Left = 482
+  Top = 163
   BorderStyle = bsDialog
   Caption = #36136#25511#37492#23450#20998#26512
   ClientHeight = 565

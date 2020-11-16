@@ -1,6 +1,6 @@
 object appendYpForm: TappendYpForm
-  Left = 225
-  Top = 272
+  Left = 498
+  Top = 285
   BorderStyle = bsDialog
   Caption = #38468#21152#33647#25935#20449#24687
   ClientHeight = 268

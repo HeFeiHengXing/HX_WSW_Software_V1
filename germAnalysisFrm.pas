@@ -798,6 +798,8 @@ end;
 
 procedure TgermAnalysisForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
+  var
+  aform:tform;
 begin
   dmym.rsBase.Active:=false;
   dmym.rsCheck.Active:=false;
@@ -806,6 +808,8 @@ begin
      dmym.rsCheck.Cancel;
   dmym.conn.Execute('delete from ypaddtmp');
   action:=cafree;
+  aform:=self.Owner as TForm;
+  aform.Show;
 end;
 
 procedure tgermAnalysisForm.updateBioCheckbox(ofispositive:boolean;bioispositive:array of boolean);
@@ -1209,7 +1213,7 @@ begin
             dmym.rsBase['shys']:=fieldbyname('shys').asstring;
             bbid:=fieldbyname('id').AsInteger;
             dmym.rsBase['bgys']:=userNamehfut;
-            if trim(rfrm.dbc_specType.text)='中段尿' then
+            {if trim(rfrm.dbc_specType.text)='中段尿' then
             begin
                 Edit1.Visible:=true;
                 Label3.Visible:=true;
@@ -1224,7 +1228,7 @@ begin
                 Label5.Visible:=false;
                 Bbbjljs:=false;
                 dbe_lczd.setfocus;
-            end;
+            end; }
          end
    end;
    if not(dmym.rsbase.State=dsInsert) then
@@ -1270,7 +1274,7 @@ begin
         cb_germtype.Enabled:=false;
         dbe_bbh.Enabled:=false;
         if radiobutton1.Checked then
-            dmym.rsBase['jjjg']:='镜检结果：'+dmym.rsBase['jjjg'];
+            dmym.rsBase['jjjg']:='涂片镜检结果：'+dmym.rsBase['jjjg'];
         if radiobutton2.Checked then
             dmym.rsBase['jjjg']:='细菌生长：'+dmym.rsBase['jjjg'];
         if dbm_conclusion.Text<>'' then
@@ -1510,7 +1514,8 @@ if (saved) or (not bNewpatient)  then
             else
               ReportRemarkNumber:=5;
             memo1:=findRaveComponent('memo1',mypage) as tRaveMemo;
-            s:=bcstr(hpr.bc);
+            s:=nrstr(js,hpr.jzname);
+            s:=s+bcstr(hpr.bc);
             memo1.text:=s;
             if s='' then
                 b1:=false
@@ -1525,7 +1530,7 @@ if (saved) or (not bNewpatient)  then
                 sql.Add('select* from xjname where name="'+dbe_jzname.Text+'"');
                 open;
             end;
-            if dbc_bb.Text='中段尿' then
+            if trim(edit1.Text)<>'' then
             begin
                 rvProject1.SetParam('jljs','菌落计数:');
                 rvproject1.SetParam('cfudw', 'CFU/ml');
@@ -1725,6 +1730,7 @@ var
   i,idx:integer;
 begin
     i:=0;
+    dataset.Edit;
     dataset.First;
     while not dataset.Eof do
     begin
@@ -1734,10 +1740,42 @@ begin
     end;
 
     dataset.First;
+    // MIC折点表示
     while not dataset.Eof do
     begin
+      dataset.Edit;
+      dataset.Fieldvalues['jfyl']:='';
+      with dmym.query1 do
+      begin
+        close;
+        sql.Clear;
+        sql.Add('select * from specialmic where js='''+js+''' and jzname='''+jzname+''' and ypmc='''+dataset.FieldValues['ypmc']+'''');
+        open;
+        if recordcount > 0 then
+        while not eof do
+        begin
+            dataset.Edit;
+            dataset.Fieldvalues['jfyl']:=FieldValues['miczd'];
+            next;
+        end
+        else
+        begin
+            close;
+            sql.Clear;
+            sql.Add('select * from specialmic where js='''+js+''' and jzname=''-'' and ypmc='''+dataset.FieldValues['ypmc']+'''');
+            open;
+            if recordcount > 0 then
+            while not eof do
+            begin
+                dataset.Edit;
+                dataset.Fieldvalues['jfyl']:=FieldValues['miczd'];
+                next;
+            end;
+        end;
+      end;
+
         //剂量及用法中A.B分行显示
-        str:=dataset.fieldvalues['jfyl'];
+        {str:=dataset.fieldvalues['jfyl'];
         idx:=pos(';',str);
         if idx>0 then
         begin
@@ -1745,7 +1783,7 @@ begin
             s2:=rightstr(str,length(str)-idx);
             dataset.Edit;
             dataset.Fieldvalues['jfyl']:=s1+''#13#10+s2;
-        end;
+        end;  }
         //英文名字附加到中文名字背后
         s:=dataset.FieldValues['ypmc'];
         s:=trim(s+dataset.FieldValues['ename']);
@@ -2058,7 +2096,7 @@ begin
        end;
 
 
-      if dbc_bb.text='中段尿' then
+      {if dbc_bb.text='中段尿' then
          begin
          Edit1.Visible:=true;
          Label3.Visible:=true;
@@ -2073,7 +2111,7 @@ begin
          Label5.Visible:=false;
          Bbbjljs:=false;
          dbe_lczd.setfocus;
-         end;
+         end;  }
    end;
 end;
 
@@ -2218,7 +2256,7 @@ end;
 
 procedure TgermAnalysisForm.dbc_bbClick(Sender: TObject);
 begin
-    if dbc_bb.text='中段尿' then
+    {if dbc_bb.text='中段尿' then
     begin
       Edit1.Visible:=true;
       Label3.Visible:=true;
@@ -2231,7 +2269,7 @@ begin
       Label3.Visible:=false;
       Label5.Visible:=false;
       Bbbjljs:=false;
-    end;
+    end; }
 end;
 
 procedure TgermAnalysisForm.DBC_ageKeyPress(Sender: TObject;
@@ -2553,7 +2591,7 @@ end;
 
 procedure TgermAnalysisForm.ExportWord;
 var wordapp,worddoc,wordtab,myrange,Template:variant;
-    str1,str2:string;
+    s,str1,str2:string;
     k:integer;
     myini:Tinifile;
     h:hwnd;
@@ -2600,7 +2638,7 @@ begin
     wordtab.cell(7,1).range.insertafter(dmym.rsBase.FieldByName('jzname').AsString);
     wordtab.cell(8,1).range.insertafter(dmym.rsBase.FieldByName('ename').AsString);
     str1:='';str2:='';
-    if dbc_bb.Text='中段尿' then
+    if trim(dmym.rsBase.FieldByName('cfu').asstring)<>'' then
     begin
         str1:='  菌落计数：';
         str2:='CFU/ml'
@@ -2675,6 +2713,15 @@ begin
         wordtab.cell(k,1).borders.item(-1).linestyle:=0;
     end else
         ReportRemarkNumber:=5;
+    s:= nrstr(js,hpr.jzname);
+    if s <>'' then
+    begin
+        wordtab.rows.item(k).select;
+        wordapp.selection.InsertRowsBelow;
+        inc(k);
+        wordtab.cell(k,1).range.insertafter(s);
+        wordtab.cell(k,1).borders.item(-1).linestyle:=0;
+    end;
     if bcstr(hpr.bc)<>'' then
     begin
         wordtab.rows.item(k).select;

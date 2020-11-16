@@ -1,11 +1,11 @@
 object germAnalysisForm: TgermAnalysisForm
-  Left = 651
-  Top = 115
+  Left = 366
+  Top = 165
   Align = alCustom
   BorderStyle = bsDialog
   Caption = #37492#23450#20998#26512
-  ClientHeight = 637
-  ClientWidth = 837
+  ClientHeight = 635
+  ClientWidth = 831
   Color = clBtnFace
   Font.Charset = GB2312_CHARSET
   Font.Color = clWindowText
@@ -97,8 +97,8 @@ object germAnalysisForm: TgermAnalysisForm
     object Label10: TLabel
       Left = 108
       Top = 89
-      Width = 24
-      Height = 24
+      Width = 48
+      Height = 12
       Caption = #26631#26412#31867#22411
       Transparent = True
       WordWrap = True
@@ -114,11 +114,10 @@ object germAnalysisForm: TgermAnalysisForm
     object Label3: TLabel
       Left = 108
       Top = 112
-      Width = 24
-      Height = 24
+      Width = 48
+      Height = 12
       Caption = #33740#33853#35745#25968
       Transparent = True
-      Visible = False
       WordWrap = True
     end
     object Label5: TLabel
@@ -127,7 +126,6 @@ object germAnalysisForm: TgermAnalysisForm
       Width = 36
       Height = 12
       Caption = 'CFU/ml'
-      Visible = False
     end
     object dbe_name: TDBEdit
       Left = 48
@@ -247,7 +245,6 @@ object germAnalysisForm: TgermAnalysisForm
       DataSource = dmym.dsBase
       ImeName = #20013#25991' ('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
       TabOrder = 8
-      Visible = False
       OnKeyPress = Edit1KeyPress
     end
   end
@@ -648,17 +645,17 @@ object germAnalysisForm: TgermAnalysisForm
       TabOrder = 0
     end
     object RadioButton1: TRadioButton
-      Left = 7
+      Left = 5
       Top = 7
-      Width = 85
-      Height = 17
-      Caption = #38236#26816#32467#26524#65306
+      Width = 113
+      Height = 18
+      Caption = #28034#29255#38236#26816#32467#26524#65306
       TabOrder = 1
     end
     object RadioButton2: TRadioButton
-      Left = 88
+      Left = 125
       Top = 7
-      Width = 89
+      Width = 81
       Height = 17
       Caption = #32454#33740#29983#38271#65306
       TabOrder = 2

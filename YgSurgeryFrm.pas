@@ -397,7 +397,7 @@ begin
 
 
    rvproject1.SetParam('resultstr',resultstr);
-   rvproject1.SetParam('titlestr',hospitalname+'院内感染监测报告单');
+   rvproject1.SetParam('titlestr',hospitalname+'环境卫生学监测报告单');
    rvproject1.ExecuteReport('Report_ygsurgery');
    rvproject1.Close;
 end;
@@ -662,7 +662,7 @@ begin
     wordtab:=worddoc.tables.item(1);
 
     try
-    wordtab.cell(1,1).range.insertafter(hospitalName+'院内感染监测报告单');
+    wordtab.cell(1,1).range.insertafter(hospitalName+'环境卫生学监测报告单');
     wordtab.cell(2,1).range.insertafter('标本号：'+dbe_specnum.text);
     wordtab.cell(2,2).range.insertafter('科室：'+dbcsection.text);
     wordtab.cell(2,3).range.insertafter('标本来源：'+dbe_room.text);

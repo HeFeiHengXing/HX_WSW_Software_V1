@@ -265,7 +265,7 @@ begin
             stgchk.cells[j,Rownum-1]:=inttostr(sum1);
         end;
     end;
-    FlashForm.free;
+    FlashForm.Hide;
     button2.Enabled:=true;
     button1.Enabled:=true;
 end;

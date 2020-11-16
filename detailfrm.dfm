@@ -1,6 +1,6 @@
 object detailform: Tdetailform
-  Left = 606
-  Top = 163
+  Left = 743
+  Top = 197
   BorderStyle = bsDialog
   Caption = #35814#32454#26597#35810
   ClientHeight = 436
@@ -472,7 +472,7 @@ object detailform: Tdetailform
     object DBRemark: TDBMemo
       Left = 8
       Top = 242
-      Width = 161
+      Width = 177
       Height = 37
       DataField = 'jjjg'
       DataSource = dmym.dsBase
@@ -503,13 +503,13 @@ object detailform: Tdetailform
       Top = 224
       Width = 113
       Height = 17
-      Caption = #38236#26816#32467#26524#65306
+      Caption = #28034#29255#38236#26816#32467#26524#65306
       TabOrder = 18
     end
     object RadioButton2: TRadioButton
-      Left = 92
+      Left = 110
       Top = 224
-      Width = 113
+      Width = 81
       Height = 17
       Caption = #32454#33740#29983#38271#65306
       TabOrder = 19
