@@ -4,10 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls,shellapi;
+  Dialogs, StdCtrls, shellapi;
 
 type
-    TfenxiForm = class(TForm)
+  TfenxiForm = class(TForm)
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
@@ -28,44 +28,44 @@ var
   fenxiForm: TfenxiForm;
 
 implementation
-uses germAnalysisFrm,NegativeFrm, positiveFrm;
+uses germAnalysisFrm, NegativeFrm, positiveFrm;
 {$R *.dfm}
 
 procedure TfenxiForm.Button1Click(Sender: TObject);
 var
-   gfrm:tgermAnalysisForm;
+  gfrm: tgermAnalysisForm;
 begin
-   gfrm:=tgermAnalysisForm.Create(self);
-   self.Hide;
-   gfrm.ShowModal;
+  gfrm := tgermAnalysisForm.Create(self);
+  self.Hide;
+  gfrm.ShowModal;
 end;
 
 procedure TfenxiForm.Button2Click(Sender: TObject);
 var
-   nfrm:tNegativeForm;
+  nfrm: tNegativeForm;
 begin
-   nfrm:=tNegativeForm.Create(self);
-   nfrm.ShowModal;
+  nfrm := tNegativeForm.Create(self);
+  nfrm.ShowModal;
 end;
 
 procedure TfenxiForm.Button3Click(Sender: TObject);
 var
-   nfrm:tPositiveForm;
+  nfrm: tPositiveForm;
 begin
-   nfrm:=tPositiveForm.Create(self);
-   nfrm.ShowModal;
+  nfrm := tPositiveForm.Create(self);
+  nfrm.ShowModal;
 end;
 
 procedure TfenxiForm.Button4Click(Sender: TObject);
 begin
- close;
+  close;
 end;
 
 procedure TfenxiForm.Button5Click(Sender: TObject);
-var  path:string;
+var path: string;
 begin
-     path:=getcurrentdir+'\Epi.exe';
-     shellexecute(handle,'open',pchar(path),nil,nil,sw_show);
+  path := getcurrentdir + '\Epi.exe';
+  shellexecute(handle, 'open', pchar(path), nil, nil, sw_show);
 end;
 
 end.

@@ -33,25 +33,25 @@ uses dbym;
 procedure TMedReportForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-    Action:=cafree;
+  Action := cafree;
 end;
 
 procedure TMedReportForm.FormShow(Sender: TObject);
-var aform:Tform;
-    i,j:integer;
+var aform: Tform;
+  i, j: integer;
 begin
-    ADODataset1.Active:=false;
-    ADODataset1.CommandText:='select * from yp order by ypid';
-    ADODataset1.Active:=true;
-    Timer1.Enabled:=true;
+  ADODataset1.Active := false;
+  ADODataset1.CommandText := 'select * from yp order by ypid';
+  ADODataset1.Active := true;
+  Timer1.Enabled := true;
 end;
 
 procedure TMedReportForm.Timer1Timer(Sender: TObject);
 begin
-    ADODataset1.DisableControls;
-    ADODataset1.Active:=false;
-    ADODataset1.Active:=true;
-    ADODataset1.EnableControls
+  ADODataset1.DisableControls;
+  ADODataset1.Active := false;
+  ADODataset1.Active := true;
+  ADODataset1.EnableControls
 end;
 
 end.

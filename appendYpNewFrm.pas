@@ -24,13 +24,13 @@ type
     procedure DBEdit1KeyPress(Sender: TObject; var Key: Char);
     procedure DBComboBox1KeyPress(Sender: TObject; var Key: Char);
     procedure DBEdit2KeyPress(Sender: TObject; var Key: Char);
-   
+
   private
     { Private declarations }
-    badd:boolean;
+    badd: boolean;
   public
     { Public declarations }
-    procedure   setStatus(b1:boolean);
+    procedure setStatus(b1: boolean);
   end;
 
 var
@@ -51,12 +51,12 @@ procedure TAppendYpNewForm.Button1Click(Sender: TObject);
 begin
   if bAdd then
   begin
-    if (dbedit1.Text='') or (dbComboBox1.Text='') then
-      MessageDlg('信息填写不完整!',mtInformation,[mbok],0)
+    if (dbedit1.Text = '') or (dbComboBox1.Text = '') then
+      MessageDlg('信息填写不完整!', mtInformation, [mbok], 0)
     else
     begin
       dmym.rsAddTemp.Post;
-      close ;
+      close;
     end
   end else
   begin
@@ -65,36 +65,38 @@ begin
   end;
 
 end;
-procedure tAppendYpNewForm.setStatus(b1:boolean);
+
+procedure tAppendYpNewForm.setStatus(b1: boolean);
 begin
   if b1 then
-    self.Caption:='药敏附加结果--新增'
+    self.Caption := '药敏附加结果--新增'
   else
-    self.Caption:='药敏附加结果--编辑';
-  badd:=b1;
+    self.Caption := '药敏附加结果--编辑';
+  badd := b1;
 end;
+
 procedure TAppendYpNewForm.FormCreate(Sender: TObject);
 begin
-  badd:=false;
+  badd := false;
 end;
 
 procedure TAppendYpNewForm.DBEdit1KeyPress(Sender: TObject; var Key: Char);
 begin
- if key=#13 then
- DBcombobox1.setfocus;
+  if key = #13 then
+    DBcombobox1.setfocus;
 end;
 
 procedure TAppendYpNewForm.DBComboBox1KeyPress(Sender: TObject;
   var Key: Char);
 begin
-  if key=#13 then
-  DBedit2.setfocus;
+  if key = #13 then
+    DBedit2.setfocus;
 end;
 
 procedure TAppendYpNewForm.DBEdit2KeyPress(Sender: TObject; var Key: Char);
 begin
- if key=#13 then
- DBedit3.setfocus;
+  if key = #13 then
+    DBedit3.setfocus;
 end;
 
 end.

@@ -8,32 +8,31 @@ uses
 //fileexists--sysutils
 //timage----extctrls
 
-  graphics,inifiles,sysutils,classes,extctrls,dialogs,variants,windows,controls,dateutils;
-  type
-      TcomcColor=function(strjz:string;i,r,g,b:integer):integer;  stdcall;
-      EDllLoadError=class(Exception);
-      TGetImageFromDriver=function(hwnd:Longint; filepath:String; left,top,width,height: double; res,imagetype,origtype: longint):Integer;  stdcall;
-      binCarray=array of array of tcolor;
-      binBarray=array of array of boolean;
-  var
-   inifile:tinifile;
-   ymResults:array [1..3,1..24] of boolean;
-   ymColors:array[1..3,1..24] of tcolor;
-   hospitalName:string;
-   rvfile:string;
-   ScanCount:integer;//开始检查loadBmpFromScanner的扫描次数
-   ReportRemarkNumber:integer;//报告单备注说明中的项目数
-  const
-      OFFSET =1;
-      MAX_PREHOLE=15;
-      MAX_GENERATE_COUNT=999999;
- procedure getRGB(icolor:integer;var ir,ig,ib:integer);
- function calcColor(x,y:integer;img:tImage;Aparam:string):tcolor;
- function bool2Str(b:boolean):string;
- function nrstr(js,jzname:string):string;
- function bcstr(str1:string):string;
- function nastr(b1:boolean):string;
- function calaverage(intarr:array of integer;Aparam:string):integer;//计算数组最大的COUNT个数的平均值
+  graphics, inifiles, sysutils, classes, extctrls, dialogs, variants, windows, controls, dateutils;
+type
+  TcomcColor = function(strjz: string; i, r, g, b: integer): integer; stdcall;
+  EDllLoadError = class(Exception);
+  TGetImageFromDriver = function(hwnd: Longint; filepath: string; left, top, width, height: double; res, imagetype, origtype: longint): Integer; stdcall;
+  binCarray = array of array of tcolor;
+  binBarray = array of array of boolean;
+var
+  inifile: tinifile;
+  ymResults: array[1..3, 1..24] of boolean;
+  ymColors: array[1..3, 1..24] of tcolor;
+  hospitalName: string;
+  rvfile: string;
+  ReportRemarkNumber: integer; //报告单备注说明中的项目数
+const
+  OFFSET = 1;
+  MAX_PREHOLE = 15;
+  MAX_GENERATE_COUNT = 999999;
+procedure getRGB(icolor: integer; var ir, ig, ib: integer);
+function calcColor(x, y: integer; Aparam: string): tcolor;
+function bool2Str(b: boolean): string;
+function nrstr(js, jzname: string): string;
+function bcstr(str1: string): string;
+function nastr(b1: boolean): string;
+function calaverage(intarr: array of integer; Aparam: string): integer; //计算数组最大的COUNT个数的平均值
  //function getHospitalName:string;
  {var
   generate_count:integer;
@@ -84,235 +83,235 @@ implementation
 
 uses dbym;
 
-function nrstr(js,jzname:string):string;
+function nrstr(js, jzname: string): string;
 var
-  i:integer;
-  s:string;
+  i: integer;
+  s: string;
   yps: Tstringlist;
 begin
-    s:='';
-    yps := TStringList.Create;
-    with dmym.query1 do
+  s := '';
+  yps := TStringList.Create;
+  with dmym.query1 do
+  begin
+    close;
+    sql.Clear;
+    sql.Add('select * from ymspecial where ymType=''+'' and js=''' +
+      js + ''' and xjName=''' + jzname + '''');
+    open;
+  end;
+  dmym.query1.First;
+  while not dmym.query1.Eof do
+  begin
+    yps.Add(dmym.query1.FieldByName('ypmc').AsString);
+    dmym.query1.Next;
+  end;
+  if yps.Count <> 0 then
+  begin
+    s := inttostr(ReportRemarkNumber) + '、' + jzname + '对以下抗生素固有耐药：';
+    inc(ReportRemarkNumber);
+    for i := 0 to yps.Count - 1 do
     begin
-      close;
-      sql.Clear;
-      sql.Add('select * from ymspecial where ymType=''+'' and js='''+
-              js+''' and xjName='''+jzname+'''');
-      open;
+      s := s + yps[i];
+      if i <> yps.Count - 1 then
+        s := s + '、';
+      if i = 3 then
+        s := s + #13#10;
     end;
-    dmym.query1.First;
-    While not dmym.query1.Eof do
-    begin
-      yps.Add(dmym.query1.FieldByName('ypmc').AsString);
-      dmym.query1.Next;
-    end;
-    if yps.Count <> 0 then
-    begin
-      s:=inttostr(ReportRemarkNumber)+'、'+jzname+'对以下抗生素固有耐药：'; 
-      inc(ReportRemarkNumber);
-      for i:=0 to yps.Count-1 do
-            begin
-                s:=s+yps[i];
-                if i<>yps.Count-1 then
-                   s:=s+'、';
-                if i = 3 then
-                   s:=s+#13#10;
-            end;
-      s:=s+'。'+#13#10;
-    end;
-    result:=s;
+    s := s + '。' + #13#10;
+  end;
+  result := s;
 end;
 
-function bcstr(str1:string):string;
+function bcstr(str1: string): string;
 var
-  s:string;
-  count:integer;
+  s: string;
+  count: integer;
 begin
-  count:=0;
-  s:='';
-  if pos('ESBL',str1)>0 then
+  count := 0;
+  s := '';
+  if pos('ESBL', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、产ESBL(超广谱β-内酰胺酶)的菌株:对青霉素和一、二、三代头孢菌素以及单环菌素类'+#13#10+'抗生素耐药，但对头霉素、碳青霉烯酶及酶抑制剂类抗生素敏感。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、产ESBL(超广谱β-内酰胺酶)的菌株:对青霉素和一、二、三代头孢菌素以及单环菌素类' + #13#10 + '抗生素耐药，但对头霉素、碳青霉烯酶及酶抑制剂类抗生素敏感。';
+    inc(count);
   end;
-  if pos('产诱导酶',str1)>0 then
+  if pos('产诱导酶', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、产诱导酶(诱导型产β-内酰胺酶)的菌株,临床上对青霉素类、头孢一代、头孢二代、头孢三代'+#13#10+'以及含β-内酰胺类抗的抗生素治疗无效,即使体外部分药物敏感。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、产诱导酶(诱导型产β-内酰胺酶)的菌株,临床上对青霉素类、头孢一代、头孢二代、头孢三代' + #13#10 + '以及含β-内酰胺类抗的抗生素治疗无效,即使体外部分药物敏感。';
+    inc(count);
   end;
-  if pos('MRSA',str1)>0 then
+  if pos('MRSA', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、耐甲氧西林的金黄色葡萄球菌(MRSA)通常对所有的β-内酰胺类抗生素(包括复合制剂)'+#13#10+'临床治疗无效,即使体外部分药物敏感。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、耐甲氧西林的金黄色葡萄球菌(MRSA)通常对所有的β-内酰胺类抗生素(包括复合制剂)' + #13#10 + '临床治疗无效,即使体外部分药物敏感。';
+    inc(count);
   end;
-  if pos('MRSCN',str1)>0 then
+  if pos('MRSCN', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、耐甲氧西林的凝固酶阴性的葡萄球菌(MRSCN)通常对所有的β-内酰胺类抗生素(包括复合制剂)'+#13#10+'临床治疗无效,即使药物敏感。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、耐甲氧西林的凝固酶阴性的葡萄球菌(MRSCN)通常对所有的β-内酰胺类抗生素(包括复合制剂)' + #13#10 + '临床治疗无效,即使药物敏感。';
+    inc(count);
   end;
-  if pos('HLAR',str1)>0 then
+  if pos('HLAR', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、HLAR(耐高水平氨基糖苷类)的菌株,临床上对氨基糖苷类与青霉素类联合用药治疗无效,'+#13#10+'即使体外部分药物敏感。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、HLAR(耐高水平氨基糖苷类)的菌株,临床上对氨基糖苷类与青霉素类联合用药治疗无效,' + #13#10 + '即使体外部分药物敏感。';
+    inc(count);
   end;
-  if pos('产碳青霉烯酶',str1)>0 then
+  if pos('产碳青霉烯酶', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、产碳青霉烯酶菌株对所有的碳青霉烯类药物治疗无效，即使体外部分药物敏感。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、产碳青霉烯酶菌株对所有的碳青霉烯类药物治疗无效，即使体外部分药物敏感。';
+    inc(count);
   end;
-  if pos('诱导克林霉',str1)>0 then
+  if pos('诱导克林霉', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、通过诱导克林霉素耐药试验，推测此菌株对克林霉素耐药，克林霉素对某些病人仍然有效。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、通过诱导克林霉素耐药试验，推测此菌株对克林霉素耐药，克林霉素对某些病人仍然有效。';
+    inc(count);
   end;
-  if pos('PRSP',str1)>0 then
+  if pos('PRSP', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(PRSP)耐青霉素肺炎链球菌株。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(PRSP)耐青霉素肺炎链球菌株。';
+    inc(count);
   end;
-  if pos('CRE',str1)>0 then
+  if pos('CRE', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(CRE)耐碳青霉烯类抗菌药物肠杆菌科细菌。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(CRE)耐碳青霉烯类抗菌药物肠杆菌科细菌。';
+    inc(count);
   end;
-   if pos('VRS',str1)>0 then
+  if pos('VRS', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(VRS)耐万古霉素的葡萄球菌菌。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(VRS)耐万古霉素的葡萄球菌菌。';
+    inc(count);
   end;
-  if pos('CR-PA',str1)>0 then
+  if pos('CR-PA', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(CR-PA)耐碳青霉烯的铜绿假单胞菌。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(CR-PA)耐碳青霉烯的铜绿假单胞菌。';
+    inc(count);
   end;
-  if pos('CR-AB',str1)>0 then
+  if pos('CR-AB', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(CR-AB)耐碳青霉烯的鲍曼不动杆菌。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(CR-AB)耐碳青霉烯的鲍曼不动杆菌。';
+    inc(count);
   end;
-  if pos('MDR-PA',str1)>0 then
+  if pos('MDR-PA', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(MDR-PA)多重耐药铜绿假单胞菌。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(MDR-PA)多重耐药铜绿假单胞菌。';
+    inc(count);
   end
-  else if pos('MDR-AB',str1)>0 then
+  else if pos('MDR-AB', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(MDR-AB)多重耐药鲍曼不动杆菌。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(MDR-AB)多重耐药鲍曼不动杆菌。';
+    inc(count);
   end
-  else if pos('MDR',str1)>0 then
+  else if pos('MDR', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(MDR)多重耐药菌株。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(MDR)多重耐药菌株。';
+    inc(count);
   end;
 
 
-  if pos('XDR-PA',str1)>0 then
+  if pos('XDR-PA', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(XDR-PA)高耐药铜绿假单胞菌。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(XDR-PA)高耐药铜绿假单胞菌。';
+    inc(count);
   end
-  else if pos('XDR-AB',str1)>0 then
+  else if pos('XDR-AB', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(XDR-AB)高耐药鲍曼不动杆菌。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(XDR-AB)高耐药鲍曼不动杆菌。';
+    inc(count);
   end
-  else if pos('XDR',str1)>0 then
+  else if pos('XDR', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(XDR)高耐药菌株。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(XDR)高耐药菌株。';
+    inc(count);
   end;
 
-  if pos('PDR-PA',str1)>0 then
+  if pos('PDR-PA', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(PDR-PA)泛耐药铜绿假单胞菌。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(PDR-PA)泛耐药铜绿假单胞菌。';
+    inc(count);
   end
-  else   if pos('PDR-AB',str1)>0 then
+  else if pos('PDR-AB', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(PDR-AB)泛耐药鲍曼不动杆菌。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(PDR-AB)泛耐药鲍曼不动杆菌。';
+    inc(count);
   end
-  else if pos('PDR',str1)>0 then
+  else if pos('PDR', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、(PDR)泛耐药菌株。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、(PDR)泛耐药菌株。';
+    inc(count);
   end;
 
 
 
-  if pos('VRE',str1)>0 then
+  if pos('VRE', str1) > 0 then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、耐万古霉素肠球菌株。';
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、耐万古霉素肠球菌株。';
+    inc(count);
   end;
-  if (str1='敏感株') or (str1='单耐药株') or (str1='多耐药株') or (str1='耐多药株') or (str1='广泛耐药株') then
+  if (str1 = '敏感株') or (str1 = '单耐药株') or (str1 = '多耐药株') or (str1 = '耐多药株') or (str1 = '广泛耐药株') then
   begin
-     if count>0 then
-        s:=s+#13#10;
-     s:=s+inttostr(count+ReportRemarkNumber)+'、该菌株为'+str1;
-     inc(count);
+    if count > 0 then
+      s := s + #13#10;
+    s := s + inttostr(count + ReportRemarkNumber) + '、该菌株为' + str1;
+    inc(count);
   end;
-  result:=s;
+  result := s;
 end;
 
-function nastr(b1:boolean):string;
+function nastr(b1: boolean): string;
 var
-  s:string;
-  i:integer;
-  bNa:boolean;
+  s: string;
+  i: integer;
+  bNa: boolean;
 begin
   //如果有特殊耐药机制,b1为true
   if b1 then
-     i:=6
+    i := 6
   else
-     i:=5;
+    i := 5;
   //判断是否存在na
-  bNa:=false;
+  bNa := false;
   with dmym.query1 do
   begin
     close;
@@ -322,9 +321,9 @@ begin
 
     while not eof do
     begin
-      if fieldvalues['bz']='NA' then
+      if fieldvalues['bz'] = 'NA' then
       begin
-        bNa:=true;
+        bNa := true;
         break;
       end;
       next;
@@ -332,110 +331,100 @@ begin
   end;
   if bNa then
   begin
-  s:='';//inttostr(i)+'、NA（Not accepted）:该药物药敏结果不可靠，应该重复试验或向细菌室咨询。';
+    s := ''; //inttostr(i)+'、NA（Not accepted）:该药物药敏结果不可靠，应该重复试验或向细菌室咨询。';
   end else
-  s:='';
-  result:=s;
+    s := '';
+  result := s;
 end;
 //从16进制整数颜色值中分别读出r，g，b的值
-procedure getRGB(icolor:integer;var ir,ig,ib:integer);
+
+procedure getRGB(icolor: integer; var ir, ig, ib: integer);
 begin
-    ib:=icolor  shr 16;
-    ig:=(icolor shr 8) - (ib shl 8);
-    ir:=icolor-(ib shl 16)-(ig shl 8);
-end;
-function bool2Str(b:boolean):string;
-begin
-   if b then
-      result:=inttostr(1)
-   else
-      result:=inttostr(0);
-      
-end;
-function calcColor(x,y:integer;img:tImage;Aparam:string):tcolor;
-var
-  offx,offy:integer;//x,y的偏移量
-  i,j,k:integer;
-  curColor:array[0..24] of integer;
-begin
-  k:=0;
-  for i:=-2 to 2 do
-  for j:=-2 to 2 do
-  begin
-      offx:=i*OFFSET;
-      offy:=j*oFFSET;
-      if Aparam='bio' then
-        curColor[k]:=img.canvas.pixels[x+offx,y+offy];
-      if Aparam='drug' then //药敏只取蓝色值进行计算
-        curColor[k]:=getBvalue(img.canvas.pixels[x+offx,y+offy]);
-      inc(k);
-  end;
-  result:=calaverage(curcolor,Aparam);
+  ib := icolor shr 16;
+  ig := (icolor shr 8) - (ib shl 8);
+  ir := icolor - (ib shl 16) - (ig shl 8);
 end;
 
-function calaverage(intarr:array of integer;Aparam:string):integer;
-function rank(var arr:array of integer):integer; //冒泡法，从小到大排序************
-var i,j,k:integer;
+function bool2Str(b: boolean): string;
 begin
-    for i:=0 to length(arr)-2 do
-    for j:=1 to length(arr)-1-i do
-    begin
-        if arr[j-1]>arr[j] then
-        begin
-          k:=arr[j];
-          arr[j]:=arr[j-1];
-          arr[j-1]:=k;
-        end;
-    end;
+  if b then
+    result := inttostr(1)
+  else
+    result := inttostr(0);
+
 end;
-var  i,j,count:integer;
-     sum:integer;
-     Rarr,Garr,Barr:array of integer; //RGB分量数组
-     Ravg,Gavg,Bavg:integer;//RGB结果分量
+
+function calcColor(x, y: integer; Aparam: string): tcolor;
+begin
+  if Aparam = 'bio' then
+    result := dbym.RecieveBuff[((y - 1) * 8 + x - 1) * 3 + 2] shl 16 or dbym.RecieveBuff[((y - 1) * 8 + x - 1) * 3 + 1] shl 8 or dbym.RecieveBuff[((y - 1) * 8 + x - 1) * 3];
+  if Aparam = 'drug' then //药敏只取蓝色值进行计算
+    result := dbym.RecieveBuff[((y - 1) * 8 + x - 1) * 3 + 2];
+end;
+
+function calaverage(intarr: array of integer; Aparam: string): integer;
+  function rank(var arr: array of integer): integer; //冒泡法，从小到大排序************
+  var i, j, k: integer;
+  begin
+    for i := 0 to length(arr) - 2 do
+      for j := 1 to length(arr) - 1 - i do
+      begin
+        if arr[j - 1] > arr[j] then
+        begin
+          k := arr[j];
+          arr[j] := arr[j - 1];
+          arr[j - 1] := k;
+        end;
+      end;
+  end;
+var i, j, count: integer;
+  sum: integer;
+  Rarr, Garr, Barr: array of integer; //RGB分量数组
+  Ravg, Gavg, Bavg: integer; //RGB结果分量
 begin
     {读取点：药敏去掉最高10个点，最低5个点取平均，生化先分解成RGB后，分别对R/G/B
     去最高5个点，最低10个点去平均，再合成。
     药敏为C\D\E\F\G\H（如下右侧六列），生化为A\B（图像左侧两列）}
-    sum:=0;
-    if Aparam='bio' then
+  sum := 0;
+  if Aparam = 'bio' then
+  begin
+    setlength(Rarr, length(intarr));
+    setlength(Garr, length(intarr));
+    setlength(Barr, length(intarr));
+    for i := 0 to length(intarr) - 1 do
     begin
-        setlength(Rarr,length(intarr));
-        setlength(Garr,length(intarr));
-        setlength(Barr,length(intarr));
-        for i:=0 to length(intarr)-1 do
-        begin
-            Rarr[i]:=GetRvalue(intarr[i]);
-            Garr[i]:=GetGvalue(intarr[i]);
-            Barr[i]:=GetBvalue(intarr[i]);
-        end;
-        rank(Rarr);
-        rank(Garr);
-        rank(Barr);
-        sum:=0;
-        for i:=10 to 19 do
-          sum:=sum+Rarr[i];
-        Ravg:=trunc(sum div 10);
-
-        sum:=0;
-        for i:=10 to 19 do
-          sum:=sum+Garr[i];
-        Gavg:=trunc(sum div 10);
-
-        sum:=0;
-        for i:=10 to 19 do
-          sum:=sum+Barr[i];
-        Bavg:=trunc(sum div 10);
-
-        result:=RGB(Ravg,Gavg,Bavg);
+      Rarr[i] := GetRvalue(intarr[i]);
+      Garr[i] := GetGvalue(intarr[i]);
+      Barr[i] := GetBvalue(intarr[i]);
     end;
+    rank(Rarr);
+    rank(Garr);
+    rank(Barr);
+    sum := 0;
+    for i := 10 to 19 do
+      sum := sum + Rarr[i];
+    Ravg := trunc(sum div 10);
 
-    if Aparam='drug' then
-    begin
-        rank(intarr);
-        for i:=5 to 14 do
-          sum:=sum+intarr[i];
-        result:=sum div 10;
-    end;
+    sum := 0;
+    for i := 10 to 19 do
+      sum := sum + Garr[i];
+    Gavg := trunc(sum div 10);
+
+    sum := 0;
+    for i := 10 to 19 do
+      sum := sum + Barr[i];
+    Bavg := trunc(sum div 10);
+
+    result := RGB(Ravg, Gavg, Bavg);
+  end;
+
+  if Aparam = 'drug' then
+  begin
+    rank(intarr);
+    for i := 5 to 14 do
+      sum := sum + intarr[i];
+    result := sum div 10;
+  end;
 end;
 
 //uses ymDataType, dbym,Meds;

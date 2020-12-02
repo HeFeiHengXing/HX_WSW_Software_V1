@@ -1,6 +1,6 @@
 object germAnalysisForm: TgermAnalysisForm
-  Left = 366
-  Top = 165
+  Left = 349
+  Top = 158
   Align = alCustom
   BorderStyle = bsDialog
   Caption = #37492#23450#20998#26512
@@ -39,13 +39,6 @@ object germAnalysisForm: TgermAnalysisForm
     Top = 176
     Width = 793
     Height = 1
-  end
-  object Image1: TImage
-    Left = 0
-    Top = 180
-    Width = 601
-    Height = 455
-    Visible = False
   end
   object gbNameInfo: TGroupBox
     Left = 8
@@ -402,85 +395,58 @@ object germAnalysisForm: TgermAnalysisForm
     TabOrder = 9
     object btnStartScan: TBitBtn
       Left = 8
-      Top = 44
+      Top = 21
       Width = 159
       Height = 26
       Caption = #24320#22987#26816#26597
-      TabOrder = 2
+      TabOrder = 0
       OnClick = btnStartScanClick
     end
     object btnAnalysis: TButton
       Left = 9
-      Top = 80
+      Top = 61
       Width = 74
       Height = 25
       Caption = #32454#33740#20998#26512
-      Enabled = False
-      TabOrder = 3
+      TabOrder = 1
       OnClick = btnAnalysisClick
     end
     object btnYmAnalysis: TButton
       Left = 9
-      Top = 113
+      Top = 98
       Width = 74
       Height = 26
       Caption = #33647#25935#20998#26512
       Enabled = False
-      TabOrder = 4
+      TabOrder = 2
       OnClick = btnYmAnalysisClick
     end
     object btnPrint: TButton
       Left = 90
-      Top = 113
+      Top = 99
       Width = 78
       Height = 25
       Caption = #25253'   '#34920
-      TabOrder = 7
+      TabOrder = 5
       OnClick = btnPrintClick
-    end
-    object chkInput: TCheckBox
-      Left = 8
-      Top = 16
-      Width = 65
-      Height = 17
-      Caption = #20154#24037#36755#20837
-      Color = clInactiveCaptionText
-      Ctl3D = True
-      ParentColor = False
-      ParentCtl3D = False
-      TabOrder = 0
-      OnClick = chkInputClick
-      OnKeyPress = chkInputKeyPress
     end
     object btnSave: TButton
       Left = 9
-      Top = 146
+      Top = 137
       Width = 75
       Height = 25
       Caption = #23384'   '#30424
       Enabled = False
-      TabOrder = 5
+      TabOrder = 3
       OnClick = btnSaveClick
-    end
-    object CheckBox1: TCheckBox
-      Left = 87
-      Top = 16
-      Width = 73
-      Height = 17
-      Caption = #19981#32463#20202#22120
-      Color = clInactiveCaptionText
-      ParentColor = False
-      TabOrder = 1
-      OnClick = CheckBox1Click
-      OnKeyPress = CheckBox1KeyPress
     end
     object Button1: TButton
       Left = 90
-      Top = 80
+      Top = 61
       Width = 78
       Height = 25
       Caption = #25253#34920#35774#32622
-      TabOrder = 6
+      TabOrder = 4
       OnClick = Button1Click
     end
   end
@@ -690,7 +656,7 @@ object germAnalysisForm: TgermAnalysisForm
   end
   object btnExit: TBitBtn
     Left = 730
-    Top = 583
+    Top = 573
     Width = 77
     Height = 25
     Caption = #36864'   '#20986

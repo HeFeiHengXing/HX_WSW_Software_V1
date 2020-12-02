@@ -23,24 +23,24 @@ var
   zkmanagez: Tzkmanagez;
 
 implementation
-uses zkbrowsefrm,zkanalysisfrm; 
+uses zkbrowsefrm, zkanalysisfrm;
 {$R *.dfm}
 
 procedure Tzkmanagez.Button1Click(Sender: TObject);
 var
-   zfrm:tzkAnalysisForm;
+  zfrm: tzkAnalysisForm;
 begin
-   zfrm:=tzkAnalysisForm.Create(self);
-   self.Hide;
-   zfrm.ShowModal;
+  zfrm := tzkAnalysisForm.Create(self);
+  self.Hide;
+  zfrm.ShowModal;
 end;
 
 procedure Tzkmanagez.Button2Click(Sender: TObject);
 var
-   zfrm:tzkBrowseForm;
+  zfrm: tzkBrowseForm;
 begin
-   zfrm:=tzkBrowseForm.Create(self);
-   zfrm.ShowModal;
+  zfrm := tzkBrowseForm.Create(self);
+  zfrm.ShowModal;
 end;
 
 procedure Tzkmanagez.Button3Click(Sender: TObject);
@@ -49,4 +49,3 @@ begin
 end;
 
 end.
- 

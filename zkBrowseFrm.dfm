@@ -1,6 +1,6 @@
 object zkBrowseForm: TzkBrowseForm
-  Left = 468
-  Top = 123
+  Left = 409
+  Top = 356
   BorderStyle = bsDialog
   Caption = #36136#25511#26631#26412#24635#35272
   ClientHeight = 367

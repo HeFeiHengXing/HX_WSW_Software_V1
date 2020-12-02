@@ -1,6 +1,6 @@
 object ym2MainForm: Tym2MainForm
-  Left = 263
-  Top = 220
+  Left = 320
+  Top = 240
   Width = 728
   Height = 489
   Align = alClient

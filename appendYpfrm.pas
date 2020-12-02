@@ -21,11 +21,11 @@ type
     procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
-    useid:integer;
+    useid: integer;
   public
     { Public declarations }
-    procedure setUserId(id:integer);
-    procedure WMCLOSE(var msg:TWMCLOSE);message WM_CLOSE;
+    procedure setUserId(id: integer);
+    procedure WMCLOSE(var msg: TWMCLOSE); message WM_CLOSE;
   end;
 
 var
@@ -39,29 +39,29 @@ uses dbym, appendYpNewFrm;
 
 procedure TappendYpForm.FormCreate(Sender: TObject);
 begin
-   dmym.rsAddTemp.Active:=false;
-   dmym.rsAddTemp.Active:=true;
+  dmym.rsAddTemp.Active := false;
+  dmym.rsAddTemp.Active := true;
 end;
 
 procedure TappendYpForm.Button1Click(Sender: TObject);
 var
-  aform:tappendypnewform;
+  aform: tappendypnewform;
 begin
   dmym.rsAddTemp.Append;
  // dmym.rsAdd['useid']:=useid;
-  aform:=tappendYpNewForm.Create(self);
+  aform := tappendYpNewForm.Create(self);
   aform.setStatus(true);
   aform.ShowModal;
 end;
 
 procedure TappendYpForm.Button2Click(Sender: TObject);
 var
-  aform:tappendypnewform;
+  aform: tappendypnewform;
 begin
   if not dmym.rsAddTemp.Eof then
   begin
     dmym.rsAddTemp.Edit;
-    aform:=tappendYpNewForm.Create(self);
+    aform := tappendYpNewForm.Create(self);
     aform.setStatus(false);
     aform.ShowModal;
   end;
@@ -70,28 +70,29 @@ end;
 
 procedure TappendYpForm.Button4Click(Sender: TObject);
 begin
-  dmym.rsaddTemp.Active:=false;
+  dmym.rsaddTemp.Active := false;
   close;
 end;
 
 procedure TappendYpForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-    dmym.rsAddTemp.Active:=true;
-    action:=cafree;
+  dmym.rsAddTemp.Active := true;
+  action := cafree;
 end;
 
 procedure TappendYpForm.Button3Click(Sender: TObject);
 begin
   if not dmym.rsAddTemp.Eof then
-    if MessageDlg('确定删除当前记录?',mtInformation,[mbOk,mbCancel],0)=mrOk then
+    if MessageDlg('确定删除当前记录?', mtInformation, [mbOk, mbCancel], 0) = mrOk then
       dmym.rsAddTemp.Delete;
 end;
 
-procedure tAppendYpform.setUserId(id:integer);
+procedure tAppendYpform.setUserId(id: integer);
 begin
-  useid:=id;
+  useid := id;
 end;
+
 procedure TappendYpForm.WMCLOSE(var msg: TWMCLOSE);
 begin
     //;

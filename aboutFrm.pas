@@ -35,7 +35,7 @@ implementation
 
 procedure TaboutForm.OKButtonClick(Sender: TObject);
 begin
-   close;
+  close;
 end;
 
 end.

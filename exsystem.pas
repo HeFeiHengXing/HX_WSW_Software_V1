@@ -195,4 +195,4 @@ begin
   ChildNodes['shares'].NodeValue := Value;
 end;
 
-end. 
+end.

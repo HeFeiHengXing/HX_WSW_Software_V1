@@ -3,7 +3,7 @@ unit system2;
 interface
 
 uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls,common,shellapi;
+  Buttons, ExtCtrls, common, shellapi;
 
 type
   Tsystem = class(TForm)
@@ -30,62 +30,63 @@ var
   system: Tsystem;
 
 implementation
-uses germListFrm,expert,aboutFrm,loginfrm, backup;
+uses germListFrm, expert, aboutFrm, loginfrm, backup;
 {$R *.dfm}
 
 procedure Tsystem.Button1Click(Sender: TObject);
 begin
-   ShellExecute(application.Handle,nil,Pchar(getcurrentdir+'\ym.chm'),nil,nil,SW_ShowNormal);
+  ShellExecute(application.Handle, nil, Pchar(getcurrentdir + '\ym.chm'), nil, nil, SW_ShowNormal);
 end;
 
 procedure Tsystem.Button2Click(Sender: TObject);
 var
-   gfrm:tgermListForm;
+  gfrm: tgermListForm;
 begin
-   gfrm:=tgermListForm.Create(self);
-   gfrm.ShowModal;
+  gfrm := tgermListForm.Create(self);
+  gfrm.ShowModal;
 end;
 
 procedure Tsystem.Button5Click(Sender: TObject);
 var
-  str:string;
+  str: string;
   si: startupinfo;
   pi: process_information;
 begin
-    ZeroMemory(@si, sizeof(si) );
-    si.cb := sizeof(si);
-    ZeroMemory( @pi, sizeof(pi) );
+  ZeroMemory(@si, sizeof(si));
+  si.cb := sizeof(si);
+  ZeroMemory(@pi, sizeof(pi));
 
-    str:=getcurrentdir+'\manager.exe';
-    createprocess(nil,pchar(str),nil,nil,false,0,nil,nil,si,pi);
+  str := getcurrentdir + '\manager.exe';
+  createprocess(nil, pchar(str), nil, nil, false, 0, nil, nil, si, pi);
 
-    closehandle(pi.hprocess);
-    closehandle(pi.hThread);
+  closehandle(pi.hprocess);
+  closehandle(pi.hThread);
 end;
 
 procedure Tsystem.Button4Click(Sender: TObject);
 var
-   afrm:taboutForm;
+  afrm: taboutForm;
 begin
-   afrm:=taboutForm.Create(self);
-   afrm.ShowModal;
+  afrm := taboutForm.Create(self);
+  afrm.ShowModal;
 end;
 
 procedure Tsystem.Button3Click(Sender: TObject);
 begin
-   close;
+  close;
 end;
 
 procedure Tsystem.FormShow(Sender: TObject);
 begin
-  if loginform.Bsuper=false then
-    Button5.Enabled:=false;
+  if loginform.Bsuper = false then
+    Button5.Enabled := false;
 end;
+
 procedure Tsystem.Button6Click(Sender: TObject);
-var aform:TbackupForm;
+var aform: TbackupForm;
 begin
-    aform:=TbackupForm.Create(self);
-    aform.ShowModal;
+  aform := TbackupForm.Create(self);
+  aform.ShowModal;
 end;
 
 end.

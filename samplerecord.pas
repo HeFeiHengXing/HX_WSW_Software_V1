@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls,db;
+  Dialogs, StdCtrls, db;
 
 type
   Tsamplerecordform = class(TForm)
@@ -27,7 +27,7 @@ var
 
 implementation
 
-uses regBBfrm, regZkfrm, dbym, germAnalysisFrm, loginfrm,ygsamplefrm;
+uses regBBfrm, regZkfrm, dbym, germAnalysisFrm, loginfrm, ygsamplefrm;
 
 {$R *.dfm}
 
@@ -37,23 +37,24 @@ begin
 end;
 
 procedure Tsamplerecordform.Button1Click(Sender: TObject);
-var afrm:TRegBBform;
+var afrm: TRegBBform;
 begin
-   afrm:= TRegbbForm.create(self);
-   afrm.showmodal;
+  afrm := TRegbbForm.create(self);
+  afrm.showmodal;
 end;
+
 procedure Tsamplerecordform.Button3Click(Sender: TObject);
-var afrm:Tregzkform;
+var afrm: Tregzkform;
 begin
-   afrm:=Tregzkform.Create(self);
-   afrm.ShowModal;
+  afrm := Tregzkform.Create(self);
+  afrm.ShowModal;
 end;
 
 procedure Tsamplerecordform.Button2Click(Sender: TObject);
-var afrm:tYgSample;
+var afrm: tYgSample;
 begin
-    afrm:=TYgSample.Create(self);
-    afrm.ShowModal;
+  afrm := TYgSample.Create(self);
+  afrm.ShowModal;
 end;
 
 end.

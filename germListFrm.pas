@@ -28,14 +28,14 @@ uses dbym;
 
 procedure TgermListForm.FormShow(Sender: TObject);
 begin
-   dmym.rsGermName.Active:=true;
+  dmym.rsGermName.Active := true;
 end;
 
 procedure TgermListForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-   dmym.rsGermName.active:=false;
-   action:=cafree;
+  dmym.rsGermName.active := false;
+  action := cafree;
 end;
 
 end.

@@ -1,9 +1,9 @@
 object dmym: Tdmym
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 5
-  Top = 4
-  Height = 448
+  Left = 987
+  Top = 145
+  Height = 446
   Width = 638
   object conn: TADOConnection
     LoginPrompt = False
@@ -239,5 +239,36 @@ object dmym: Tdmym
     DataSet = rsbase1
     Left = 86
     Top = 386
+  end
+  object USBCOM: TComm
+    CommName = 'COM3'
+    BaudRate = 115200
+    ParityCheck = False
+    Outx_CtsFlow = False
+    Outx_DsrFlow = False
+    DtrControl = DtrEnable
+    DsrSensitivity = False
+    TxContinueOnXoff = False
+    Outx_XonXoffFlow = False
+    Inx_XonXoffFlow = False
+    ReplaceWhenParityError = False
+    IgnoreNullChar = False
+    RtsControl = RtsEnable
+    XonLimit = 500
+    XoffLimit = 500
+    ByteSize = _8
+    Parity = None
+    StopBits = _1
+    XonChar = #17
+    XoffChar = #19
+    ReplacedChar = #0
+    ReadIntervalTimeout = 100
+    ReadTotalTimeoutMultiplier = 0
+    ReadTotalTimeoutConstant = 0
+    WriteTotalTimeoutMultiplier = 0
+    WriteTotalTimeoutConstant = 0
+    OnReceiveData = comMainReceiveData
+    Left = 148
+    Top = 389
   end
 end

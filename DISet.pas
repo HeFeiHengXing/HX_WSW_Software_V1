@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls,inifiles;
+  Dialogs, StdCtrls, inifiles;
 
 type
   TDISetform = class(TForm)
@@ -21,7 +21,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
-     Myini:Tinifile;
+    Myini: Tinifile;
   public
     { Public declarations }
   end;
@@ -35,22 +35,22 @@ implementation
 
 procedure TDISetform.FormShow(Sender: TObject);
 begin
-    Myini:=Tinifile.Create(ExtractFileDir(Application.ExeName)+'\dw.ini');
-    Memo1.Text:=Myini.ReadString('DepartMent','Information','');
-    CheckBox1.Checked := StrToBool(Myini.ReadString('ReportConfig','Group',''));
-    CheckBox2.Checked := StrToBool(Myini.ReadString('ReportConfig','DoseUsage',''));
-    CheckBox3.Checked := StrToBool(Myini.ReadString('ReportConfig','NatrualResistance',''));
-    CheckBox4.Checked := StrToBool(Myini.ReadString('ReportConfig','NoStandard',''));
+  Myini := Tinifile.Create(ExtractFileDir(Application.ExeName) + '\dw.ini');
+  Memo1.Text := Myini.ReadString('DepartMent', 'Information', '');
+  CheckBox1.Checked := StrToBool(Myini.ReadString('ReportConfig', 'Group', ''));
+  CheckBox2.Checked := StrToBool(Myini.ReadString('ReportConfig', 'DoseUsage', ''));
+  CheckBox3.Checked := StrToBool(Myini.ReadString('ReportConfig', 'NatrualResistance', ''));
+  CheckBox4.Checked := StrToBool(Myini.ReadString('ReportConfig', 'NoStandard', ''));
 end;
 
 procedure TDISetform.Button2Click(Sender: TObject);
 begin
-    Myini.WriteString('DepartMent','Information',Memo1.text);
-    Myini.WriteString('ReportConfig','Group',BoolToStr(CheckBox1.Checked));
-    Myini.WriteString('ReportConfig','DoseUsage',BoolToStr(CheckBox2.Checked));
-    Myini.WriteString('ReportConfig','NatrualResistance',BoolToStr(CheckBox3.Checked));
-    Myini.WriteString('ReportConfig','NoStandard',BoolToStr(CheckBox4.Checked));
-    showmessage('设置信息已保存!');
+  Myini.WriteString('DepartMent', 'Information', Memo1.text);
+  Myini.WriteString('ReportConfig', 'Group', BoolToStr(CheckBox1.Checked));
+  Myini.WriteString('ReportConfig', 'DoseUsage', BoolToStr(CheckBox2.Checked));
+  Myini.WriteString('ReportConfig', 'NatrualResistance', BoolToStr(CheckBox3.Checked));
+  Myini.WriteString('ReportConfig', 'NoStandard', BoolToStr(CheckBox4.Checked));
+  showmessage('设置信息已保存!');
 end;
 
 procedure TDISetform.Button3Click(Sender: TObject);
@@ -60,7 +60,7 @@ end;
 
 procedure TDISetform.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-    Action:=Cafree;
+  Action := Cafree;
 end;
 
 end.

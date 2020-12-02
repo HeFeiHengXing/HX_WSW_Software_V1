@@ -42,8 +42,8 @@ var
 
 implementation
 
-uses dbym, YgAirFrm,YgSurfaceFrm,YgHandFrm,YgLiqFrm,YgMedFrm,
-     YgQueryFrm,YgqtFrm,Ygtxyfrm, YgSurgeryFrm;
+uses dbym, YgAirFrm, YgSurfaceFrm, YgHandFrm, YgLiqFrm, YgMedFrm,
+  YgQueryFrm, YgqtFrm, Ygtxyfrm, YgSurgeryFrm;
 
 {$R *.dfm}
 
@@ -53,77 +53,77 @@ uses dbym, YgAirFrm,YgSurfaceFrm,YgHandFrm,YgLiqFrm,YgMedFrm,
 
 procedure TYgFrm.Button2Click(Sender: TObject);
 var
-    yfrm:tygAirForm;
+  yfrm: tygAirForm;
 begin
-    yfrm:=tygAirForm.Create(self);
-    yfrm.showmodal;
+  yfrm := tygAirForm.Create(self);
+  yfrm.showmodal;
 end;
 
 procedure TYgFrm.Button3Click(Sender: TObject);
 var
-    yfrm:tYgSurfaceForm;
+  yfrm: tYgSurfaceForm;
 begin
-    yfrm:=tYgSurfaceForm.Create(self);
-    yfrm.ShowModal;
+  yfrm := tYgSurfaceForm.Create(self);
+  yfrm.ShowModal;
 end;
 
 procedure TYgFrm.Button4Click(Sender: TObject);
 var
-    yfrm:tYgHandForm;
+  yfrm: tYgHandForm;
 begin
-    yfrm:=tYgHandForm.Create(self);
-    yfrm.ShowModal;
+  yfrm := tYgHandForm.Create(self);
+  yfrm.ShowModal;
 end;
 
 procedure TYgFrm.Button5Click(Sender: TObject);
 var
-    yfrm:tYgMedForm;
+  yfrm: tYgMedForm;
 begin
-    yfrm:=tYgMedForm.Create(self);
-    yfrm.ShowModal;
+  yfrm := tYgMedForm.Create(self);
+  yfrm.ShowModal;
 end;
 
 procedure TYgFrm.Button6Click(Sender: TObject);
 var
-    yfrm:tYgLiqForm;
+  yfrm: tYgLiqForm;
 begin
-    yfrm:=tYgLiqForm.Create(self);
-    yfrm.ShowModal;
+  yfrm := tYgLiqForm.Create(self);
+  yfrm.ShowModal;
 end;
 
 procedure TYgFrm.Button7Click(Sender: TObject);
 var
-    yfrm:tYgQueryForm;
+  yfrm: tYgQueryForm;
 begin
-    yfrm:=tYgQueryForm.Create(self);
-    yfrm.ShowModal;
+  yfrm := tYgQueryForm.Create(self);
+  yfrm.ShowModal;
 end;
 
 procedure TYgFrm.Button8Click(Sender: TObject);
 var
-    yfrm:TygqtForm;
+  yfrm: TygqtForm;
 begin
-    yfrm:=TygqtForm.Create(self);
-    yfrm.ShowModal;
+  yfrm := TygqtForm.Create(self);
+  yfrm.ShowModal;
 end;
 
 procedure TYgFrm.Button9Click(Sender: TObject);
-var afrm:TYgtxy;
+var afrm: TYgtxy;
 begin
-    afrm:=TYgtxy.Create(self);
-    afrm.ShowModal;
+  afrm := TYgtxy.Create(self);
+  afrm.ShowModal;
 end;
 
 procedure TYgFrm.Button10Click(Sender: TObject);
-var afrm:TYgSurgeryForm;
+var afrm: TYgSurgeryForm;
 begin
-    afrm:=TYgSurgeryForm.Create(self);
-    afrm.ShowModal;
+  afrm := TYgSurgeryForm.Create(self);
+  afrm.ShowModal;
 end;
 
 procedure TYgFrm.Button1Click(Sender: TObject);
 begin
-    self.close;
+  self.close;
 end;
 
 end.

@@ -1,6 +1,6 @@
 object zkAnalysisForm: TzkAnalysisForm
-  Left = 482
-  Top = 163
+  Left = 540
+  Top = 214
   BorderStyle = bsDialog
   Caption = #36136#25511#37492#23450#20998#26512
   ClientHeight = 565
@@ -266,75 +266,49 @@ object zkAnalysisForm: TzkAnalysisForm
     ParentColor = False
     TabOrder = 6
     object btnStartScan: TBitBtn
-      Left = 8
-      Top = 56
-      Width = 73
+      Left = 16
+      Top = 22
+      Width = 145
       Height = 25
       Caption = #24320#22987#26816#26597
-      TabOrder = 2
+      TabOrder = 0
       OnClick = btnStartScanClick
     end
     object btnAnalysis: TButton
-      Left = 8
-      Top = 96
+      Left = 16
+      Top = 57
       Width = 73
       Height = 25
       Caption = #32454#33740#20998#26512
-      TabOrder = 3
+      TabOrder = 1
       OnClick = btnAnalysisClick
     end
     object btnYmAnalysis: TButton
-      Left = 8
-      Top = 136
+      Left = 16
+      Top = 89
       Width = 73
       Height = 25
       Caption = #33647#25935#20998#26512
-      TabOrder = 4
+      TabOrder = 2
       OnClick = btnYmAnalysisClick
     end
     object btnPrint: TButton
-      Left = 96
-      Top = 96
-      Width = 69
+      Left = 95
+      Top = 89
+      Width = 66
       Height = 25
       Caption = #25253#34920
-      TabOrder = 6
+      TabOrder = 4
       OnClick = btnPrintClick
-    end
-    object chkInput: TCheckBox
-      Left = 8
-      Top = 16
-      Width = 73
-      Height = 17
-      Caption = #20154#24037#36755#20837
-      Color = clMoneyGreen
-      Ctl3D = True
-      ParentColor = False
-      ParentCtl3D = False
-      TabOrder = 0
-      OnClick = chkInputClick
-      OnKeyPress = chkInputKeyPress
     end
     object btnSave: TButton
       Left = 96
-      Top = 56
-      Width = 69
+      Top = 57
+      Width = 65
       Height = 25
       Caption = #23384#30424
-      TabOrder = 5
+      TabOrder = 3
       OnClick = btnSaveClick
-    end
-    object CheckBox1: TCheckBox
-      Left = 88
-      Top = 16
-      Width = 81
-      Height = 17
-      Caption = #19981#32463#20202#22120
-      Color = clMoneyGreen
-      ParentColor = False
-      TabOrder = 1
-      OnClick = CheckBox1Click
-      OnKeyPress = CheckBox1KeyPress
     end
   end
   object GroupBox2: TGroupBox
@@ -474,9 +448,9 @@ object zkAnalysisForm: TzkAnalysisForm
     TabOrder = 9
   end
   object btnExit: TBitBtn
-    Left = 768
-    Top = 523
-    Width = 73
+    Left = 688
+    Top = 508
+    Width = 145
     Height = 25
     Caption = #36864#20986
     TabOrder = 10
