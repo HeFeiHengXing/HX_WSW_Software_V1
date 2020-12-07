@@ -470,9 +470,9 @@ begin
   //id:=getid;
   btnstartscan.Enabled := false;
   if bNewPatient then
-    hpr := zHelper.create(js, 'ypbase', self, bNewPatient, 0)
+    hpr := zHelper.create(js, 'ypbase', self, bNewPatient, true, 0)
   else
-    hpr := zHelper.create(js, 'ypbase', self, bNewPatient, dmym.rsbase['useid']);
+    hpr := zHelper.create(js, 'ypbase', self, bNewPatient, true, dmym.rsbase['useid']);
   hpr.setRs(dmym.rsBase);
   //hpr.setNewPatient(bNewPatient);
   hpr.startCheck;
@@ -983,12 +983,12 @@ begin
     exit;
   end;
   if bNewPatient then
-    hpr := zHelper.create(js, 'ypbase', self, bNewPatient, 0)
+    hpr := zHelper.create(js, 'ypbase', self, bNewPatient, false, 0)
   else
-    hpr := zHelper.create(js, 'ypbase', self, bNewPatient, dmym.rsbase['useid']);
+    hpr := zHelper.create(js, 'ypbase', self, bNewPatient, false, dmym.rsbase['useid']);
   hpr.setRs(dmym.rsBase);
       //hpr.setNewPatient(bNewPatient);
-  hpr.setAllResults;
+  hpr.startCheck;
   dmym.rsCheck.Active := false; //false;
   hpr.analyzeBio;
   btnYmAnalysis.Enabled := true;

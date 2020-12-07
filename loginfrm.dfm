@@ -1,6 +1,6 @@
 object loginForm: TloginForm
-  Left = 479
-  Top = 217
+  Left = 539
+  Top = 256
   BorderStyle = bsDialog
   Caption = #31995#32479#30331#20837
   ClientHeight = 454

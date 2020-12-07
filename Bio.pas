@@ -6,9 +6,9 @@ uses
 type
   zBio = class
   private
-    reactionColors: array[1..30] of tcolor;
+    reactionColors: array[1..30] of double;
 
-    ofcolors: array[1..3] of tcolor;
+    ofcolors: array[1..3] of double;
     holeCodes: array[1..30] of integer; //不同的菌属所对应的参与编码的孔号
     errorCodes: array[1..10] of integer;
     errorCodesLen: integer; //>0的errorCodes的元素个数
@@ -36,8 +36,8 @@ type
     cbCode: string; //checkbox code  base的bm字段
     basecode: string; //base-result
     constructor create(js1: string);
-    procedure setColor(colors: array of tcolor);
-    procedure setOfColor(colors: array of tcolor);
+    procedure setColor(colors: array of double);
+    procedure setOfColor(colors: array of double);
     procedure setInput(iresults: array of boolean);
     procedure setGermIndex(idx: string);
     procedure setOriginJs(js: string);
@@ -88,9 +88,8 @@ begin
     b := 0;
     for i := 1 to 3 do
     begin
-      getRGB(ofcolors[i], r, g, b);
          //if (r>b) and ((g-b)>15) then   20131026改
-      if g > b then
+      if (ofcolors[i] >= 300) and (ofcolors[i] <= 900) then
       begin
         if i = 1 then
           ofIsPositive := true;
@@ -172,11 +171,7 @@ begin
         //   bioresults[26]:=true;
       for i := 1 to 24 do //计算生化反应值
       begin
-        r := 0;
-        g := 0;
-        b := 0;
-        getRGB(reactionColors[i], r, g, b);
-        chk := comccolor(originjs, i, r, g, b);
+        chk := comccolor(originjs, i, reactionColors[i]);
         if chk = 1 then
           bioResults[i] := true
         else
@@ -193,7 +188,7 @@ begin
 end;
 //set reactionColors[]
 
-procedure zBio.setColor(colors: array of tcolor);
+procedure zBio.setColor(colors: array of double);
 var
   i: integer;
 begin
@@ -202,7 +197,7 @@ begin
 end;
 //set ofColors[]
 
-procedure zBio.setOfColor(colors: array of tcolor);
+procedure zBio.setOfColor(colors: array of double);
 var
   i: integer;
 begin
@@ -1153,3 +1148,4 @@ begin
 end;
 
 end.
+

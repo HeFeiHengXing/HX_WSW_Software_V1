@@ -16,6 +16,7 @@ type
     userid: integer;
       //inifile:tinifile;
     bNewPatient: boolean;
+    bDoScan: boolean;
     dllPath: string; //
     originjs: string;
     rsBaseTable: tadodataset;
@@ -24,8 +25,8 @@ type
     locx: array[1..12] of integer;
     locy: array[1..12] of integer;
       //ymColors:array[1..3,1..24] of tcolor; //后6列，作为药敏反应颜色
-    bioColors: array[1..30] of tcolor; //前两列，作为生化反应颜色,加6个补充试验
-    ofColors: array[1..3] of tcolor;
+    bioColors: array[1..30] of double; //前两列，作为生化反应颜色,加6个补充试验
+    ofColors: array[1..3] of double;
     inputResults: array[1..6] of boolean;
 
   public
@@ -33,7 +34,7 @@ type
     bc, tsnyID, tsnyIDM: string;
     jzname: string;
     bbid: integer;
-    constructor create(js1, ytable: string; pWnd: tform; bPatient: boolean; id: integer);
+    constructor create(js1, ytable: string; pWnd: tform; bPatient, bScan: boolean; id: integer);
       //constructor create(js1:string;pwnd:tform;bHand:boolean);override;
     procedure startCheck;
     procedure handInput;
@@ -59,7 +60,7 @@ implementation
 uses germAnalysisFrm, dbym, zkAnalysisfrm;
 
 
-constructor zhelper.create(js1, ytable: string; pWnd: tform; bPatient: boolean; id: integer);
+constructor zhelper.create(js1, ytable: string; pWnd: tform; bPatient, bScan: boolean; id: integer);
 var
   i, j: integer;
 begin
@@ -69,6 +70,7 @@ begin
   originjs := js1;
   bio := zBio.create(originjs);
   bnewPatient := bPatient;
+  bDoScan := bScan;
   if bnewPatient then
     med := zMed.create(js1)
   else
@@ -264,27 +266,54 @@ end;
 
 procedure zHelper.getColorsFromRecieveBuff;
 var
-  i, j: integer;
+  i, j, temp: integer;
+  LibHandle: Thandle;
+  colortype: TColorType;
+  germtype: string;
+  path: string;
 begin
-   //第1－2列，作为生化反应颜色，存至bioColor数组
-  for i := 1 to 2 do
-    for j := 1 to 12 do
+  //试图调用生化反应 check.dll
+    //inifile:=tinifile.Create(getcurrentdir+'\ym.ini');/////////////////////////////////
+    //path:=inifile.ReadString('dll','check','0');
+  path := Getcurrentdir + '\check.dll';
+  LibHandle := loadlibrary(pchar(path));
+  try
+    if LibHandle = 0 then
+      raise EdllLoadError.create('无法调入对应的动态库文件');
+    @colortype := getprocaddress(libhandle, 'ColorType');
+    if not (@colortype = nil) then
     begin
-      bioColors[j + (i - 1) * 12] := calccolor(i, j, 'bio');
-      //inifile.WriteFloat('biocolors','bio'+inttostr(j+(i-1)*12),bioColors[j+(i-1)*12]);
-    end;
+           //第1－2列，作为生化反应颜色，存至bioColor数组
+      for i := 1 to 2 do
+        for j := 1 to 12 do
+        begin
+          temp := colortype(originjs, j + (i - 1) * 12);
+          if temp = 1 then
+            bioColors[j + (i - 1) * 12] := calccolor(j, i, 'ColorH')
+          else if temp = 2 then
+            bioColors[j + (i - 1) * 12] := calccolor(j, i, 'ColorC')
+          else if temp = 3 then
+            bioColors[j + (i - 1) * 12] := calccolor(j, i, 'ColorS');
+        end;
+    end
+    else
+      raiseLastWin32Error;
+  finally
+    freeLibrary(LibHandle); //卸载dll
+  end;
+
    // 第一组药敏反应，第3列到第5列,只要蓝色值。存放到ymcolor的前12列。
   for i := 3 to 5 do
     for j := 1 to 12 do
-      ymColors[i - 2, j] := calccolor(i, j, 'drug');
+      ymColors[i - 2, j] := calccolor(j, i, 'ColorC');
    // 第二组药敏反应，第6列到第8列,只要蓝色值。存放到ymcolor的后12列
   for i := 6 to 8 do
     for j := 1 to 12 do
-      ymColors[i - 5, j + 12] := calccolor(i, j, 'drug');
+      ymColors[i - 5, j + 12] := calccolor(j, i, 'ColorC');
    //o-f 试验颜色计算
-  ofcolors[1] := calccolor(6, 12, 'bio');
-  ofcolors[2] := calccolor(7, 12, 'bio');
-  ofColors[3] := calccolor(8, 12, 'bio');
+  ofcolors[1] := calccolor(12, 6, 'ColorH');
+  ofcolors[2] := calccolor(12, 7, 'ColorH');
+  ofColors[3] := calccolor(12, 8, 'ColorH');
 end;
 
 procedure zHelper.analyzeYm;
@@ -656,7 +685,10 @@ begin
     for j := 1 to length(ymResults[i]) do
       ymresults[i, j] := false;
   dmym.rscheck.active := false;
-  startScan;
+  if bDoScan then
+    startScan
+  else
+    handInput;
   //更新界面
   if parentwnd is tzkAnalysisForm then
   begin

@@ -858,9 +858,9 @@ begin
   end;
   btnstartscan.Enabled := false;
   if bNewPatient then
-    hpr := zHelper.create(js, 'ypbasezk', self, bNewPatient, 0)
+    hpr := zHelper.create(js, 'ypbasezk', self, bNewPatient, true, 0)
   else
-    hpr := zHelper.create(js, 'ypbasezk', self, bNewPatient, dmym.rsbasezk['useid']);
+    hpr := zHelper.create(js, 'ypbasezk', self, bNewPatient, true, dmym.rsbasezk['useid']);
   hpr.setRs(dmym.rsBasezk);
   //hpr.setNewPatient(bNewPatient);
   hpr.startCheck;
@@ -912,9 +912,9 @@ begin
     exit;
   end;
   if bNewPatient then
-    hpr := zHelper.create(js, 'ypbasezk', self, bNewPatient, 0)
+    hpr := zHelper.create(js, 'ypbasezk', self, bNewPatient, false, 0)
   else
-    hpr := zHelper.create(js, 'ypbasezk', self, bNewPatient, dmym.rsbasezk['useid']);
+    hpr := zHelper.create(js, 'ypbasezk', self, bNewPatient, false, dmym.rsbasezk['useid']);
   hpr.setRs(dmym.rsBase);
   //hpr.setNewPatient(bNewPatient);
   hpr.setAllResults;

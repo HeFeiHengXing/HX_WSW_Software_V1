@@ -60,7 +60,7 @@ type
 
 var
   dmym: Tdmym;
-  RecieveBuff: array[0..287] of byte;
+  RecieveBuff: array[0..863] of byte;
   RecieveColor: boolean;
   RecieveResponse: boolean;
 
@@ -101,14 +101,19 @@ var
   reg: TRegistry;
   sComm: TStrings;
   i: integer;
+  findDevice: boolean;
 begin
   result := false;
+  findDevice := false;
   // Open the scane machine serial port
   try
     USBCOM.StopComm;
     USBCOM.StartComm;
     if (USBShakeHand) then
+    begin
+      findDevice := true;
       result := USBColorSample;
+    end;
   except
     USBCOM.StopComm;
   end;
@@ -127,6 +132,7 @@ begin
       USBCOM.StartComm;
       if (USBShakeHand) then
       begin
+        findDevice := true;
         result := USBColorSample;
         break;
       end
@@ -135,7 +141,8 @@ begin
     except
     end;
   end;
-  MessageDlg('未发现仪器!', mtInformation, [mbOK], 0);
+  if not findDevice then
+    MessageDlg('未发现仪器!', mtInformation, [mbOK], 0);
   sComm.Free;
   reg.CloseKey;
   reg.free;
@@ -190,9 +197,9 @@ begin
   if RecieveResponse and (RecieveBuff[0] = byte($A2)) then
     if RecieveBuff[1] = byte($EC) then
     begin
-      // wait for the color data (30s)
+      // wait for the color data (60s)
       dw := GetTickCount;
-      while (not RecieveColor) and (GetTickCount - dw < 30000) do
+      while (not RecieveColor) and (GetTickCount - dw < 60000) do
         Application.ProcessMessages;
 
       if (RecieveColor) then
@@ -236,10 +243,10 @@ end;
 
 procedure Tdmym.comMainReceiveData(Sender: TObject; Buffer: Pointer; BufferLength: Word);
 begin
-  if (BufferLength = 288) or (BufferLength = 2) then
+  if (BufferLength = 864) or (BufferLength = 2) then
   begin
     Move(Buffer^, pchar(@RecieveBuff)^, BufferLength);
-    if (BufferLength = 288) then
+    if (BufferLength = 864) then
       RecieveColor := true
     else if (BufferLength = 2) then
       RecieveResponse := true;

@@ -10,7 +10,8 @@ uses
 
   graphics, inifiles, sysutils, classes, extctrls, dialogs, variants, windows, controls, dateutils;
 type
-  TcomcColor = function(strjz: string; i, r, g, b: integer): integer; stdcall;
+  TcomcColor = function(strjz: string; i: integer; color: double): integer; stdcall;
+  TColorType = function(strjz: string; i: integer): integer; stdcall;
   EDllLoadError = class(Exception);
   TGetImageFromDriver = function(hwnd: Longint; filepath: string; left, top, width, height: double; res, imagetype, origtype: longint): Integer; stdcall;
   binCarray = array of array of tcolor;
@@ -18,7 +19,7 @@ type
 var
   inifile: tinifile;
   ymResults: array[1..3, 1..24] of boolean;
-  ymColors: array[1..3, 1..24] of tcolor;
+  ymColors: array[1..3, 1..24] of double;
   hospitalName: string;
   rvfile: string;
   ReportRemarkNumber: integer; //报告单备注说明中的项目数
@@ -27,7 +28,7 @@ const
   MAX_PREHOLE = 15;
   MAX_GENERATE_COUNT = 999999;
 procedure getRGB(icolor: integer; var ir, ig, ib: integer);
-function calcColor(x, y: integer; Aparam: string): tcolor;
+function calcColor(x, y: integer; Aparam: string): Double;
 function bool2Str(b: boolean): string;
 function nrstr(js, jzname: string): string;
 function bcstr(str1: string): string;
@@ -354,12 +355,78 @@ begin
 
 end;
 
-function calcColor(x, y: integer; Aparam: string): tcolor;
+function calcColor(x, y: integer; Aparam: string): Double;
+var
+  color_min, color_max, color_temp, clear, red, green, blue: Double;
 begin
-  if Aparam = 'bio' then
-    result := dbym.RecieveBuff[((y - 1) * 8 + x - 1) * 3 + 2] shl 16 or dbym.RecieveBuff[((y - 1) * 8 + x - 1) * 3 + 1] shl 8 or dbym.RecieveBuff[((y - 1) * 8 + x - 1) * 3];
-  if Aparam = 'drug' then //药敏只取蓝色值进行计算
-    result := dbym.RecieveBuff[((y - 1) * 8 + x - 1) * 3 + 2];
+  if Aparam = 'ColorH' then
+  begin
+    red := dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 98] or dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 99] shl 8;
+    red := red * (dbym.RecieveBuff[(x - 1) * 8 + 4] or dbym.RecieveBuff[(x - 1) * 8 + 5] shl 8) * (dbym.RecieveBuff[(x - 1) * 8 + 6] or dbym.RecieveBuff[(x - 1) * 8 + 7] shl 8);
+    green := dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 100] or dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 101] shl 8;
+    green := green * (dbym.RecieveBuff[(x - 1) * 8 + 2] or dbym.RecieveBuff[(x - 1) * 8 + 3] shl 8) * (dbym.RecieveBuff[(x - 1) * 8 + 6] or dbym.RecieveBuff[(x - 1) * 8 + 7] shl 8);
+    blue := dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 102] or dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 103] shl 8;
+    blue := blue * (dbym.RecieveBuff[(x - 1) * 8 + 2] or dbym.RecieveBuff[(x - 1) * 8 + 3] shl 8) * (dbym.RecieveBuff[(x - 1) * 8 + 4] or dbym.RecieveBuff[(x - 1) * 8 + 5] shl 8);
+    color_min := red;
+    color_max := red;
+    if color_min > green then
+      color_min := green;
+
+    if color_max < green then
+      color_max := green;
+
+    if color_min > blue then
+      color_min := blue;
+
+    if color_max < blue then
+      color_max := blue;
+
+    color_temp := color_max - color_min;
+    if color_temp = 0 then
+      result := 3600
+    else if (color_max = red) and (green >= blue) then
+      result := 600 * (green - blue) / color_temp
+    else if color_max = red then
+      result := 3600 - (600 * (blue - green) / color_temp)
+    else if (color_max = green) and (blue >= red) then
+      result := 1200 + (600 * (blue - red) / color_temp)
+    else if color_max = green then
+      result := 1200 - (600 * (red - blue) / color_temp)
+    else if (color_max = blue) and (red >= green) then
+      result := 2400 + (600 * (red - green) / color_temp)
+    else if color_max = blue then
+      result := 2400 - (600 * (green - red) / color_temp);
+  end
+  else if Aparam = 'ColorS' then
+  begin
+    red := dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 98] or dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 99] shl 8;
+    red := red * (dbym.RecieveBuff[(x - 1) * 8 + 4] or dbym.RecieveBuff[(x - 1) * 8 + 5] shl 8) * (dbym.RecieveBuff[(x - 1) * 8 + 6] or dbym.RecieveBuff[(x - 1) * 8 + 7] shl 8);
+    green := dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 100] or dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 101] shl 8;
+    green := green * (dbym.RecieveBuff[(x - 1) * 8 + 2] or dbym.RecieveBuff[(x - 1) * 8 + 3] shl 8) * (dbym.RecieveBuff[(x - 1) * 8 + 6] or dbym.RecieveBuff[(x - 1) * 8 + 7] shl 8);
+    blue := dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 102] or dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 103] shl 8;
+    blue := blue * (dbym.RecieveBuff[(x - 1) * 8 + 2] or dbym.RecieveBuff[(x - 1) * 8 + 3] shl 8) * (dbym.RecieveBuff[(x - 1) * 8 + 4] or dbym.RecieveBuff[(x - 1) * 8 + 5] shl 8);
+    color_min := red;
+    color_max := red;
+    if color_min > green then
+      color_min := green;
+
+    if color_max < green then
+      color_max := green;
+
+    if color_min > blue then
+      color_min := blue;
+
+    if color_max < blue then
+      color_max := blue;
+
+    color_temp := color_max - color_min;
+    result := 10000 * color_temp / color_max;
+  end
+  else if Aparam = 'ColorC' then
+  begin
+    clear := dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 96] or dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 97] shl 8;
+    result := clear * 10000 / (dbym.RecieveBuff[(x - 1) * 8] or dbym.RecieveBuff[(x - 1) * 8 + 1] shl 8);
+  end;
 end;
 
 function calaverage(intarr: array of integer; Aparam: string): integer;
