@@ -78,16 +78,16 @@ function compcgj(i: integer; color: double): boolean; //³¦¸Ë¾úÑÕÉ«
 begin
   case i of
     1, 2:
-      if (color >= 2400) and (color <= 3300) then result := true
+      if (color >= 2400) and (color < 150) then result := true
       else result := false;
     3, 13, 14, 17, 24:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     4, 5, 6, 7, 8, 9, 11, 12, 18, 20, 21, 23, 72, 84, 96:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     10, 19:
-      if (color >= 900) and (color <= 3000) then result := true
+      if (color > 900) and (color <= 3000) then result := true
       else result := false;
     15:
       result := false;
@@ -101,10 +101,10 @@ function compffxj(i: integer; color: double): boolean; //·Ç·¢½Í¾úÑÕÉ«
 begin
   case i of
     1, 5, 6, 7, 8, 9, 10, 11, 15, 16, 19, 21:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     2, 3:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     4, 13, 14:
       if (color < 1000) then result := true
@@ -113,12 +113,12 @@ begin
       if (color < 2000) then result := true
       else result := false;
     17, 18:
-      if (color >= 2400) and (color <= 3300) then result := true
+      if (color >= 2400) and (color < 150) then result := true
       else result := false;
     20, 22:
       result := false;
     23:
-      if (color >= 900) and (color <= 3000) then result := true
+      if (color > 900) and (color <= 3000) then result := true
       else result := false;
     24:
       if (color < 1500) then result := true
@@ -130,13 +130,13 @@ function compqj(i: integer; color: double): boolean; //ÆÏÌÑÇò¾úÑÕÉ«
 begin
   case i of
     1, 4, 5, 6, 7, 8, 9, 11, 12, 15, 16, 17, 18, 19, 20, 21:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     2, 10, 14, 22:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     3:
-      if (color >= 2400) and (color <= 3300) then result := true
+      if (color >= 2400) and (color < 150) then result := true
       else result := false;
     13, 23:
       if (color < 1000) then result := true
@@ -154,10 +154,10 @@ begin
       if (color < 1000) then result := true
       else result := false;
     2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15, 17, 18, 19, 20, 21, 23, 24:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     9, 13, 16, 22:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
   end;
 end;
@@ -166,10 +166,10 @@ function compzj(i: integer; color: double): boolean; //½ÍÄ¸ÑùÕæ¾úÑÕÉ«
 begin
   case i of
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     14:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     15:
       if (color < 1500) then result := true
@@ -189,10 +189,10 @@ begin
       if (color < 1000) then result := true
       else result := false;
     2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15, 17, 18, 19, 20, 21, 23, 24:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     9, 13, 16, 22:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
   end;
 end;
@@ -204,10 +204,10 @@ begin
       if (color < 1000) then result := true
       else result := false;
     2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15, 17, 18, 19, 20, 21, 23, 24:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     9, 13, 16, 22:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
   end;
 end;
@@ -216,19 +216,19 @@ function comphj(i: integer; color: double): boolean; //»¡¾úÑÕÉ«
 begin
   case i of
     1, 2:
-      if (color >= 2400) and (color <= 3300) then result := true
+      if (color >= 2400) and (color < 150) then result := true
       else result := false;
     3, 4, 5, 6, 8, 9:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     7:
-      if (color >= 900) and (color <= 3000) then result := true
+      if (color > 900) and (color <= 3000) then result := true
       else result := false;
     10, 14:
       if (color < 1000) then result := true
       else result := false;
     13, 15:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     11, 12, 16, 17, 18, 19, 20, 21, 22, 23, 24:
       result := false;
@@ -242,10 +242,10 @@ begin
       if (color < 1000) then result := true
       else result := false;
     2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15, 17, 18, 19, 20, 21, 23, 24:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     9, 13, 16, 22:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
   end;
 end;
@@ -254,13 +254,13 @@ function compsxgj(i: integer; color: double): boolean; //ÊÈÑª¸Ë¾úÑÕÉ«
 begin
   case i of
     1, 8:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     2, 3, 4, 5, 6, 7, 10, 11, 12:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     9:
-      if (color >= 2400) and (color <= 3300) then result := true
+      if (color >= 2400) and (color < 150) then result := true
       else result := false;
     13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24:
       result := false;
@@ -271,10 +271,10 @@ function compyxgj(i: integer; color: double): boolean; //ÑôÐÔ¸Ë¾ú£¨ÎÞÑ¿°û£©ÑÕÉ«
 begin
   case i of
     1, 4, 5, 6, 7, 9, 10, 12, 16:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     2, 14:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     3, 13:
       if (color < 1000) then result := true
@@ -297,7 +297,7 @@ function compyyqj(i: integer; color: double): boolean; //ÒõÐÔÇò¾úÑÕÉ«
 begin
   case i of
     2, 3, 4, 5:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     6:
       if (color < 1500) then result := true
@@ -314,16 +314,16 @@ function compyxyagj(i: integer; color: double): boolean; //ÑôÐÔ¸Ë(Ñ¿°û)¾úÑÕÉ«
 begin
   case i of
     1, 13, 16:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     2, 3, 4, 5, 8, 9, 10, 11, 12, 17, 18, 19, 20, 22, 23:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     6: //É«¶È
       if (color > 3000) then result := true
       else result := false;
     7:
-      if (color >= 900) and (color <= 3000) then result := true
+      if (color > 900) and (color <= 3000) then result := true
       else result := false;
     14, 15, 24:
       if (color < 1000) then result := true
@@ -337,7 +337,7 @@ function compwqgj(i: integer; color: double): boolean; //ÍäÇú¸Ë¾úÑÕÉ«
 begin
   case i of
     1, 2, 14:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     3, 5, 6, 10, 15, 17:
       if (color < 1500) then result := true
@@ -346,10 +346,10 @@ begin
       if (color > 3000) then result := true
       else result := false;
     16:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     9:
-      if (color >= 900) and (color <= 3000) then result := true
+      if (color > 900) and (color <= 3000) then result := true
       else result := false;
     18, 19, 20, 21, 22, 23, 24:
       result := false;
@@ -363,10 +363,10 @@ function compyyj(i: integer; color: double): boolean; //ÑáÑõ¾úÑÕÉ«
 begin
   case i of
     1, 2, 3, 6, 7, 8, 11, 12, 16, 17, 18, 19, 20, 21:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     4, 13, 15:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     5, 14:
       if (color < 1000) then result := true
@@ -374,7 +374,7 @@ begin
     10:
       result := false;
     22:
-      if (color >= 900) and (color <= 3000) then result := true
+      if (color > 900) and (color <= 3000) then result := true
       else result := false;
     9, 23, 24: //É«¶È
       if (color > 3000) then result := true
@@ -386,10 +386,10 @@ function compzyt(i: integer; color: double): boolean; //Ö§Ô­ÌåÑÕÉ«
 begin
   case i of
     1, 2:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     3:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24:
       result := false;
@@ -400,19 +400,19 @@ function compjhgj(i: integer; color: double): boolean; //½áºÏ¸Ë¾úÑÕÉ«
 begin
   case i of
     1, 10, 11:
-      if (color >= 100) and (color <= 900) then result := true
+      if (color >= 150) and (color <= 900) then result := true
       else result := false;
     2, 3, 8, 9:
       if (color < 1500) then result := true
       else result := false;
     4:
-      if (color <= 100) or (color >= 3100) then result := true
+      if (color >= 3100) then result := true
       else result := false;
     5, 7: //É«¶È
       if (color > 3000) then result := true
       else result := false;
     12:
-      if (color >= 900) and (color <= 3000) then result := true
+      if (color > 900) and (color <= 3000) then result := true
       else result := false;
     6, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24:
       result := false;
