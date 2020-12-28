@@ -135,10 +135,9 @@ var
   i, j: integer;
   a, b: boolean;
   fieldNOs, fieldNOe: integer;
-  ymtemp: double;
   EsblValue: integer;
   DtestValue: integer;
-  pinforvalue, ymstart: integer;
+  pinforvalue: integer;
   StdValue: integer;
   StdIsValid: boolean;
   isTiaoKong: boolean;
@@ -146,19 +145,6 @@ var
   posarr: array of array[0..1] of integer;
   myini: Tinifile;
 begin
-  myini := Tinifile.Create(getcurrentdir + '\dw.ini');
-  if js = '09' then
-  begin
-    ymstart := myini.ReadInteger('preset threshold', 'zjstart', 4500);
-    pinforvalue := myini.ReadInteger('preset threshold', 'pinforvaluezj', 3000);
-    StdIsValid := true;
-  end
-  else
-  begin
-    ymstart := myini.ReadInteger('preset threshold', 'ymstart', 3300);
-    pinforvalue := myini.ReadInteger('preset threshold', 'pinforvalue', 1500);
-  end;
-
   if js = '09' then //真菌试剂板模型不同。判断不同
     with dmym.query1 do
     begin
@@ -170,55 +156,39 @@ begin
       first;
       while not eof do
       begin
-        if i <= 3 then
+        fieldNOs := fieldbyname('fy1').FieldNo - 1;
+        fieldNOe := fieldbyname('fy12').FieldNo - 1;
+        for j := fieldNOs to fieldNOe do
         begin
-          if ymcolors[i, 1] > pinforvalue then
-            StdIsValid := false
-          else
-          begin
-            ymtemp := ymstart - (fieldbyname('ymth').Value * (ymstart - ymcolors[i, 1]) / 100);
-            for j := 1 to 12 do
-              if ymcolors[i, j] < ymtemp then
-                ymresults[i, j] := true;
-          end;
-        end
-        else
-        begin
-          if ymcolors[i - 3, 1] > pinforvalue then
-            StdIsValid := false
-          else
-          begin
-            ymtemp := ymstart - (fieldbyname('ymth').Value * (ymstart - ymcolors[i - 3, 13]) / 100);
-            for j := 13 to 24 do
-              if ymcolors[i - 3, j] < ymtemp then
-                ymresults[i - 3, j] := true;
-          end;
+          if i <= 3 then
+            if ymcolors[i, j - fieldNOs + 1] < fields[j].Value then
+              ymresults[i, j - fieldNOs + 1] := true;
+          if i > 3 then
+            if ymcolors[i - 3, j - fieldNOs + 13] < fields[j].Value then
+              ymresults[i - 3, j - fieldNOs + 13] := true;
         end;
         inc(i);
         next;
       end;
-      if not StdIsValid then
-        showmessage('试剂板培养时间不够或菌悬液浓度过低,请延长培养或是重新上板');
       exit;
     end;
 
+  myini := Tinifile.Create(getcurrentdir + '\dw.ini');
     {按23孔系1孔（阳性），2孔（阳性），3孔（阴性）算出标准值，如果标准值在可接受范围
     则其他所有孔位的阴阳性按标准值计算，小于标准值为阳性，大于标准值为阴性，如果标准
     值不在可接受范围，则调取数据库中预设的标准值进行计算}
-
+  pinforvalue := myini.ReadInteger('preset threshold', 'pinforvalue', 60);
   if js = '01' then
   begin
-    //StdValue := round((ymcolors[3, 23] - (ymcolors[1, 23] + ymcolors[2, 23]) / 2) * 2 / 3) + round((ymcolors[1, 23] + ymcolors[2, 23]) / 2);
-    ymtemp := (ymcolors[1, 23] + ymcolors[2, 23] + ymcolors[3, 23]) / 3;
-    if ymtemp < pinforvalue then
+    StdValue := round((ymcolors[3, 23] - (ymcolors[1, 23] + ymcolors[2, 23]) / 2) * 2 / 3) + round((ymcolors[1, 23] + ymcolors[2, 23]) / 2);
+    if (ymcolors[1, 23] + ymcolors[2, 23] + ymcolors[3, 23]) / 3 < pinforvalue then
       StdIsValid := true
     else
       StdIsValid := false;
   end else
   begin
-    //StdValue := round((ymcolors[3, 24] - (ymcolors[1, 24] + ymcolors[2, 24]) / 2) * 2 / 3) + round((ymcolors[1, 24] + ymcolors[2, 24]) / 2);
-    ymtemp := (ymcolors[1, 24] + ymcolors[2, 24] + ymcolors[3, 24]) / 3;
-    if ymtemp < pinforvalue then
+    StdValue := round((ymcolors[3, 24] - (ymcolors[1, 24] + ymcolors[2, 24]) / 2) * 2 / 3) + round((ymcolors[1, 24] + ymcolors[2, 24]) / 2);
+    if (ymcolors[1, 24] + ymcolors[2, 24] + ymcolors[3, 24]) / 3 < pinforvalue then
       StdIsValid := true
     else
       StdIsValid := false;
@@ -249,11 +219,11 @@ begin
                   ymResults[1,i]:=true;
             end else }
         begin
-          if ymstart - (fieldvalues['fy1'] * (ymstart - ymtemp) / 100) > ymcolors[3, i + 12] then
+          if fieldvalues['fy1'] > ymcolors[3, i + 12] then
             ymResults[3, i] := true;
-          if ymstart - (fieldvalues['fy2'] * (ymstart - ymtemp) / 100) > ymcolors[2, i + 12] then
+          if fieldvalues['fy2'] > ymcolors[2, i + 12] then
             ymResults[2, i] := true;
-          if ymstart - (fieldvalues['fy3'] * (ymstart - ymtemp) / 100) > ymcolors[1, i + 12] then
+          if fieldvalues['fy3'] > ymcolors[1, i + 12] then
             ymResults[1, i] := true;
         end;
         edit;
@@ -272,11 +242,11 @@ begin
                   ymResults[1,i]:=true;
             end else }
         begin
-          if ymstart - (fieldvalues['fy1'] * (ymstart - ymtemp) / 100) > ymcolors[3, i] then
+          if fieldvalues['fy1'] > ymcolors[3, i] then
             ymResults[3, i] := true;
-          if ymstart - (fieldvalues['fy2'] * (ymstart - ymtemp) / 100) > ymcolors[2, i] then
+          if fieldvalues['fy2'] > ymcolors[2, i] then
             ymResults[2, i] := true;
-          if ymstart - (fieldvalues['fy3'] * (ymstart - ymtemp) / 100) > ymcolors[1, i] then
+          if fieldvalues['fy3'] > ymcolors[1, i] then
             ymResults[1, i] := true;
         end;
         edit;
@@ -288,27 +258,27 @@ begin
       inc(i);
     end;
       //不满24种药品的，处理不同
-    EsblValue := myini.ReadInteger('preset threshold', 'ESBL', 215);
-    DtestValue := myini.ReadInteger('preset threshold', 'D-Test', 215);
-    if not (js = '06') then
+    EsblValue := myini.ReadInteger('preset threshold', 'ESBL', 3000);
+    DtestValue := myini.ReadInteger('preset threshold', 'D-Test', 3000);
+    if js = '06' then
       while i < 25 do
       begin
         if (js = '01') and (i = 22) then //肠杆菌 22孔用作ESBL的判断
         begin
-          if ymColors[1, i] < ymstart - (EsblValue * (ymstart - ymtemp) / 100) then
+          if ymColors[1, i] < EsblValue then
             ymResults[1, i] := true;
-          if ymColors[2, i] < ymstart - (EsblValue * (ymstart - ymtemp) / 100) then
+          if ymColors[2, i] < EsblValue then
             ymResults[2, i] := true;
-          if ymColors[3, i] < ymstart - (EsblValue * (ymstart - ymtemp) / 100) then
+          if ymColors[3, i] < EsblValue then
             ymResults[3, i] := true;
         end else
           if (js = '03') and (i = 23) then //葡萄球菌，D试验
           begin
-            if ymColors[1, i] < ymstart - (Dtestvalue * (ymstart - ymtemp) / 100) then
+            if ymColors[1, i] < Dtestvalue then
               ymResults[1, i] := true;
-            if ymColors[2, i] < ymstart - (Dtestvalue * (ymstart - ymtemp) / 100) then
+            if ymColors[2, i] < Dtestvalue then
               ymResults[2, i] := true;
-            if ymColors[3, i] < ymstart - (Dtestvalue * (ymstart - ymtemp) / 100) then
+            if ymColors[3, i] < Dtestvalue then
               ymResults[3, i] := true;
           end;
         inc(i);

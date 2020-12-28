@@ -1,6 +1,6 @@
 object whonetform: Twhonetform
-  Left = 490
-  Top = 89
+  Left = 551
+  Top = 118
   Width = 754
   Height = 679
   Caption = #23548#20986#21040'WHONET'

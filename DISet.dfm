@@ -1,6 +1,6 @@
 object DISetform: TDISetform
-  Left = 592
-  Top = 308
+  Left = 666
+  Top = 409
   Width = 406
   Height = 205
   Caption = #25253#34920#35774#32622

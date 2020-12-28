@@ -3,7 +3,7 @@ unit dbym;
 interface
 
 uses
-  SysUtils, Classes, DB, ADODB, SPComm, Registry, Windows, dialogs, Forms;
+  SysUtils, Classes, DB, ADODB, SPComm, Registry, Windows, dialogs, Forms, inifiles;
 
 type
   Tdmym = class(TDataModule)
@@ -71,6 +71,7 @@ implementation
 procedure Tdmym.DataModuleCreate(Sender: TObject);
 var
   str: string;
+  MyIni: Tinifile;
 begin
   str := getcurrentdir + '\germ.mdb';
   conn.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;User ID=Admin;' +
@@ -82,6 +83,10 @@ begin
     'Jet OLEDB:Global Bulk Transactions=1;' +
     'Jet OLEDB:New Database Password="";' +
     'Jet OLEDB:Create System Database=False;Jet OLEDB:Encrypt Database=False;Jet OLEDB:Don''t Copy Locale on Compact=False;Jet OLEDB:Compact Without Replica Repair=False;Jet OLEDB:SFP=False';
+
+  MyIni := Tinifile.Create(getcurrentdir + '\dw.ini');
+  USBCOM.CommName := '//./' + Myini.ReadString('COM Port', 'serialport', '');
+  MyIni.Free;
 
 end;
 
@@ -102,6 +107,7 @@ var
   sComm: TStrings;
   i: integer;
   findDevice: boolean;
+  MyIni: Tinifile;
 begin
   result := false;
   findDevice := false;
@@ -133,6 +139,9 @@ begin
       if (USBShakeHand) then
       begin
         findDevice := true;
+        MyIni := Tinifile.Create(getcurrentdir + '\dw.ini');
+        Myini.WriteString('COM Port', 'serialport', reg.ReadString(sComm.Strings[i]));
+        MyIni.Free;
         result := USBColorSample;
         break;
       end
@@ -151,20 +160,18 @@ end;
 function Tdmym.USBShakeHand: boolean;
 var
   buf: array[0..1] of byte;
-  send_count: integer;
 begin
   result := false;
   buf[0] := byte($07);
   buf[1] := byte($11);
 
-  send_count := 50;
   RecieveResponse := false;
-  repeat
-    Dec(send_count);
+  while true do
+  begin
     if USBCOM.WriteCommData(@buf[0], 2) then
       break;
-  until send_count = 0;
-  ResponseWait(300);
+  end;
+  ResponseWait(2000);
   if RecieveResponse and (RecieveBuff[0] = Byte($A2)) and (RecieveBuff[1] = Byte($FF)) then
   begin
   // success
@@ -176,7 +183,6 @@ end;
 function Tdmym.USBColorSample: boolean;
 var
   buf: array[0..1] of byte;
-  tim, send_count: Integer;
   dw: Cardinal;
 begin
   result := false;
@@ -186,14 +192,13 @@ begin
   RecieveBuff[0] := 0;
   RecieveBuff[1] := 0;
 
-  send_count := 50;
   RecieveResponse := false;
-  repeat
-    Dec(send_count);
+  while true do
+  begin
     if USBCOM.WriteCommData(@buf[0], 2) then
       break;
-  until send_count = 0;
-  ResponseWait(300);
+  end;
+  ResponseWait(2000);
   if RecieveResponse and (RecieveBuff[0] = byte($A2)) then
     if RecieveBuff[1] = byte($EC) then
     begin
@@ -223,14 +228,13 @@ begin
       buf[0] := byte($A0);
       buf[1] := byte($01);
         // ºÏ≤È¥ÌŒÛ¬Î
-      send_count := 50;
       RecieveResponse := false;
-      repeat
-        Dec(send_count);
+      while true do
+      begin
         if USBCOM.WriteCommData(@buf[0], 2) then
           break;
-      until send_count = 0;
-      ResponseWait(300);
+      end;
+      ResponseWait(2000);
       if RecieveResponse and (RecieveBuff[0] = byte($A1)) then
         MessageDlg('“«∆˜∑¢…˙¥ÌŒÛ, ErrorCode:' + INTTOHEX(RecieveBuff[1], 2) + ',«Î÷ÿ∆Ù“«∆˜∫Û÷ÿ ‘!', mtInformation, [mbOK], 0)
       else

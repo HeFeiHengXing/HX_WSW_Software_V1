@@ -1,6 +1,6 @@
 object detailform: Tdetailform
-  Left = 743
-  Top = 197
+  Left = 836
+  Top = 261
   BorderStyle = bsDialog
   Caption = #35814#32454#26597#35810
   ClientHeight = 436
