@@ -267,9 +267,10 @@ end;
 procedure zHelper.getColorsFromRecieveBuff;
 var
   i, j, temp: integer;
+  outfile: textFile;
   LibHandle: Thandle;
   colortype: TColorType;
-  germtype: string;
+  germtype, temp_str: string;
   path: string;
 begin
   //试图调用生化反应 check.dll
@@ -281,10 +282,14 @@ begin
     if LibHandle = 0 then
       raise EdllLoadError.create('无法调入对应的动态库文件');
     @colortype := getprocaddress(libhandle, 'ColorType');
+    assignfile(outfile, 'temp_data.txt');
+    Rewrite(outfile);
     if not (@colortype = nil) then
     begin
-           //第1－2列，作为生化反应颜色，存至bioColor数组
+      //第1－2列，作为生化反应颜色，存至bioColor数组
       for i := 1 to 2 do
+      begin
+        temp_str := '';
         for j := 1 to 12 do
         begin
           temp := colortype(originjs, j + (i - 1) * 12);
@@ -294,26 +299,47 @@ begin
             bioColors[j + (i - 1) * 12] := calccolor(j, i, 'ColorC')
           else if temp = 3 then
             bioColors[j + (i - 1) * 12] := calccolor(j, i, 'ColorS');
+          temp_str := temp_str + FormatFloat('0.00', bioColors[j + (i - 1) * 12]) + ', ';
         end;
+        writeln(outfile, temp_str);
+      end;
     end
     else
       raiseLastWin32Error;
+
+      // 第一组药敏反应，第3列到第5列,只要蓝色值。存放到ymcolor的前12列。
+    for i := 3 to 5 do
+    begin
+      temp_str := '';
+      for j := 1 to 12 do
+      begin
+        ymColors[i - 2, j] := calccolor(j, i, 'ColorC');
+        temp_str := temp_str + FormatFloat('0.00', ymColors[i - 2, j]) + ', ';
+      end;
+      writeln(outfile, temp_str);
+    end;
+      // 第二组药敏反应，第6列到第8列,只要蓝色值。存放到ymcolor的后12列
+    for i := 6 to 8 do
+    begin
+      temp_str := '';
+      for j := 1 to 12 do
+      begin
+        ymColors[i - 5, j + 12] := calccolor(j, i, 'ColorC');
+        temp_str := temp_str + FormatFloat('0.00', ymColors[i - 5, j + 12]) + ', ';
+      end;
+      writeln(outfile, temp_str);
+    end;
+      //o-f 试验颜色计算
+    temp_str := '';
+    ofcolors[1] := calccolor(12, 6, 'ColorH');
+    ofcolors[2] := calccolor(12, 7, 'ColorH');
+    ofColors[3] := calccolor(12, 8, 'ColorH');
+    temp_str := FormatFloat('0.00', ofcolors[1]) + ', ' + FormatFloat('0.00', ofcolors[2]) + ', ' + FormatFloat('0.00', ofcolors[3]);
+    writeln(outfile, temp_str);
   finally
     freeLibrary(LibHandle); //卸载dll
+    closefile(outfile);
   end;
-
-   // 第一组药敏反应，第3列到第5列,只要蓝色值。存放到ymcolor的前12列。
-  for i := 3 to 5 do
-    for j := 1 to 12 do
-      ymColors[i - 2, j] := calccolor(j, i, 'ColorC');
-   // 第二组药敏反应，第6列到第8列,只要蓝色值。存放到ymcolor的后12列
-  for i := 6 to 8 do
-    for j := 1 to 12 do
-      ymColors[i - 5, j + 12] := calccolor(j, i, 'ColorC');
-   //o-f 试验颜色计算
-  ofcolors[1] := calccolor(12, 6, 'ColorH');
-  ofcolors[2] := calccolor(12, 7, 'ColorH');
-  ofColors[3] := calccolor(12, 8, 'ColorH');
 end;
 
 procedure zHelper.analyzeYm;
