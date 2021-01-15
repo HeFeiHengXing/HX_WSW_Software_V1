@@ -424,8 +424,8 @@ begin
   end
   else if Aparam = 'ColorC' then
   begin
-    clear := dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 96] or dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 97] shl 8;
-    result := clear * 10000 / (dbym.RecieveBuff[(x - 1) * 8] or dbym.RecieveBuff[(x - 1) * 8 + 1] shl 8);
+    blue := dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 102] or dbym.RecieveBuff[((y - 1) * 12 + x - 1) * 8 + 103] shl 8;
+    result := blue * 10000 / (dbym.RecieveBuff[(x - 1) * 8 + 6] or dbym.RecieveBuff[(x - 1) * 8 + 7] shl 8);
   end;
 end;
 
