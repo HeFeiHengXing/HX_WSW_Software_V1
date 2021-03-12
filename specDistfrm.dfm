@@ -1,6 +1,6 @@
 object SpecDistForm: TSpecDistForm
-  Left = 225
-  Top = 125
+  Left = 463
+  Top = 198
   BorderStyle = bsDialog
   Caption = #24635#20307#25239#29983#32032#25928#33021#32479#35745
   ClientHeight = 534
@@ -36,7 +36,7 @@ object SpecDistForm: TSpecDistForm
       Top = 60
       Width = 24
       Height = 12
-      Caption = #31185#23460
+      Caption = #21697#31181
     end
     object Label3: TLabel
       Left = 8

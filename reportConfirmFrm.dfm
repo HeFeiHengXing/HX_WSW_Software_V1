@@ -1,7 +1,7 @@
 object reportConfirmForm: TreportConfirmForm
   Left = 837
   Top = 322
-  Width = 214
+  Width = 196
   Height = 248
   Caption = #30830#35748#25171#21360
   Color = clBtnFace
@@ -18,9 +18,9 @@ object reportConfirmForm: TreportConfirmForm
   object CheckBox1: TCheckBox
     Left = 24
     Top = 10
-    Width = 169
+    Width = 149
     Height = 49
-    Caption = #28034#29255#38236#26816#32467#26524'/'#32454#33740#29983#38271
+    Caption = #38236#26816#32467#26524'/'#32454#33740#29983#38271
     TabOrder = 0
     OnClick = CheckBox1Click
   end
@@ -53,7 +53,7 @@ object reportConfirmForm: TreportConfirmForm
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 128
+    Left = 96
     Top = 168
     Width = 49
     Height = 33

@@ -1,6 +1,6 @@
 object regBBForm: TregBBForm
-  Left = 354
-  Top = 174
+  Left = 598
+  Top = 205
   BorderStyle = bsDialog
   Caption = #20020#24202#26631#26412#30331#35760
   ClientHeight = 459
@@ -47,7 +47,7 @@ object regBBForm: TregBBForm
       Top = 59
       Width = 66
       Height = 12
-      Caption = #22995'    '#21517'   '
+      Caption = #23456' '#29289' '#21517'   '
       Color = clBtnFace
       ParentColor = False
       Transparent = True
@@ -57,7 +57,7 @@ object regBBForm: TregBBForm
       Top = 27
       Width = 66
       Height = 12
-      Caption = #20303' '#38498' '#21495'   '
+      Caption = #30149' '#21382' '#21495'   '
       Color = clBtnFace
       ParentColor = False
       Transparent = True
@@ -77,7 +77,7 @@ object regBBForm: TregBBForm
       Top = 27
       Width = 72
       Height = 12
-      Caption = #31185'    '#21035'    '
+      Caption = #21697'    '#31181'    '
       Color = clBtnFace
       ParentColor = False
       Transparent = True
@@ -107,7 +107,7 @@ object regBBForm: TregBBForm
       Top = 91
       Width = 66
       Height = 12
-      Caption = #24202'    '#21495'   '
+      Caption = #23456' '#29289' '#20027'   '
       Color = clBtnFace
       ParentColor = False
       Transparent = True
@@ -341,14 +341,14 @@ object regBBForm: TregBBForm
       item
         Expanded = False
         FieldName = 'name'
-        Title.Caption = #22995#21517
-        Width = 50
+        Title.Caption = #23456#29289#21517
+        Width = 49
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'kb'
-        Title.Caption = #31185#21035
+        Title.Caption = #21697#31181
         Width = 42
         Visible = True
       end
@@ -369,7 +369,7 @@ object regBBForm: TregBBForm
       item
         Expanded = False
         FieldName = 'zyh'
-        Title.Caption = #20303#38498#21495
+        Title.Caption = #30149#21382#21495
         Width = 43
         Visible = True
       end
@@ -390,7 +390,7 @@ object regBBForm: TregBBForm
       item
         Expanded = False
         FieldName = 'bed'
-        Title.Caption = #24202#21495
+        Title.Caption = #23456#29289#20027
         Width = 31
         Visible = True
       end

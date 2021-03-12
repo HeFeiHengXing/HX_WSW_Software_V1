@@ -35,7 +35,7 @@ object YYRepoForm: TYYRepoForm
     Top = 56
     Width = 24
     Height = 12
-    Caption = #31185#23460
+    Caption = #21697#31181
     Font.Charset = GB2312_CHARSET
     Font.Color = clWindowText
     Font.Height = -12

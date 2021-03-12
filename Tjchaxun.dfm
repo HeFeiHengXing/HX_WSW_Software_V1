@@ -83,7 +83,7 @@ object aboutbox: Taboutbox
     Top = 130
     Width = 117
     Height = 78
-    Caption = #30149#21592#26597#35810
+    Caption = #30149#23456#26597#35810
     TabOrder = 6
     OnClick = Button8Click
   end

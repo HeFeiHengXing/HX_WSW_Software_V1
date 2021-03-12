@@ -124,7 +124,7 @@ begin
   end;
   if dbc_section.text <> '******不限******' then
   begin
-    str1 := str1 + ',kb as 科室';
+    str1 := str1 + ',kb as 品种';
     str2 := str2 + ' and kb=''' + dbc_section.Text + '''';
     str3 := str3 + ',kb';
   end;
@@ -138,7 +138,7 @@ begin
   case rdgselect.ItemIndex of
     1: //选择总属
       begin
-        strq := 'select count(useid) as 标本数,jzname as 细菌名称,kb as 科室,bb as 标本类型 from base where repdate between #';
+        strq := 'select count(useid) as 标本数,jzname as 细菌名称,kb as 品种,bb as 标本类型 from base where repdate between #';
         strq := strq + datetostr(dtpbegdate.DateTime) + '# and #' + datetostr(dtpenddate.DateTime + 1) + '# ' + str2;
         strq := strq + 'group by jzname,kb,bb';
       end;
@@ -238,7 +238,7 @@ begin
     bold := false;
     ypos := ypos + 0.6;
     printcenter('菌属： ' + dbc_germtype.text, 2.8);
-    printcenter('科室： ' + dbc_section.text, 5.5);
+    printcenter('品种： ' + dbc_section.text, 5.5);
     ypos := ypos + 0.4;
     printcenter('标本类型： ' + dbc_bb.Text, 2.8);
     printcenter('时间范围： ' + datetostr(dtpbegdate.Date) + '至' + datetostr(dtpEndDate.Date), 5.5);
@@ -336,7 +336,7 @@ begin
   k := 1;
   excelWorksheet1.cells.item[k, 1] := '菌属：' + dbc_germtype.Text;
   inc(k);
-  excelWorksheet1.cells.item[k, 1] := '科室：' + dbc_section.Text;
+  excelWorksheet1.cells.item[k, 1] := '品种：' + dbc_section.Text;
   inc(k);
   excelWorksheet1.cells.item[k, 1] := '标本类型：' + dbc_bb.Text;
   inc(k);

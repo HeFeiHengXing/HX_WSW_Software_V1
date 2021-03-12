@@ -495,7 +495,7 @@ begin
   k := 1;
   excelWorksheet1.cells.item[k, 1] := '菌属：' + dbc_germtype.Text;
   inc(k);
-  excelWorksheet1.cells.item[k, 1] := '科室：' + dbc_section.Text;
+  excelWorksheet1.cells.item[k, 1] := '品种：' + dbc_section.Text;
   inc(k);
   excelWorksheet1.cells.item[k, 1] := '标本类型：' + dbc_bb.Text;
   inc(k);
@@ -598,7 +598,7 @@ begin
     bold := false;
     ypos := ypos + 0.6;
     printcenter('菌属： ' + dbc_germtype.text, 1);
-    printcenter('科室： ' + dbc_section.text, 3.8);
+    printcenter('品种： ' + dbc_section.text, 3.8);
     printcenter('标本类型： ' + dbc_bb.Text, 6.6);
     ypos := ypos + 0.4;
     printcenter('特殊耐药机制： ' + SpecialRmDB.text, 1);

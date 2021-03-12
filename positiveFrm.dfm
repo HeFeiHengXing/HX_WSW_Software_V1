@@ -30,7 +30,7 @@ object PositiveForm: TPositiveForm
     Top = 37
     Width = 48
     Height = 12
-    Caption = #22995'    '#21517
+    Caption = #23456' '#29289' '#21517
     FocusControl = dbe_name
   end
   object Label8: TLabel
@@ -45,14 +45,14 @@ object PositiveForm: TPositiveForm
     Top = 74
     Width = 48
     Height = 12
-    Caption = #31185'    '#21035
+    Caption = #21697'    '#31181
   end
   object Label10: TLabel
     Left = 246
     Top = 74
     Width = 48
     Height = 12
-    Caption = #24202'    '#21495
+    Caption = #23456' '#29289' '#20027
     FocusControl = dbe_bed
   end
   object Label9: TLabel
@@ -75,7 +75,7 @@ object PositiveForm: TPositiveForm
     Top = 74
     Width = 48
     Height = 12
-    Caption = #20303' '#38498' '#21495
+    Caption = #30149' '#21382' '#21495
     FocusControl = dbe_custNo
   end
   object Label13: TLabel

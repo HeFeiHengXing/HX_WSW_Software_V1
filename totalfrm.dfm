@@ -1,6 +1,6 @@
 object totalForm: TtotalForm
-  Left = 368
-  Top = 105
+  Left = 403
+  Top = 164
   BorderStyle = bsDialog
   Caption = #26631#26412#24635#35272
   ClientHeight = 636
@@ -55,7 +55,7 @@ object totalForm: TtotalForm
       item
         Expanded = False
         FieldName = 'name'
-        Title.Caption = #22995#21517
+        Title.Caption = #23456#29289#21517
         Width = 36
         Visible = True
       end
@@ -83,21 +83,21 @@ object totalForm: TtotalForm
       item
         Expanded = False
         FieldName = 'kb'
-        Title.Caption = #31185#21035
+        Title.Caption = #21697#31181
         Width = 42
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'bed'
-        Title.Caption = #24202#21495
+        Title.Caption = #23456#29289#20027
         Width = 50
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'zyh'
-        Title.Caption = #20303#38498#21495
+        Title.Caption = #30149#21382#21495
         Width = 50
         Visible = True
       end
@@ -242,7 +242,7 @@ object totalForm: TtotalForm
         Top = 60
         Width = 24
         Height = 12
-        Caption = #31185#23460
+        Caption = #21697#31181
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12

@@ -1,6 +1,6 @@
 object queryPatientForm: TqueryPatientForm
-  Left = 368
-  Top = 232
+  Left = 505
+  Top = 278
   BorderStyle = bsDialog
   Caption = #30149#21592#20449#24687#26597#35810
   ClientHeight = 221
@@ -76,8 +76,8 @@ object queryPatientForm: TqueryPatientForm
     ItemHeight = 12
     TabOrder = 0
     Items.Strings = (
-      #20303#38498#21495
-      #30149#21592#22995#21517
+      #30149#21382#21495
+      #23456#29289#22995#21517
       #26631#26412#21495)
   end
   object Edit1: TEdit
@@ -110,14 +110,14 @@ object queryPatientForm: TqueryPatientForm
       item
         Expanded = False
         FieldName = 'name'
-        Title.Caption = #22995#21517
+        Title.Caption = #23456#29289#21517
         Width = 85
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'zyh'
-        Title.Caption = #20303#38498#21495
+        Title.Caption = #30149#21382#21495
         Width = 77
         Visible = True
       end

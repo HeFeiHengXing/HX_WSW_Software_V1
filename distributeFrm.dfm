@@ -1,6 +1,6 @@
 object bbDistributeForm: TbbDistributeForm
-  Left = 285
-  Top = 177
+  Left = 464
+  Top = 348
   BorderStyle = bsDialog
   Caption = #26631#26412#20998#24067
   ClientHeight = 511
@@ -37,7 +37,7 @@ object bbDistributeForm: TbbDistributeForm
       Top = 60
       Width = 24
       Height = 12
-      Caption = #31185#23460
+      Caption = #21697#31181
     end
     object Label4: TLabel
       Left = 16

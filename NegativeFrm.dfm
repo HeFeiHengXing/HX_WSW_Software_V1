@@ -1,6 +1,6 @@
 object NegativeForm: TNegativeForm
-  Left = 208
-  Top = 50
+  Left = 610
+  Top = 233
   BorderStyle = bsDialog
   Caption = #20020#24202#38452#24615#25253#21578
   ClientHeight = 593
@@ -30,7 +30,7 @@ object NegativeForm: TNegativeForm
     Top = 36
     Width = 48
     Height = 12
-    Caption = #22995'    '#21517
+    Caption = #23456' '#29289' '#21517
     FocusControl = dbe_name
   end
   object Label8: TLabel
@@ -41,18 +41,18 @@ object NegativeForm: TNegativeForm
     Caption = #26631#26412#31867#22411
   end
   object Label4: TLabel
-    Left = 407
+    Left = 405
     Top = 71
     Width = 48
     Height = 12
-    Caption = #31185'    '#21035
+    Caption = #21697'    '#31181
   end
   object Label10: TLabel
     Left = 232
     Top = 71
     Width = 48
     Height = 12
-    Caption = #24202'    '#21495
+    Caption = #23456' '#29289' '#20027
     FocusControl = dbe_bed
   end
   object Label9: TLabel
@@ -75,7 +75,7 @@ object NegativeForm: TNegativeForm
     Top = 71
     Width = 48
     Height = 12
-    Caption = #20303' '#38498' '#21495
+    Caption = #30149' '#21382' '#21495
     FocusControl = dbe_custNo
   end
   object Label13: TLabel

@@ -1,6 +1,6 @@
 object detailform: Tdetailform
-  Left = 836
-  Top = 261
+  Left = 442
+  Top = 203
   BorderStyle = bsDialog
   Caption = #35814#32454#26597#35810
   ClientHeight = 436
@@ -154,9 +154,9 @@ object detailform: Tdetailform
     object Label29: TLabel
       Left = 10
       Top = 53
-      Width = 36
+      Width = 48
       Height = 12
-      Caption = #22995#21517#65306
+      Caption = #23456#29289#21517#65306
       Transparent = True
     end
     object Label32: TLabel
@@ -164,7 +164,7 @@ object detailform: Tdetailform
       Top = 81
       Width = 36
       Height = 12
-      Caption = #31185#21035#65306
+      Caption = #21697#31181#65306
       Transparent = True
     end
     object Label33: TLabel
@@ -200,11 +200,11 @@ object detailform: Tdetailform
       Transparent = True
     end
     object Label34: TLabel
-      Left = 283
+      Left = 270
       Top = 81
-      Width = 36
+      Width = 48
       Height = 12
-      Caption = #24202#21495#65306
+      Caption = #23456#29289#20027#65306
       Transparent = True
     end
     object Label31: TLabel
@@ -228,7 +228,7 @@ object detailform: Tdetailform
       Top = 81
       Width = 48
       Height = 12
-      Caption = #20303#38498#21495#65306
+      Caption = #30149#21382#21495#65306
       Transparent = True
     end
     object Label36: TLabel
@@ -323,7 +323,7 @@ object detailform: Tdetailform
       Transparent = True
     end
     object DBName: TDBEdit
-      Left = 44
+      Left = 56
       Top = 49
       Width = 77
       Height = 20
@@ -472,7 +472,7 @@ object detailform: Tdetailform
     object DBRemark: TDBMemo
       Left = 8
       Top = 242
-      Width = 177
+      Width = 161
       Height = 37
       DataField = 'jjjg'
       DataSource = dmym.dsBase
@@ -503,13 +503,13 @@ object detailform: Tdetailform
       Top = 224
       Width = 113
       Height = 17
-      Caption = #28034#29255#38236#26816#32467#26524#65306
+      Caption = #38236#26816#32467#26524#65306
       TabOrder = 18
     end
     object RadioButton2: TRadioButton
-      Left = 110
+      Left = 92
       Top = 224
-      Width = 81
+      Width = 113
       Height = 17
       Caption = #32454#33740#29983#38271#65306
       TabOrder = 19

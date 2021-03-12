@@ -48,11 +48,11 @@ object germAnalysisForm: TgermAnalysisForm
     Caption = #22522#26412#20449#24687
     TabOrder = 5
     object Label2: TLabel
-      Left = 16
-      Top = 32
-      Width = 36
+      Left = 7
+      Top = 29
+      Width = 48
       Height = 12
-      Caption = #22995#21517'  '
+      Caption = #23456#29289#21517'  '
       Transparent = True
     end
     object Label4: TLabel
@@ -64,19 +64,19 @@ object germAnalysisForm: TgermAnalysisForm
       Transparent = True
     end
     object Label7: TLabel
-      Left = 4
-      Top = 90
+      Left = 8
+      Top = 88
       Width = 36
       Height = 12
-      Caption = #20303#38498#21495
+      Caption = #30149#21382#21495
       Transparent = True
     end
     object Label8: TLabel
-      Left = 16
-      Top = 64
-      Width = 24
+      Left = 8
+      Top = 60
+      Width = 36
       Height = 12
-      Caption = #24202#21495
+      Caption = #23456#29289#20027
       Transparent = True
     end
     object Label9: TLabel
@@ -84,7 +84,7 @@ object germAnalysisForm: TgermAnalysisForm
       Top = 62
       Width = 30
       Height = 12
-      Caption = #31185#21035' '
+      Caption = #21697#31181' '
       Transparent = True
     end
     object Label10: TLabel

@@ -51,7 +51,7 @@ object LSDZForm: TLSDZForm
       item
         Expanded = False
         FieldName = 'name'
-        Title.Caption = #22995#21517
+        Title.Caption = #23456#29289#21517
         Width = 36
         Visible = True
       end
@@ -79,7 +79,7 @@ object LSDZForm: TLSDZForm
       item
         Expanded = False
         FieldName = 'kb'
-        Title.Caption = #31185#21035
+        Title.Caption = #21697#31181
         Width = 42
         Visible = True
       end

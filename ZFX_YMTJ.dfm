@@ -1,6 +1,6 @@
 object ZFX_YMTJFrm: TZFX_YMTJFrm
-  Left = 192
-  Top = 228
+  Left = 380
+  Top = 242
   Width = 725
   Height = 415
   Caption = #33647#25935#32479#35745
@@ -17,7 +17,7 @@ object ZFX_YMTJFrm: TZFX_YMTJFrm
     Left = 0
     Top = 0
     Width = 717
-    Height = 388
+    Height = 381
     Align = alClient
     Color = clGradientActiveCaption
     TabOrder = 0
@@ -57,7 +57,7 @@ object ZFX_YMTJFrm: TZFX_YMTJFrm
       Left = 1
       Top = 1
       Width = 715
-      Height = 386
+      Height = 379
       Align = alClient
       Color = clGradientActiveCaption
       TabOrder = 3
@@ -75,7 +75,7 @@ object ZFX_YMTJFrm: TZFX_YMTJFrm
         Width = 33
         Height = 13
         AutoSize = False
-        Caption = #31185#23460
+        Caption = #21697#31181
       end
       object Label5: TLabel
         Left = 200

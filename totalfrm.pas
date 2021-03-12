@@ -279,7 +279,7 @@ begin
   k := 1;
   excelWorksheet1.cells.item[k, 1] := '菌属：' + dbc_germtype.Text;
   inc(k);
-  excelWorksheet1.cells.item[k, 1] := '科室：' + dbc_section.Text;
+  excelWorksheet1.cells.item[k, 1] := '品种：' + dbc_section.Text;
   inc(k);
   excelWorksheet1.cells.item[k, 1] := '标本类型：' + dbc_bb.Text;
   inc(k);

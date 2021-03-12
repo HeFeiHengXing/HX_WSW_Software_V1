@@ -1,6 +1,6 @@
 object queryGenForm: TqueryGenForm
-  Left = 340
-  Top = 198
+  Left = 430
+  Top = 208
   Width = 541
   Height = 377
   Caption = #26597#35810#26465#20214#29983#25104
@@ -166,7 +166,7 @@ object queryGenForm: TqueryGenForm
       Top = 48
       Width = 59
       Height = 17
-      Caption = #31185#21035
+      Caption = #21697#31181
       TabOrder = 0
       OnKeyPress = cb4KeyPress
     end
